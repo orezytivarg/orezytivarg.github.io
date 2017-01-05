@@ -29,9 +29,9 @@ development 빌드는 애플리케이션 개발에 도움이 되는 추가적인
 
 React는 렌더링된 UI를 내부적으로 따로 관리하고 있다. React가 내부적으로 관리하고 있는 모델은 당신의 컴포넌트가 return한 React element를 포함하고 있다. 이 모델을 통해 React는 DOM node를 생성하는 것을 피하고 이미 존재하는 DOM node에 대해 불필요하게 접근하는 것을 피한다. 이미 존재하는 DOM node에 대한 접근은 보통 JavaScript 오브젝트를 조작하는 것보다 느리다. 이전에는 "virtual DOM"이라고 일컬어졌지만, 이제는 React Native에서도 같은 방법으로 동작한다.
 
-When a component's props or state change, React decides whether an actual DOM update is necessary by comparing the newly returned element with the previously rendered one. When they are not equal, React will update the DOM.
+컴포넌트의 props나 state가 변경되었을 때, React는 이전에 렌더된 React element와 새로 리턴된 React element를 비교하여 실제 DOM을 갱신할 필요가 있는지를 결정한다. 이 둘이 같지 않을 경우에 React는 DOM을 갱신한다.
 
-In some cases, your component can speed all of this up by overriding the lifecycle function `shouldComponentUpdate`, which is triggered before the re-rendering process starts. The default implementation of this function returns `true`, leaving React to perform the update:
+어떤 경우에는 컴포넌트의 라이프사이클 함수 `shouldComponentUpdate`를 전부 오버라이드해서 속도를 올릴 수 있다. 이 함수는 리렌더링 프로세스가 시작하기 직전에 트리거되는 함수다. 이 함수의 기본 구현은 `true`를 리턴하여 React로 하여금 업데이트를 수행하도록 하는 것이다:
 
 ```javascript
 shouldComponentUpdate(nextProps, nextState) {
