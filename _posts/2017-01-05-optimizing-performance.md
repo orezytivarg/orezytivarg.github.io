@@ -39,15 +39,15 @@ shouldComponentUpdate(nextProps, nextState) {
 }
 ```
 
-If you know that in some situations your component doesn't need to update, you can return `false` from `shouldComponentUpdate` instead, to skip the whole rendering process, including calling `render()` on this component and below.
+만약 컴포넌트가 업데이트할 필요가 없는 상황인지 알고있다면, `render()`를 호출하는 것을 포함한 전체 렌더링 프로세스를 건너뛸 수 있도록 `shouldComponentUpdate` 함수에서 `false`를 리턴하면 된다.
 
-## shouldComponentUpdate In Action
+## 실전 shouldComponentUpdate
 
-Here's a subtree of components. For each one, `SCU` indicates what `shouldComponentUpdate` returned, and `vDOMEq` indicates whether the rendered React elements were equivalent. Finally, the circle's color indicates whether the component had to be reconciled or not.
+여기에 컴포넌트 서브트리가 있다. 각각 `SCU`는 `shouldComponentUpdate`를 뜻하고, `vDOMEq`는 렌더된 React element가 동일한지를 뜻한다. 마지막으로 각 원의 색은 컴포넌트가 재조정되야하는지 아닌지 여부를 뜻한다.
 
 <figure><img src="/assets/images/should-component-update.png" /></figure>
 
-Since `shouldComponentUpdate` returned `false` for the subtree rooted at C2, React did not attempt to render C2, and thus didn't even have to invoke `shouldComponentUpdate` on C4 and C5.
+서브트리 C2의 `shouldComponentUpdate`가 `false`를 리턴하기 때문에 React는 C2를 렌더하려하지 않는다, 그리고 그 결과 C4와 C5의 `shouldComponentUpdate` 역시 호출하지 않는다.
 
 For C1 and C3, `shouldComponentUpdate` returned `true`, so React had to go down to the leaves and check them. For C6 `shouldComponentUpdate` returned `true`, and since the rendered elements weren't equivalent React had to update the DOM.
 
