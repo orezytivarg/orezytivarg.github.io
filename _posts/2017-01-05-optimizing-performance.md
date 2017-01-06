@@ -3,6 +3,7 @@ id: optimizing-performance
 title: 퍼포먼스 최적화하기
 category: React
 ---
+원문보기: https://facebook.github.io/react/docs/optimizing-performance.html
 
 내부적으로 React는 몇 가지 테크닉을 통해 UI를 업데이트할 때 필요한 DOM 조작을 최소화한다. 다른 많은 애플리케이션에 대해서 React를 사용하게되면 별다른 퍼포먼스 최적화 작업이 없이도 빠르게 반응하는 유저 인터페이스를 제공할 수 있을 것이다. 그래도 React 애플리케이션의 속도를 빠르게 하는 몇 가지 방법이 역시 존재한다.
 
