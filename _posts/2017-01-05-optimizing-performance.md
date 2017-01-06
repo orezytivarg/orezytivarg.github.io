@@ -27,7 +27,7 @@ development 빌드는 애플리케이션 개발에 도움이 되는 추가적인
 
 ## 재보정 피하기(Avoid Reconciliation)
 
-React는 렌더링된 UI를 내부적으로 다른 식으로 관리하고 있다. React가 내부적으로 관리하고 있는 이 모델은 컴포넌트가 return한 React element를 포함하고 있다. 이 모델을 통해 React는 DOM node를 생성하는 것을 피하고 이미 존재하는 DOM node에 대해 불필요하게 접근하는 것을 피한다. 이미 존재하는 DOM node에 대한 접근은 JavaScript 오브젝트를 조작하는 것보다 종종 느릴 수 있다. 이전에는 "virtual DOM"이라고 일컬어졌지만, 이제는 React Native에서도 같은 방법으로 동작한다.
+React는 렌더링된 UI를 내부적으로 다른 식으로 관리하고 있다. React가 내부적으로 관리하고 있는 이 모델은 컴포넌트가 리턴한 React element를 포함하고 있다. 이 모델을 통해 React는 DOM node를 생성하는 것을 피하고 이미 존재하는 DOM node에 대해 불필요하게 접근하는 것을 피한다. 이미 존재하는 DOM node에 대한 접근은 JavaScript 오브젝트를 조작하는 것보다 종종 느릴 수 있다. 이전에는 "virtual DOM"이라고 일컬어졌지만, 이제는 React Native에서도 같은 방법으로 동작한다.
 
 컴포넌트의 props나 state가 변경되었을 때, React는 이전에 렌더된 React element와 새로 리턴된 React element를 비교하여 실제 DOM을 갱신할 필요가 있는지를 결정한다. 이 둘이 같지 않을 경우에 React는 DOM을 갱신한다.
 
@@ -43,7 +43,7 @@ shouldComponentUpdate(nextProps, nextState) {
 
 ## 실전 shouldComponentUpdate
 
-여기에 컴포넌트 서브트리가 있다. `SCU`는 `shouldComponentUpdate`를 뜻하고, `vDOMEq`는 렌더된 React element가 동일한지를 뜻한다. 마지막으로 각 원의 색은 컴포넌트가 재조정되야하는지 아닌지 여부를 뜻한다.
+아래에 컴포넌트와 그 서브트리가 있다. `SCU`는 `shouldComponentUpdate`를 뜻하고, `vDOMEq`는 렌더된 React element가 동일한지를 뜻한다. 각 원의 색은 컴포넌트가 재조정되야하는지 아닌지 여부를 뜻한다.
 
 <figure><img src="/assets/images/should-component-update.png" /></figure>
 
@@ -57,7 +57,7 @@ React는 피할수없는 C6만을 위해 DOM을 변경해야만 한다는 것을
 
 ## 예제
 
-만약 컴포넌트를 변경하는 유일한 방법이 `props.color`나 `state.count`를 변경하는 것이라면 `shouldComponentUpdate`는 다음과 같이 확인할 수 있다:
+만약 컴포넌트를 변경하는 유일한 방법이 `props.color`나 `state.count`를 변경하는 것이라면 `shouldComponentUpdate`에서는 다음과 같이 확인하도록 작성하면 된다:
 
 ```javascript
 class CounterButton extends React.Component {
@@ -88,7 +88,7 @@ class CounterButton extends React.Component {
 }
 ```
 
-이 코드에서, `shouldComponentUpdate`는 그저 `props.color`나 `state.count`에 변화가 있는지만 확인한다. 만약 값이 변하지 않았다면 컴포넌트는 갱신하지 않는다. 만약 컴포넌트가 조금 더 복잡한 경우에는 컴포넌트 업데이트를 결정하기 위해 `props`와 `state`의 모든 필드에 대해 "shallow comparison"이라는 패턴을 사용할 수 있다. 이 패턴은 React에서 이 로직을 사용하기 위한 헬퍼를 제공할 정도로 일반적이다 - 그저 `React.PureComponent`만 상속하면 된다. 따라서 이 코드는 더 간단한 방법으로 위 코드와 같은 일을 할수 있다:
+이 코드에서, `shouldComponentUpdate`는 그저 `props.color`나 `state.count`에 변화가 있는지만 확인한다. 만약 값이 변하지 않았다면 컴포넌트를 갱신하지 않는다. 만약 컴포넌트가 조금 더 복잡한 경우에는 컴포넌트 업데이트를 결정하기 위해 `props`와 `state`의 모든 필드에 대해 "shallow comparison"이라는 패턴을 사용할 수 있다. 이 패턴은 React에서 이 로직을 사용하기 위한 헬퍼를 제공할 정도로 일반적이다 - 그냥 `React.PureComponent`만 상속하면 된다. 따라서 이 코드는 더 간단한 방법으로 위 코드와 같은 일을 할수 있다:
 
 ```js
 class CounterButton extends React.PureComponent {
