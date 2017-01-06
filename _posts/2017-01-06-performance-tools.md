@@ -18,7 +18,7 @@ var Perf = React.addons.Perf; // ES5 with react-with-addons.js
 
 React는 그냥 두어도 적당히 빨라보인다. 그러나, 애플리케이션의 1 온스의 성능을 쥐어 짜야하는 상황에서는 React의 diff 알고리즘에 최적화 힌트를 추가할 수 있는 [shouldComponentUpdate()](https://facebook.github.io/react/docs/react-component.html#shouldcomponentupdate) 훅을 제공한다.
 
-일반적으로 앱의 전반적인 성능을 살펴볼 수는 있지만, 추가적으로 `Perf`는 어디를 후킹하여 최적화할 필요가 있는 부분인지 알려주는 프로파일링 도구도 제공한다.
+일반적으로 앱의 전반적인 성능을 살펴볼 수는 있지만, 추가적으로 제공하는 프로파일링 도구 `Perf`를 이용하면 어디를 후킹하여 최적화할 필요가 있는지 알 수 있다.
 
 [Benchling Engineering Team](http://benchling.engineering)에서 작성한 다음 두 기사에서 심도있는 프로파일링 툴 사용법을 소개하고 있다.
 
