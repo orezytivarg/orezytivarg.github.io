@@ -65,7 +65,7 @@ this.setState({left: this.state.left + 10}).
 
 Perf를 사용하려면 콘솔에서 Perf.start()를 호출하면 된다. 그리고 나서 기록하고 싶은 행동을 하고, 다시 Perf.stop()을 선언하면 된다. 그리고 나서 다음 메서드들 중 하나를 호출해서 측정값을 출력해서 확인하면 된다.
 
-퍼포먼스 디버깅 모드에서 나는, 간단하게 start/stop 레코딩 버튼을 만들어서 퍼포먼스를 측정한다. (코드는 정말 간단하다 - 컴포넌트를 화면 한 쪽에 놓고 React.addons.Perf를 호출하도록 한다.) React DevTools 처럼 [Chrome Extension] (https://github.com/facebook/react-devtools/issues/71)으로 사용할 수도 있다. Jeff가 start/stop에 단축키를 바인드하는 환상적인 팁을 알려줬다.
+퍼포먼스 디버깅 모드에서 나는, 간단하게 start/stop 레코딩 버튼을 만들어서 퍼포먼스를 측정한다. (코드는 정말 간단하다 - 컴포넌트를 화면 한 쪽에 놓고 React.addons.Perf를 호출하도록 한다.) React DevTools 처럼 [Chrome Extension](https://github.com/facebook/react-devtools/issues/71)으로 사용할 수도 있다. Jeff가 start/stop에 단축키를 바인드하는 환상적인 팁을 알려줬다.
 
 ### Perf.printWasted()
 
