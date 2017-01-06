@@ -47,7 +47,7 @@ shouldComponentUpdate(nextProps, nextState) {
 
 아래에 컴포넌트와 그 서브트리가 있다. `SCU`는 `shouldComponentUpdate`를 뜻하고, `vDOMEq`는 렌더된 React element가 동일한지를 뜻한다. 각 원의 색은 컴포넌트가 재조정되야하는지 아닌지 여부를 뜻한다.
 
-<figure><img src="/assets/images/should-component-update.png" /></figure>
+<figure><img src="https://facebook.github.io/react/img/should-component-update.png" /></figure>
 
 서브트리 C2의 `shouldComponentUpdate`가 `false`를 리턴하기 때문에 React는 C2를 렌더하려하지 않는다, 그리고 그 결과 C4와 C5의 `shouldComponentUpdate` 역시 호출하지 않는다.
 
