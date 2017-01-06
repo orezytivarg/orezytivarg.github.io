@@ -4,7 +4,7 @@ title: 퍼포먼스 측정 도구들
 category: React
 ---
 
-원문보기: https://facebook.github.io/react/docs/perf.html
+[원문보기](https://facebook.github.io/react/docs/perf.html)
 
 **임포트 하기**
 
