@@ -1,5 +1,5 @@
 ---
-id: perf
+id: performance-tools
 title: 퍼포먼스 측정 도구들
 category: React
 ---
