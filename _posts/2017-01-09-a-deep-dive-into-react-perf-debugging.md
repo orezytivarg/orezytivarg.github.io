@@ -36,6 +36,7 @@ Heaby (Bottom Up) 부분을 보면, React의 batchedUpdates가 대부분의 시�
 첫 번째 아이템은 Todos에 의해 렌더된 TodoItem을 나타낸다; 그러나 Pref.printWasted()는 렌더 트리를 리빌딩하지 않으면 100ms의 시간을 절약할 수 있다는 것을 알려준다. 최적화가 가장 필요한 후보처럼 보인다.
 
 왜 TodoItem이 이렇게 많은 시간을 낭비하는지 진단하려면 WhyDidYouUpdateMixin이라는 커스텀 Minxin을 사용한다. 컴포넌트와 log를 후킹하여 update가 어디에서 왜 일어났는지 확인한다. 다음 코드를 보고 필요에 따라 적용하라:
+
 ```js
 /* eslint-disable no-console */
 import _ from 'underscore';
@@ -103,48 +104,7 @@ TodoItem에 이 믹스인을 추가하고, 어떻게 되는지 봤다:
 
 만약 바인드되지 않은 함수를 TodoItem 전달한다면, 그리고 tags를 상수로 저장한다면 이런 문제를 피할 수 있다:
 
-```diff
-diff --git i/example.js w/example.js
-index ba2427a..2edc85e 100644
---- i/example.js
-+++ w/example.js
-@@ -11,10 +11,13 @@ const TodoItem = React.createClass({
-       id: React.PropTypes.number.isRequired,
-     }).isRequired,
-   },
-+  deleteItem() {
-+    this.props.deleteItem(this.props.item.id);
-+  },
-   render() {
-     return (
-       <div>
--        <button style={{width: 30}} onClick={this.props.deleteItem}>x</button>
-+        <button style={{width: 30}} onClick={this.deleteItem}>x</button>
-         <span>{this.props.item.text}</span>
-         {this.props.tags.map((tag) => {
-           return <span key={tag} className="tag"> {tag}</span>;
-@@ -26,6 +29,9 @@ const TodoItem = React.createClass({
-
- const Todos = React.createClass({
-   mixins: [React.addons.LinkedStateMixin],
-+  statics: {
-+    tags: ['important', 'starred'],
-+  },
-   propTypes: {
-     initialItems: React.PropTypes.arrayOf(React.PropTypes.shape({
-       text: React.PropTypes.string.isRequired,
-@@ -60,8 +66,8 @@ const Todos = React.createClass({
-         </form>
-         {this.state.items.map((item) => {
-           return (
--            <TodoItem key={item.id} item={item} tags={['important', 'starred']}
--             deleteItem={this.deleteItem.bind(null, item.id)} />
-+            <TodoItem key={item.id} item={item} tags={Todos.tags}
-+             deleteItem={this.deleteItem} />
-            );
-         })}
-       </div>
-```
+<script src="https://gist.github.com/joshma/8c0b2a3b60844efea2d5.js"></script>
 
 WhyDidYouUpdateMixin은 prevProps와 new props가 shallow equal함을 보인다. PureRenderMixin을 사용하면 이런 상황에서 업데이트를 건너뛸 수 있따.
 
