@@ -81,7 +81,7 @@ Perf.printDOM()은 React tree를 렌더링할 때 발생하는 모든 DOM 연산
 
 처음 컴포넌트가 렌더링된 이후에, 향후의 렌더링에서 기존 DOM 노드를 다시 사용하거나 업데이트를 하고 새로운 DOM 노드를 생성하지 않기를 기대하고 결국 이것이 React의 virtual DOM이 제공하는 최적화입니다.
 
-나는 가끔 이 함수를 사용해서 이상한 브라우저 버그를 발견하거나, 예기치 못한 대량의 DOM 수정을 발견했습니다.
+나는 가끔 이 함수를 사용해서 이상한 브라우저 버그를 발견하거나, 예기치 못한 대량의 DOM 수정을 발견했다.
 
 ## shouldComponentUpdate로 렌더링 피하기
 
@@ -108,7 +108,7 @@ var ReactComponentWithPureRenderMixin = {
 
 ### 작은 유의점
 
-PureRenderMixin을 사용한다면 성능 향상에 대한 잘못된 감각을 가질 수 있습니다 - 이것은 자식 컴포넌트들의 propType 유효성 검사 또한 회피하기 때문이다. 어차피 이 propType 유효성 검사는 제품 빌드에서는 PureRenderMixin 없이도 건너뛰는 것들이다.
+PureRenderMixin을 사용한다면 성능 향상에 대한 잘못된 감각을 가질 수 있다 - 이것은 자식 컴포넌트들의 propType 유효성 검사 또한 회피하기 때문이다. 어차피 이 propType 유효성 검사는 제품 빌드에서는 PureRenderMixin 없이도 건너뛰는 것들이다.
 
 ### 더 큰 유의점
 
@@ -125,7 +125,7 @@ shouldComponentUpdate(nextProps, nextState) {
 
 대부분의 props를 재사용한 경우 `_.isEqual`이 처음에 shallow 비교를 하기 때문에, 성능은 괜찮아 보였다. 실제로 `_.isEqual`로 충분한 경우에는 deep compare와 성능상의 이슈를 발견하지는 못했다.
 
-또한 컴포너트에 맞게 재단된 custom shouldComponentUpdate를 작성해도 되지만, 나는 단순한 컴포넌트에만 이를 적용했다. 만약 이 custom 메서드가 적절하게 관리되지 않는다면, 실제로 갱신이 필요한데도 갱신이 되지 않는 경우가 발생한다.
+또한 컴포넌트에 맞게 재단된 custom shouldComponentUpdate를 작성해도 되지만, 나는 단순한 컴포넌트에만 이를 적용했다. 만약 이 custom 메서드가 적절하게 관리되지 않는다면, 실제로 갱신이 필요한데도 갱신이 되지 않는 경우가 발생한다.
 
 ## Optimizing for shallow-equal props
 
@@ -224,9 +224,9 @@ false
 const TAGS = ['important', 'starred'];
 ```
 
-### Subcomponents
+### 서브 컴포넌트들
 
-Defining content boundaries between a component and its subcomponent often lends itself to easy performance optimizations - well-encapsulated component interfaces lend naturally to performant updates. Refactoring out intermediate components can help improve where you can use PureRenderMixin and save updates:
+한 컴포넌트와 그 서브 컴포넌트간의 컨텐츠 경계를 정의하면 성능 최적화를 쉽게 수행할 수 있다 - 캡슐화가 잘된 컴포넌트 인터페이스는 자연스러운 업데이트 성능을 제공한다. 업데이트를 줄여주고 PureRenderMixin를 사용하는 중간 컴포넌트들을 잘 리팩토링하라:
 
 ```js
 <div>
@@ -238,7 +238,7 @@ Defining content boundaries between a component and its subcomponent often lends
 </div>
 ```
 
-In this case, if complexFormProps and items come from the same store, typing in the ComplexForm might lead to store updates, and each store update leads to re-rendering the entire <ul>. Virtual DOM diffing is great, but it still has to check every <li>. Instead, refactor out <ul> into its own subcomponent that takes in this.props.items, and only update if this.props.items changes:
+위와 같은 경우, complexFormProps와 items가 같은 스토어로부터 온다면, ComplexForm 안에서 타이핑하는 것은 스토어를 업데이트 할 것이고, <ul> 전체를 다시 렌더링하게 할 것이다. Virtual DOM의 diffing은 훌륭하지만, 여전히 모든 <li>를 확인할 것이다. 대신 <ul>을 this.props.items를 취하는 서브컴포넌트로 따로 빼내고, this.props.items가 변경될 때만 업데이트되도록 리팩토링 하라:
 
 ```js
 <div>
@@ -247,9 +247,9 @@ In this case, if complexFormProps and items come from the same store, typing in 
 </div>
 ```
 
-### Cache expensive computations
+### 값비싼 계산에 대한 캐시(Cache for Expensive Computations)
 
-This goes against the "single source of state" principle, but if computations on a prop are expensive you can cache them on the component. Instead of directly using doExpensiveComputation(this.prop.someProp) in the render method, we can wrap the call that caches the value if the prop is unchanged:
+"single source of state" 원칙에 반하겠지만, prop을 계산하는 것이 값비싼 경우에는 컴포넌트에 prop을 캐시할 수 있다. render 메서드에서 doExpensiveComputation(this.prop.someProp)을 직접 사용하는 것 대신, prop이 변경되지 않은 경우에는 캐시를 호출하도록 감쌀 수 있다:
 
 ```js
 getCachedExpensiveComputation() {
@@ -261,11 +261,11 @@ getCachedExpensiveComputation() {
 }
 ```
 
-Candidates for this optimization would be best discovered using the JS Profiler.
+이 최적화에 대한 후보군은 기존의 JS Profiler를 이용하여 쉽게 발견할 수 있을 것이다.
 
-### Link State
+### State 링크하기(Link State)
 
-React's Two Way Binding Helpers can be very useful for simple inversion of control, allowing a child component to communicate new state to the parent. If only used with valueLink for a React form component, it isn't so bad as the React form inputs are very simple. But if you start threading it through more components like we were doing, you may run into issues. linkState is implemented as follows:
+React의 Two Way Binding Helpers는 간단한 컨트롤의 값 전달에 유용하고, 자식 컴포넌트의 새로운 상태를 부모 컴포넌트에 전달하는 것을 허용한다. React 폼 컴포넌트의 valueLink만이 함께 쓰인다면, React의 폼 입력이 매우 간단하기 때문에 나쁘지는 않다. 그러나 더 많은 컴포넌트를 통해 스레딩을 시작하면 문제가 발생할 수 있다. linkState는 다음과 같이 구현한다:
 
 ```js
 linkState(key) {
@@ -276,16 +276,14 @@ linkState(key) {
 }
 ```
 
-Every call to linkState returns a new object, even if the the state hasn't changed! This means shallowCompare will never work. Our workaround is unfortunately simply not to use a linkState. If you instead flatten the linkState into a getter prop and a setter prop, we avoid creating a new object, e.g. nameLink={this.linkState(‘name')} could be replaced with name={this.state.name} setName={this.setName}. (We've considered writing a linkState that caches itself...)
+linkState에 대한 모든 호출은 상태가 변경되지 않은 경우에도 새 객체를 return 한다! 즉, shallowCompare는 절대 제대로 작동하지 않을 것이다. 우리의 해결방법은 유감스럽게도 linkState를 사용하지 않는 것이다. 만약 linkState를 getter prop과 setter prop으로만 flatten 하는 대신, 새로운 오브젝트를 생성하는 것을 피할 수 있다. 예) nameLink={this.linkState('name')}을 name={this.state.name} setName={this.setName}으로 치환할 수 있다. (우리는 스스로를 캐시하는 linkState를 작성하는 것을 고려했다.)
 
-## Compiler Optimizations
+## 컴파일러 최적화(Compiler Optimizations)
 
-Newer versions of Babel and React support inlining React elements and automatically hoisting constant React elements. We haven't played too much with this yet, unfortunately, but they will help with reducing calls to React.createElement and in speeding up DOM reconciliation, respectively.
+새로운 버전의 바벨과 React는 인라이닝을 지원하고 상수형 React elements를 자동으로 호이스팅한다. 아직 이것들과 많이 놀아보지는 않았지만, 아마도 React.createElement를 호출하오 DOM을 재조정하는 속도를 올리는데 도움이 될 것이다.
 
-## Wrapping Up
+## 요약
 
-We went through a lot just now (you should've seen the original list!), but the key point to take away is that you should 1) get comfortable with profiling and 2) shouldComponentUpdate will get you a long way. We hope this has been useful!
+조금 많이 알아본 것 같지만(본래 목록은 훨씬 많았다!), 키 포인트는 1)프로파일링에 익숙해지자, 2) shouldComponentUpdate라는 먼 길을 가야한다 두 가지다. 아무쪼록 유용했길 바란다. 어떤 제안이나 댓글이나 우리가 잃어버린 것 같은게 있다면? 알려달라 - benchling.com
 
-Any suggestions, comments, or things we've missed? Let us know - saif at benchling.com.
-
-Stay tuned for part 2, where we'll discuss our React debugging workflows, dive into real examples of non-performant code, and subsequently fix them.
+파트 2에서는 디버깅 워크플로우에 대해서 논의하고, 성능이 좋지 않은 코드의 실제 예제들을 살펴본 다음 수정할 것이다.
