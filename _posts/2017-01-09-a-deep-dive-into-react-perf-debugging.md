@@ -11,7 +11,7 @@ category: React
 
 우리는 다음 샘플 코드를 참조할 것이다 - 간단한 todo list를 React로 렌더링하는 것이다. JS fiddle 스니펫에서 "Result"를 클릭하면 성능 개선을 완료한 인터랙티브 버전을 볼 수 있다. 우리느 업데이트된 JS fiddle을 가지고 포스트할 것이다.
 
-[jsfiddle](http://jsfiddle.net/kLv241qz/3/?utm_source=website&utm_medium=embed&utm_campaign=kLv241qz)
+http://jsfiddle.net/kLv241qz/3/?utm_source=website&utm_medium=embed&utm_campaign=kLv241qz
 
 ## Case Study #1: TodoList
 
