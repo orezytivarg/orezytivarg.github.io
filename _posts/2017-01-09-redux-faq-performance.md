@@ -8,11 +8,11 @@ category: Redux
 
 ## 목차
 
- - [Redux를 어떻게 성능과 아키텍쳐 측면에서 잘 "확장""할 수 있나요?](#performance-scaling)
- - [각 액션에 대해서 "내 모든 리듀서들"을 호출하는 것이 느리지 않나요?](#performance-all-reducers)
- - [리듀서에서 내 상태를 deep-clone해야만 하나요? 상태를 복사하는 것으로 인해 느려지지는 않나요?](#performance-clone-state)
- - [어떻게 해야 스토어를 업데이트하는 이벤트의 수를 줄일 수 있나요?](#performance-update-events)
- - ["하나의 상태 트리"가 메모리 문제를 일으키지 않나요? 많은 액션들을 디스패칭하는 것은 많은 메모리가 필요하지 않나요?](#performance-state-memory)
+- [Redux를 어떻게 성능과 아키텍쳐 측면에서 잘 "확장""할 수 있나요?](#performance-scaling)
+- [각 액션에 대해서 "내 모든 리듀서들"을 호출하는 것이 느리지 않나요?](#performance-all-reducers)
+- [리듀서에서 내 상태를 deep-clone해야만 하나요? 상태를 복사하는 것으로 인해 느려지지는 않나요?](#performance-clone-state)
+- [어떻게 해야 스토어를 업데이트하는 이벤트의 수를 줄일 수 있나요?](#performance-update-events)
+- ["하나의 상태 트리"가 메모리 문제를 일으키지 않나요? 많은 액션들을 디스패칭하는 것은 많은 메모리가 필요하지 않나요?](#performance-state-memory)
 
 
 ## 성능
@@ -33,33 +33,35 @@ Redux는 다른 라이브러리와 비교할 때 효율적이지는 않다. Reac
 #### 더 읽어보기
 
 **Documentation**
- - [레시피: 리듀서 구조화 하기 - 상태 모양의 정규화](http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.md)
+
+- [레시피: 리듀서 구조화 하기 - 상태 모양의 정규화](http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.md)
 
 
 **Articles**
- - [React 애플리케이션을 확장하는 법](https://www.smashingmagazine.com/2016/09/how-to-scale-react-applications/) (연관된 이야기: [React 애플리케이션 확장하기](https://vimeo.com/168648012))
- - [고성능 Redux](http://somebody32.github.io/high-performance-redux/)
- - [React와 Redux의 성능을 Reselect로 향상시키기](http://blog.rangle.io/react-and-redux-performance-with-reselect/)
- - [Redux 상태 트리 캡슐화하기](http://randycoulman.com/blog/2016/09/13/encapsulating-the-redux-state-tree/)
- - [React/Redux Links: Performance - Redux](https://github.com/markerikson/react-redux-links/blob/master/react-performance.md#redux-performance)
+
+- [React 애플리케이션을 확장하는 법](https://www.smashingmagazine.com/2016/09/how-to-scale-react-applications/) (연관된 이야기: [React 애플리케이션 확장하기](https://vimeo.com/168648012))
+- [고성능 Redux](http://somebody32.github.io/high-performance-redux/)
+- [React와 Redux의 성능을 Reselect로 향상시키기](http://blog.rangle.io/react-and-redux-performance-with-reselect/)
+- [Redux 상태 트리 캡슐화하기](http://randycoulman.com/blog/2016/09/13/encapsulating-the-redux-state-tree/)
+- [React/Redux Links: Performance - Redux](https://github.com/markerikson/react-redux-links/blob/master/react-performance.md#redux-performance)
 
 **Discussions**
- - [#310: 누가 Redux를 사용하는가?](https://github.com/reactjs/redux/issues/310)
- - [#1751: 대규모 콜렉션에 대한 성능 이슈](https://github.com/reactjs/redux/issues/1751)
- - [React Redux #269: 커스텀 구독 메서드를 사용하여 연결하다](https://github.com/reactjs/react-redux/issues/269)
- - [React Redux #407: 발전된 API를 제공하도록 connect를 재작성하다](https://github.com/reactjs/react-redux/issues/407)
- - [React Redux #416: 더 나은 성능과 확장성을 위해 connect를 재작성하다](https://github.com/reactjs/react-redux/pull/416)
- - [Redux vs MobX TodoMVC 벤치마크: #1](https://github.com/mweststrate/redux-todomvc/pull/1)
- - [Reddit: 초기상태 저장을 위한 최고의 장소는 어디인가?](https://www.reddit.com/r/reactjs/comments/47m9h5/whats_the_best_place_to_keep_the_initial_state/)
- - [Reddit: SPA를 위한 Redux 상태 디자인에 대한 도움말 ](https://www.reddit.com/r/reactjs/comments/48k852/help_designing_redux_state_for_a_single_page/)
- - [Reddit: 대규모 상태 오브젝트에 대한 Redux 성능 이슈들?](https://www.reddit.com/r/reactjs/comments/41wdqn/redux_performance_issues_with_a_large_state_object/)
- - [Reddit: 초 거대 스케일 앱을 위한 React/Redux](https://www.reddit.com/r/javascript/comments/49box8/reactredux_for_ultra_large_scale_apps/)
- - [Twitter: Redux 스케일링](https://twitter.com/NickPresta/status/684058236828266496)
- - [Twitter: Redux vs MobX 벤치마크 그래프 - Redux 상태 모양 문제](https://twitter.com/dan_abramov/status/720219615041859584)
- - [Stack Overflow: 중첩된 컴포넌트를 위한 props 업데이트는 어떻게 최적화 하는가?](http://stackoverflow.com/questions/37264415/how-to-optimize-small-updates-to-props-of-nested-component-in-react-redux)
- - [Chat log: React/Redux perf - 10000개 Todo list를 업데이트하기](https://gist.github.com/markerikson/53735e4eb151bc228d6685eab00f5f85)
- - [Chat log: React/Redux perf - single connection vs many connections](https://gist.github.com/markerikson/6056565dd65d1232784bf42b65f8b2ad)
 
+- [#310: 누가 Redux를 사용하는가?](https://github.com/reactjs/redux/issues/310)
+- [#1751: 대규모 콜렉션에 대한 성능 이슈](https://github.com/reactjs/redux/issues/1751)
+- [React Redux #269: 커스텀 구독 메서드를 사용하여 연결하다](https://github.com/reactjs/react-redux/issues/269)
+- [React Redux #407: 발전된 API를 제공하도록 connect를 재작성하다](https://github.com/reactjs/react-redux/issues/407)
+- [React Redux #416: 더 나은 성능과 확장성을 위해 connect를 재작성하다](https://github.com/reactjs/react-redux/pull/416)
+- [Redux vs MobX TodoMVC 벤치마크: #1](https://github.com/mweststrate/redux-todomvc/pull/1)
+- [Reddit: 초기상태 저장을 위한 최고의 장소는 어디인가?](https://www.reddit.com/r/reactjs/comments/47m9h5/whats_the_best_place_to_keep_the_initial_state/)
+- [Reddit: SPA를 위한 Redux 상태 디자인에 대한 도움말 ](https://www.reddit.com/r/reactjs/comments/48k852/help_designing_redux_state_for_a_single_page/)
+- [Reddit: 대규모 상태 오브젝트에 대한 Redux 성능 이슈들?](https://www.reddit.com/r/reactjs/comments/41wdqn/redux_performance_issues_with_a_large_state_object/)
+- [Reddit: 초 거대 스케일 앱을 위한 React/Redux](https://www.reddit.com/r/javascript/comments/49box8/reactredux_for_ultra_large_scale_apps/)
+- [Twitter: Redux 스케일링](https://twitter.com/NickPresta/status/684058236828266496)
+- [Twitter: Redux vs MobX 벤치마크 그래프 - Redux 상태 모양 문제](https://twitter.com/dan_abramov/status/720219615041859584)
+- [Stack Overflow: 중첩된 컴포넌트를 위한 props 업데이트는 어떻게 최적화 하는가?](http://stackoverflow.com/questions/37264415/how-to-optimize-small-updates-to-props-of-nested-component-in-react-redux)
+- [Chat log: React/Redux perf - 10000개 Todo list를 업데이트하기](https://gist.github.com/markerikson/53735e4eb151bc228d6685eab00f5f85)
+- [Chat log: React/Redux perf - single connection vs many connections](https://gist.github.com/markerikson/6056565dd65d1232784bf42b65f8b2ad)
 
 <a id="performance-all-reducers"></a>
 ### 각각의 액션마다 "내 모든 리듀서"를 호출하는 것은 느리지 않나요?
@@ -75,10 +77,11 @@ Redux 스토어는 실제로 하나의 리듀서 함수만을 가진다는 것�
 #### 더 읽어보기
 
 **Discussions**
- - [#912: 제안: 액션 필터 유틸리티](https://github.com/reactjs/redux/issues/912)
- - [#1303: 빈번한 갱신이 발생하는 대규모 스토어에서 Redux 성능](https://github.com/reactjs/redux/issues/1303)
- - [Stack Overflow: Redux 앱의 상태는 리듀서 이름을 가진다](http://stackoverflow.com/questions/35667775/state-in-redux-react-app-has-a-property-with-the-name-of-the-reducer/35674297)
- - [Stack Overflow: Redux는 어떻게 깊게 중첩된 모델을 다루는가?](http://stackoverflow.com/questions/34494866/how-does-redux-deals-with-deeply-nested-models/34495397)
+
+- [#912: 제안: 액션 필터 유틸리티](https://github.com/reactjs/redux/issues/912)
+- [#1303: 빈번한 갱신이 발생하는 대규모 스토어에서 Redux 성능](https://github.com/reactjs/redux/issues/1303)
+- [Stack Overflow: Redux 앱의 상태는 리듀서 이름을 가진다](http://stackoverflow.com/questions/35667775/state-in-redux-react-app-has-a-property-with-the-name-of-the-reducer/35674297)
+- [Stack Overflow: Redux는 어떻게 깊게 중첩된 모델을 다루는가?](http://stackoverflow.com/questions/34494866/how-does-redux-deals-with-deeply-nested-models/34495397)
 
 
 <a id="performance-clone-state"></a>
@@ -93,15 +96,17 @@ Immutabl하게 상태를 갱신하는 것은 일반적으로 deep 카피가 아�
 #### 더 읽어보기
 
 **Documentation**
- - [Recipes: 리듀서 구조화 - 선행 컨셉](http://redux.js.org/docs/recipes/reducers/PrerequisiteConcepts.md)
- - [Recipes: 리듀서 구조화 - immutable한 업데이트 패턴](http://redux.js.org/docs/recipes/reducers/ImmutableUpdatePatterns.md)
+
+- [Recipes: 리듀서 구조화 - 선행 컨셉](http://redux.js.org/docs/recipes/reducers/PrerequisiteConcepts.md)
+- [Recipes: 리듀서 구조화 - immutable한 업데이트 패턴](http://redux.js.org/docs/recipes/reducers/ImmutableUpdatePatterns.md)
 
 **Discussions**
- - [#454: 리듀서에서 커다란 상태를 다루기](https://github.com/reactjs/redux/issues/454)
- - [#758: 상태는 왜 mutate될 수 없나?](https://github.com/reactjs/redux/issues/758)
- - [#994: 중첩된 entities를 업데이트할 때의 보일러 플레이트는?](https://github.com/reactjs/redux/issues/994)
- - [Twitter: 일반적인 오해 - deep cloning](https://twitter.com/dan_abramov/status/688087202312491008)
- - [자바스크립트에서 오브젝트 클론하기](http://www.zsoltnagy.eu/cloning-objects-in-javascript/)
+
+- [#454: 리듀서에서 커다란 상태를 다루기](https://github.com/reactjs/redux/issues/454)
+- [#758: 상태는 왜 mutate될 수 없나?](https://github.com/reactjs/redux/issues/758)
+- [#994: 중첩된 entities를 업데이트할 때의 보일러 플레이트는?](https://github.com/reactjs/redux/issues/994)
+- [Twitter: 일반적인 오해 - deep cloning](https://twitter.com/dan_abramov/status/688087202312491008)
+- [자바스크립트에서 오브젝트 클론하기](http://www.zsoltnagy.eu/cloning-objects-in-javascript/)
 
 
 <a id="performance-update-events"></a>
@@ -114,14 +119,16 @@ React를 사용한다면 `ReactDOM.unstable_batchedUpdates()`에 여러개의 �
 #### 더 읽어보기
 
 **Discussions**
- - [#125: 계단식 렌더를 피하는 전략](https://github.com/reactjs/redux/issues/125)
- - [#542: 아이디어: 액션 일괄수행하기](https://github.com/reactjs/redux/issues/542)
- - [#911: 액션 일괄수행하기](https://github.com/reactjs/redux/issues/911)
- - [#1813: 배열 디스패칭을 지원하는 루프를 사용하라 ](https://github.com/reactjs/redux/pull/1813)
- - [React Redux #263: 수백개의 액션을 수행할 때의 커다란 성능 이슈](https://github.com/reactjs/react-redux/issues/263)
+
+- [#125: 계단식 렌더를 피하는 전략](https://github.com/reactjs/redux/issues/125)
+- [#542: 아이디어: 액션 일괄수행하기](https://github.com/reactjs/redux/issues/542)
+- [#911: 액션 일괄수행하기](https://github.com/reactjs/redux/issues/911)
+- [#1813: 배열 디스패칭을 지원하는 루프를 사용하라 ](https://github.com/reactjs/redux/pull/1813)
+- [React Redux #263: 수백개의 액션을 수행할 때의 커다란 성능 이슈](https://github.com/reactjs/react-redux/issues/263)
 
 **Libraries**
- - [Redux Addons Catalog: Store - Change Subscriptions](https://github.com/markerikson/redux-ecosystem-links/blob/master/store.md#store-change-subscriptions)
+
+- [Redux Addons Catalog: Store - Change Subscriptions](https://github.com/markerikson/redux-ecosystem-links/blob/master/store.md#store-change-subscriptions)
 
 
 <a id="performance-state-memory"></a>
@@ -134,8 +141,10 @@ Redux는 액션 자체에 대한 기록을 저장하지 않는다. Redux DevTool
 #### 더 읽어보기
 
 **Documentation**
- - [Docs: 비동기 액션들 ](http://redux.js.org/docs/advanced/AsyncActions.md)
+
+- [Docs: 비동기 액션들 ](http://redux.js.org/docs/advanced/AsyncActions.md)
 
 **Discussions**
- - [Stack Overflow: Redux가 메모리를 해제하기 위해서 상태를 커밋하는 다른 방법이 있나?](http://stackoverflow.com/questions/35627553/is-there-any-way-to-commit-the-state-in-redux-to-free-memory/35634004)
- - [Reddit: 초기 상태를 유지할만한 최고의 장소는 어디인가?](https://www.reddit.com/r/reactjs/comments/47m9h5/whats_the_best_place_to_keep_the_initial_state/)
+
+- [Stack Overflow: Redux가 메모리를 해제하기 위해서 상태를 커밋하는 다른 방법이 있나?](http://stackoverflow.com/questions/35627553/is-there-any-way-to-commit-the-state-in-redux-to-free-memory/35634004)
+- [Reddit: 초기 상태를 유지할만한 최고의 장소는 어디인가?](https://www.reddit.com/r/reactjs/comments/47m9h5/whats_the_best_place_to_keep_the_initial_state/)
