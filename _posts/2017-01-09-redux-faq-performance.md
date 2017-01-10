@@ -6,7 +6,7 @@ category: Redux
 
 [원문보기](http://redux.js.org/docs/faq/Performance.html)
 
-## 목차
+# 목차
 
 - [Redux를 어떻게 성능과 아키텍쳐 측면에서 잘 "확장""할 수 있나요?](#performance-scaling)
 - [각 액션에 대해서 "내 모든 리듀서들"을 호출하는 것이 느리지 않나요?](#performance-all-reducers)
@@ -15,12 +15,13 @@ category: Redux
 - ["하나의 상태 트리"가 메모리 문제를 일으키지 않나요? 많은 액션들을 디스패칭하는 것은 많은 메모리가 필요하지 않나요?](#performance-state-memory)
 
 
-## 성능
+# 성능
 
 <a id="performance-scaling"></a>
-### Redux를 어떻게 성능과 아키텍쳐 측면에서 잘 "확장""할 수 있나요?
 
-이 문제에 대해서 하나의 확실한 대답을 할 수 없지만, 대부분의 경우 이 문제는 염려되지 말아야 한다.
+## Redux를 어떻게 성능과 아키텍쳐 측면에서 잘 "확장""할 수 있나요?
+
+이 문제에 대해서 하나의 확실한 대답을 할 수 없지만, 대부분의 경우 이 문제는 걱정할 필요가 없어야 한다.
 
 Redux에 의한 작업 완료는 몇 구역으로 나뉘어진다: 미들웨어와 리듀서들에서 액션 처리(immutable한 업데이트를 위한 오브젝트 복제를 포함), 액션이 디스패치되고 나서 구독자들에게 알림 보내기, 상태 변화에 따라 UI 컴포넌트를 업데이트하기. 충분히 복잡한 상황에서는 이들 각각이 성능 우려를 만들만한 *가능성* 이 있지만, Redux가 구현되는 방식에 본질적으로는 느리거나 비효율적인 것은 없다. 사실, React-Redux는 불필요한 재 렌더링을 줄이기 위해 많이 최적화되어 있으며 React-Redux v5는 이전 버전보다 눈에 띄는 개선 사항이 많다.
 
@@ -30,12 +31,11 @@ Redux는 다른 라이브러리와 비교할 때 효율적이지는 않다. Reac
 
 > 규모면에서, 우리는 ~500개의 액션 타입과, 400개의 리듀서 케이스, ~150개의 컴포넌트, 5개의 미들웨어, ~200개의 액션, 2300개의 테스트를 가지고 있다.
 
-#### 더 읽어보기
+### 더 읽어보기
 
 **Documentation**
 
 - [레시피: 리듀서 구조화 하기 - 상태 모양의 정규화](http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.md)
-
 
 **Articles**
 
@@ -64,7 +64,8 @@ Redux는 다른 라이브러리와 비교할 때 효율적이지는 않다. Reac
 - [Chat log: React/Redux perf - single connection vs many connections](https://gist.github.com/markerikson/6056565dd65d1232784bf42b65f8b2ad)
 
 <a id="performance-all-reducers"></a>
-### 각각의 액션마다 "내 모든 리듀서"를 호출하는 것은 느리지 않나요?
+
+## 각각의 액션마다 "내 모든 리듀서"를 호출하는 것은 느리지 않나요?
 
 Redux 스토어는 실제로 하나의 리듀서 함수만을 가진다는 것에 유의하는 것이 중요하다. 스토어는 하나의 리듀서 함수에 현재 상태를 전달하고 액션을 디스패치하하고 리듀서는 이를 적절히 다루도록 하자.
 
@@ -74,7 +75,7 @@ Redux 스토어는 실제로 하나의 리듀서 함수만을 가진다는 것�
 
 만약 정말로 reducer의 성능이 우려된다면 [redux-ignore](https://github.com/omnidan/redux-ignore)나  [reduxr-scoped-reducer](https://github.com/chrisdavies/reduxr-scoped-reducer)를 이용하여 특정 액션에 하나의 리듀서만 반응하도록 할 수 있다. 또한 [redux-log-slow-reducers](https://github.com/michaelcontento/redux-log-slow-reducers)를 이용해 성능 벤치마킹을 할 수 있다.
 
-#### 더 읽어보기
+### 더 읽어보기
 
 **Discussions**
 
@@ -85,7 +86,8 @@ Redux 스토어는 실제로 하나의 리듀서 함수만을 가진다는 것�
 
 
 <a id="performance-clone-state"></a>
-### 리듀서에서 내 상태를 deep-clone해야만 하나요? 상태를 복사하는 것으로 인해 느려지지는 않나요?
+
+## 리듀서에서 내 상태를 deep-clone해야만 하나요? 상태를 복사하는 것으로 인해 느려지지는 않나요?
 
 Immutabl하게 상태를 갱신하는 것은 일반적으로 deep 카피가 아니라 shallow 카피를 뜻한다. shallow 카피는 딥 카피보다 훨씬 빠르다, 왜나하면 적은 오브젝트와 필드만 카피하고, 포인터를 효과적으로 움직이게 된다.
 
@@ -93,7 +95,7 @@ Immutabl하게 상태를 갱신하는 것은 일반적으로 deep 카피가 아�
 
 > 일반적인 Redux에 대한 오해: state를 deep copy해야 한다. 실제: 내부가 바뀌지 않으면 참조를 동일하게 유지해야 한다.
 
-#### 더 읽어보기
+### 더 읽어보기
 
 **Documentation**
 
@@ -110,13 +112,13 @@ Immutabl하게 상태를 갱신하는 것은 일반적으로 deep 카피가 아�
 
 
 <a id="performance-update-events"></a>
-### 어떻게 해야 스토어를 업데이트하는 이벤트의 수를 줄일 수 있나요?
+## 어떻게 해야 스토어를 업데이트하는 이벤트의 수를 줄일 수 있나요?
 
 리덕스는 각 액션을 성공적으로 디스패치한 다음 구독자들에게 알린다(즉, 스토어에 도달한 액션이 리듀서에서 처리된 경우). 어떤 경우에는, 구독자가 호출된 횟수를 줄이는 것이 유용할 수 있다. 특히, 액션 생성자가 여러 개의 서로 다른 액션을 연속적으로 발송하는 경우에 유용하다.
 
 React를 사용한다면 `ReactDOM.unstable_batchedUpdates()`에 여러개의 동기적인 디스패치를 감싸서 성능을 향상시킬 수 있지만 이 API는 실험적이고 React 릴리즈에서 제거될 수 있으니 많이 의존하지는 말아라. [redux-batched-actions](https://github.com/tshelburne/redux-batched-actions) (여러 개의 액션을 하나의 액션으로 감싸고 리듀서에서 그것들을 "unpack"하는 고차 리듀서), [redux-batched-subscribe](https://github.com/tappleby/redux-batched-subscribe) (여러번 디스패치되는 호출을 디바운스하게 하는 스토어 인핸서), 혹은 [redux-batch](https://github.com/manaflair/redux-batch) (여러 개의 액션들을 하나의 구독자 알림으로 다루는 스토어 인핸서)을 참고하라.
 
-#### 더 읽어보기
+### 더 읽어보기
 
 **Discussions**
 
@@ -132,13 +134,13 @@ React를 사용한다면 `ReactDOM.unstable_batchedUpdates()`에 여러개의 �
 
 
 <a id="performance-state-memory"></a>
-### "하나의 상태 트리"가 메모리 문제를 일으키지 않나요? 많은 액션들을 디스패칭하는 것은 많은 메모리가 필요하지 않나요?
+## "하나의 상태 트리"가 메모리 문제를 일으키지 않나요? 많은 액션들을 디스패칭하는 것은 많은 메모리가 필요하지 않나요?
 
 우선 메모리 사용 측면에서 Redux는 다른 자바스크립트 라이브러리와 다르지 않다. 유일한 차이점은 Backbone처럼 다양한 독립적인 모델 인스턴스를 저장하는 것이 아니라, 여러 오브젝트 레퍼런스가 중첩되어 하나의 트리를 이룬다는 것이다. 두번째로는 전형적인 Redux 앱은 Backbone 앱에 비해 *적은* 메모리를 사용할 것이라는 것이다. 왜냐하면 Redux는 모델이나 컬렉션의 인스턴스를 생성하기 보다는 plain 자바스크립트 오브젝트와 배열을 사용하는 것을 독려하기 때문이다. 마지막으로, Redux는 한 번에 하나의 상태 트리 레퍼런스만을 가지고 있다. 트리 내에서 더 이상 레퍼런스되지 않는 오브젝트들은 보통 가비지 콜렉션 대상이 된다.
 
 Redux는 액션 자체에 대한 기록을 저장하지 않는다. Redux DevTools는 리플레이할 수 있도록 액션들을 저장하지만 일반적으로 Redux DevTools는 제품 모드가 아닌 개발 모드에서만 활성화한다.
 
-#### 더 읽어보기
+### 더 읽어보기
 
 **Documentation**
 
