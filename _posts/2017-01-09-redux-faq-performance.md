@@ -5,6 +5,7 @@ category: Redux
 ---
 
 [원문보기](http://redux.js.org/docs/faq/Performance.html)
+
 ## 목차
 
  - [Redux를 어떻게 성능과 아키텍쳐 측면에서 잘 "확장""할 수 있나요?](#performance-scaling)
