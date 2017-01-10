@@ -29,14 +29,14 @@ Redux는 다른 라이브러리와 비교할 때 효율적이지는 않다. Reac
 
 > 규모면에서, 우리는 ~500개의 액션 타입과, 400개의 리듀서 케이스, ~150개의 컴포넌트, 5개의 미들웨어, ~200개의 액션, 2300개의 테스트를 가지고 있다.
 
-#### 더 많은 정보
+#### 더 읽어보기
 
 **Documentation**
-- [레시피: 리듀서 구조화 하기 - 상태 모양의 정규화](/docs/recipes/reducers/NormalizingStateShape.md)
+- [레시피: 리듀서 구조화 하기 - 상태 모양의 정규화](http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.md)
 
 
 **Articles**
-- [React 애플리케이션을 확장하는 법](https://www.smashingmagazine.com/2016/09/how-to-scale-react-applications/) (accompanying talk: [React 애플리케이션 확장하기](https://vimeo.com/168648012))
+- [React 애플리케이션을 확장하는 법](https://www.smashingmagazine.com/2016/09/how-to-scale-react-applications/) (연관된 이야기: [React 애플리케이션 확장하기](https://vimeo.com/168648012))
 - [고성능 Redux](http://somebody32.github.io/high-performance-redux/)
 - [React와 Redux의 성능을 Reselect로 향상시키기](http://blog.rangle.io/react-and-redux-performance-with-reselect/)
 - [Redux 상태 트리 캡슐화하기](http://randycoulman.com/blog/2016/09/13/encapsulating-the-redux-state-tree/)
@@ -71,7 +71,7 @@ Redux 스토어는 실제로 하나의 리듀서 함수만을 가진다는 것�
 
 만약 정말로 reducer의 성능이 우려된다면 [redux-ignore](https://github.com/omnidan/redux-ignore)나  [reduxr-scoped-reducer](https://github.com/chrisdavies/reduxr-scoped-reducer)를 이용하여 특정 액션에 하나의 리듀서만 반응하도록 할 수 있다. 또한 [redux-log-slow-reducers](https://github.com/michaelcontento/redux-log-slow-reducers)를 이용해 성능 벤치마킹을 할 수 있다.
 
-#### Further information
+#### 더 읽어보기
 
 **Discussions**
 - [#912: 제안: 액션 필터 유틸리티](https://github.com/reactjs/redux/issues/912)
@@ -89,52 +89,52 @@ Immutabl하게 상태를 갱신하는 것은 일반적으로 deep 카피가 아�
 
 > 일반적인 Redux에 대한 오해: state를 deep copy해야 한다. 실제: 내부가 바뀌지 않으면 참조를 동일하게 유지해야 한다.
 
-#### Further information
+#### 더 읽어보기
 
 **Documentation**
-- [Recipes: Structuring Reducers - Prerequisite Concepts](/docs/recipes/reducers/PrerequisiteConcepts.md)
-- [Recipes: Structuring Reducers - Immutable Update Patterns](/docs/recipes/reducers/ImmutableUpdatePatterns.md)
+- [Recipes: 리듀서 구조화 - 선행 컨셉](http://redux.js.org/docs/recipes/reducers/PrerequisiteConcepts.md)
+- [Recipes: 리듀서 구조화 - immutable한 업데이트 패턴](http://redux.js.org/docs/recipes/reducers/ImmutableUpdatePatterns.md)
 
 **Discussions**
-- [#454: Handling big states in reducer](https://github.com/reactjs/redux/issues/454)
-- [#758: Why can't state be mutated?](https://github.com/reactjs/redux/issues/758)
-- [#994: How to cut the boilerplate when updating nested entities?](https://github.com/reactjs/redux/issues/994)
-- [Twitter: common misconception - deep cloning](https://twitter.com/dan_abramov/status/688087202312491008)
-- [Cloning Objects in JavaScript](http://www.zsoltnagy.eu/cloning-objects-in-javascript/)
+- [#454: 리듀서에서 커다란 상태를 다루기](https://github.com/reactjs/redux/issues/454)
+- [#758: 상태는 왜 mutate될 수 없나?](https://github.com/reactjs/redux/issues/758)
+- [#994: 중첩된 entities를 업데이트할 때의 보일러 플레이트는?](https://github.com/reactjs/redux/issues/994)
+- [Twitter: 일반적인 오해 - deep cloning](https://twitter.com/dan_abramov/status/688087202312491008)
+- [자바스크립트에서 오브젝트 클론하기](http://www.zsoltnagy.eu/cloning-objects-in-javascript/)
 
 
 <a id="performance-update-events"></a>
-### How can I reduce the number of store update events?
+### 어떻게 해야 스토어를 업데이트하는 이벤트의 수를 줄일 수 있나요?
 
-Redux notifies subscribers after each successfully dispatched action (i.e. an action reached the store and was handled by reducers). In some cases, it may be useful to cut down on the number of times subscribers are called, particularly if an action creator dispatches multiple distinct actions in a row.
+리덕스는 각 액션을 성공적으로 디스패치한 다음 구독자들에게 알린다(즉, 스토어에 도달한 액션이 리듀서에서 처리된 경우). 어떤 경우에는, 구독자가 호출된 횟수를 줄이는 것이 유용할 수 있다. 특히, 액션 생성자가 여러 개의 서로 다른 액션을 연속적으로 발송하는 경우에 유용하다.
 
-If you use React, note that you can improve performance of multiple synchronous dispatches by wrapping them in `ReactDOM.unstable_batchedUpdates()`, but this API is experimental and may be removed in any React release so don't rely on it too heavily. Take a look at [redux-batched-actions](https://github.com/tshelburne/redux-batched-actions) (a higher-order reducer that lets you dispatch several actions as if it was one and “unpack” them in the reducer), [redux-batched-subscribe](https://github.com/tappleby/redux-batched-subscribe) (a store enhancer that lets you debounce subscriber calls for multiple dispatches), or [redux-batch](https://github.com/manaflair/redux-batch) (a store enhancer that handles dispatching an array of actions with a single subscriber notification).
+React를 사용한다면 `ReactDOM.unstable_batchedUpdates()`에 여러개의 동기적인 디스패치를 감싸서 성능을 향상시킬 수 있지만 이 API는 실험적이고 React 릴리즈에서 제거될 수 있으니 많이 의존하지는 말아라. [redux-batched-actions](https://github.com/tshelburne/redux-batched-actions) (여러 개의 액션을 하나의 액션으로 감싸고 리듀서에서 그것들을 "unpack"하는 고차 리듀서), [redux-batched-subscribe](https://github.com/tappleby/redux-batched-subscribe) (여러번 디스패치되는 호출을 디바운스하게 하는 스토어 인핸서), 혹은 [redux-batch](https://github.com/manaflair/redux-batch) (여러 개의 액션들을 하나의 구독자 알림으로 다루는 스토어 인핸서)을 참고하라.
 
-#### Further information
+#### 더 읽어보기
 
 **Discussions**
-- [#125: Strategy for avoiding cascading renders](https://github.com/reactjs/redux/issues/125)
-- [#542: Idea: batching actions](https://github.com/reactjs/redux/issues/542)
-- [#911: Batching actions](https://github.com/reactjs/redux/issues/911)
-- [#1813: Use a loop to support dispatching arrays](https://github.com/reactjs/redux/pull/1813)
-- [React Redux #263: Huge performance issue when dispatching hundreds of actions](https://github.com/reactjs/react-redux/issues/263)
+- [#125: 계단식 렌더를 피하는 전략](https://github.com/reactjs/redux/issues/125)
+- [#542: 아이디어: 액션 일괄수행하기](https://github.com/reactjs/redux/issues/542)
+- [#911: 액션 일괄수행하기](https://github.com/reactjs/redux/issues/911)
+- [#1813: 배열 디스패칭을 지원하는 루프를 사용하라 ](https://github.com/reactjs/redux/pull/1813)
+- [React Redux #263: 수백개의 액션을 수행할 때의 커다란 성능 이슈](https://github.com/reactjs/react-redux/issues/263)
 
 **Libraries**
 - [Redux Addons Catalog: Store - Change Subscriptions](https://github.com/markerikson/redux-ecosystem-links/blob/master/store.md#store-change-subscriptions)
 
 
 <a id="performance-state-memory"></a>
-### Will having “one state tree” cause memory problems? Will dispatching many actions take up memory?
+### "하나의 상태 트리"가 메모리 문제를 일으키지 않나요? 많은 액션들을 디스패칭하는 것은 많은 메모리가 필요하지 않나요?
 
-First, in terms of raw memory usage, Redux is no different than any other JavaScript library. The only difference is that all the various object references are nested together into one tree, instead of maybe saved in various independent model instances such as in Backbone. Second, a typical Redux app would probably have somewhat *less* memory usage than an equivalent Backbone app because Redux encourages use of plain JavaScript objects and arrays rather than creating instances of Models and Collections. Finally, Redux only holds onto a single state tree reference at a time. Objects that are no longer referenced in that tree will be garbage collected, as usual.
+우선 메모리 사용 측면에서 Redux는 다른 자바스크립트 라이브러리와 다르지 않다. 유일한 차이점은 Backbone처럼 다양한 독립적인 모델 인스턴스를 저장하는 것이 아니라, 여러 오브젝트 레퍼런스가 중첩되어 하나의 트리를 이룬다는 것이다. 두번째로는 전형적인 Redux 앱은 Backbone 앱에 비해 *적은* 메모리를 사용할 것이라는 것이다. 왜냐하면 Redux는 모델이나 컬렉션의 인스턴스를 생성하기 보다는 plain 자바스크립트 오브젝트와 배열을 사용하는 것을 독려하기 때문이다. 마지막으로, Redux는 한 번에 하나의 상태 트리 레퍼런스만을 가지고 있다. 트리 내에서 더 이상 레퍼런스되지 않는 오브젝트들은 보통 가비지 콜렉션 대상이 된다.
 
-Redux does not store a history of actions itself. However, the Redux DevTools do store actions so they can be replayed, but those are generally only enabled during development, and not used in production.
+Redux는 액션 자체에 대한 기록을 저장하지 않는다. Redux DevTools는 리플레이할 수 있도록 액션들을 저장하지만 일반적으로 Redux DevTools는 제품 모드가 아닌 개발 모드에서만 활성화한다.
 
-#### Further information
+#### 더 읽어보기
 
 **Documentation**
-- [Docs: Async Actions](/docs/advanced/AsyncActions.md)
+- [Docs: 비동기 액션들 ](http://redux.js.org/docs/advanced/AsyncActions.md)
 
 **Discussions**
-- [Stack Overflow: Is there any way to "commit" the state in Redux to free memory?](http://stackoverflow.com/questions/35627553/is-there-any-way-to-commit-the-state-in-redux-to-free-memory/35634004)
-- [Reddit: What's the best place to keep initial state?](https://www.reddit.com/r/reactjs/comments/47m9h5/whats_the_best_place_to_keep_the_initial_state/)
+- [Stack Overflow: Redux가 메모리를 해제하기 위해서 상태를 커밋하는 다른 방법이 있나?](http://stackoverflow.com/questions/35627553/is-there-any-way-to-commit-the-state-in-redux-to-free-memory/35634004)
+- [Reddit: 초기 상태를 유지할만한 최고의 장소는 어디인가?](https://www.reddit.com/r/reactjs/comments/47m9h5/whats_the_best_place_to_keep_the_initial_state/)
