@@ -35,7 +35,7 @@ Redux는 다른 라이브러리와 비교할 때 효율적이지는 않다. Reac
 
 **Documentation**
 
-- [레시피: 리듀서 구조화 하기 - 상태 모양의 정규화](http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.md)
+- [레시피: 리듀서 구조화 하기 - 상태 모양의 정규화](http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.html)
 
 **Articles**
 
@@ -99,8 +99,8 @@ Immutabl하게 상태를 갱신하는 것은 일반적으로 deep 카피가 아�
 
 **Documentation**
 
-- [Recipes: 리듀서 구조화 - 선행 컨셉](http://redux.js.org/docs/recipes/reducers/PrerequisiteConcepts.md)
-- [Recipes: 리듀서 구조화 - immutable한 업데이트 패턴](http://redux.js.org/docs/recipes/reducers/ImmutableUpdatePatterns.md)
+- [레시피: 리듀서 구조화 - 선행 컨셉](http://redux.js.org/docs/recipes/reducers/PrerequisiteConcepts.html)
+- [레시피: 리듀서 구조화 - immutable한 업데이트 패턴](http://redux.js.org/docs/recipes/reducers/ImmutableUpdatePatterns.html)
 
 **Discussions**
 
@@ -146,7 +146,7 @@ Redux는 액션 자체에 대한 기록을 저장하지 않는다. Redux DevTool
 
 **Documentation**
 
-- [Docs: 비동기 액션들 ](http://redux.js.org/docs/advanced/AsyncActions.md)
+- [Docs: 비동기 액션들 ](http://redux.js.org/docs/advanced/AsyncActions.html)
 
 **Discussions**
 
