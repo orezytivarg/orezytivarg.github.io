@@ -1,9 +1,11 @@
 ---
 id: redux-faq-performance
-title: Redux FAQ: 성능편
+title: Redux FAQ 성능편
 category: Redux
 ---
-[원본보기](redux.js.org/docs/faq/Performance.html)
+
+[원문보기](http://redux.js.org/docs/faq/Performance.html)
+
 # Redux FAQ: 성능편
 
 ## 목차

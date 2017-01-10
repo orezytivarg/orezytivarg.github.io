@@ -3,6 +3,7 @@ id: performance-engineering-with-react
 title: React 퍼포먼스 엔지니어링
 category: React
 ---
+
 [원문보기](http://benchling.engineering/performance-engineering-with-react/)
 
 이 포스트는 React 퍼포먼스 엔지니어링 시리즈의 첫 번째 파트다. Part 2 - [A Deep Dive into React Perf Debugging](http://benchling.engineering/deep-dive-react-perf-debugging/) 도 올라왔다!
@@ -23,19 +24,19 @@ React를 사용하면 별다른 작업 없이도 즉시 성능향상을 이뤄�
 
 왜냐하면 React 컴포넌트의 상태는 자바스크립트에 저장되어 있기 때문에 DOM에 직접 접근하는 것을 피할 수 있다. 고전적인 성능 이슈는 DOM을 부적절한 순간에 접근하기 때문이다. 일반적으로 이런 부적절한 순간 문제란 강제로 layout 동기화 같은 문제(예: someNode.style.left를 읽으면 브라우저는 강제로 프레임을 렌더링한다)다.
 
-다음과 같이 하는 대신에:
+다음과 같이 하는 대신에,
 
 ```js
 someNode.style.left = parseInt(someNode.style.left) + 10 + "px";  
 ```
 
-우리는 선언적으로 <SomeComponent style={{left: this.state.left}} />과 같이 DOM 상태를 읽지 않고도 컴포넌트가 움직이도록 간단하게 업데이트할 수 있다:
+선언적으로 "<SomeComponent style={{ left: this.state.left }}/>"과 같이 DOM 상태를 읽지 않고도 컴포넌트가 움직이도록 간단하게 업데이트할 수 있다.
 
 ```js
 this.setState({left: this.state.left + 10}).  
 ```
 
-더 명확히 하자면, 이런 최적화는 React 없이도 가능하다 - 하지만 말하고자 하는 바는 바로 React가 이런 문제를 미리 해결하는 경향이 있다는 것이다.
+더 명확히 하자면, 이런 최적화는 React 없이도 가능하다 - 여기서 말하고자 하는 바는 바로 React가 이런 문제를 미리 해결하는 경향이 있다는 것이다.
 
 단순한 애플리케이션에서는 이 퍼포먼스 최적화가 React를 사용하는 것만으로 충분하다 - 나는 그것이 선언적 프레임워크가 실현될 수 있는 최소한의 작업이라고 생각한다. 그러나 보다 복잡한 뷰들을 개발하고, 관리하고, virtual DOM을 비교하는 것은 비용이 많이 드는 작업이 될 수 있다. 다행히도, React는 성능 문제가 존재하는 곳을 감지하고 이를 방지하기 위한 수단을 몇 가지 툴을 통해 제공한다.
 

@@ -3,6 +3,7 @@ id: a-deep-dive-into-react-perf-debugging
 title: React 퍼포먼스 디버깅 심층 연구
 category: React
 ---
+
 [원문보기](http://benchling.engineering/deep-dive-react-perf-debugging/)
 
 2개의 시리즈물인 React 성능 엔지니어링의 두 번째 파트다. 파트 1에서 우리는 React 성능 툴을 어떻게 쓰는지 살펴보았고, React의 일반적인 렌더링 병목현상과 몇 가지 디버깅 팁을 알아보았다. 아직 안봤다면 한 번 살펴보라!
