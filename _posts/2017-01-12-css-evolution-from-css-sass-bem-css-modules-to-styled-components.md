@@ -1,13 +1,13 @@
 ---
 id: css-evolution-from-css-sass-bem-css-modules-to-styled-components
-title: CSS의 진화: CSS, SASS, BEM, CSS Modules로부터 Styled Components로
+title: CSS의 진화 - CSS, SASS, BEM, CSS Modules로부터 Styled Components로
 category: CSS
 ---
 ![](https://cdn-images-1.medium.com/max/1000/1*yBxZo9LNEjRaL7eKUBqRSA.png)
 
 [원문보기](https://m.alphasights.com/css-evolution-from-css-sass-bem-css-modules-to-styled-components-d4c1da3a659b#.mcz0jzhui)
 
-# CSS Evolution: From CSS, SASS, BEM, CSS Modules to Styled Components
+# CSS의 진화: CSS, SASS, BEM, CSS Modules로부터 Styled Components로
 
 Since the beginnings of the Internet we’ve always had the need to style our websites, CSS has been around forever and has evolved at its own pace over the years, this article will take you through it.
 
