@@ -59,7 +59,7 @@ BEM은 컴포넌트가 고유한 #reusabilityFtw임을 보장한다는 의미에
 
 그러나, 또 다른 문제들이 발생했다:
 
-- 클레스 이름 선택이 끔찍한 일이 되었다.
+- 클래스 이름으로 셀렉트하는 일이 끔찍한 일이 되었다.
 - 마크업이 길다란 클래스 이름으로 비대해졌다.
 - 재사용할 때마다 모든 ui 컴포넌트를 명시적으로 확장해야만 했다.
 - 마크업이 불필요하게 의미론적이 되었다.
@@ -160,7 +160,7 @@ styled component에서는 JS의 풀파워를 사용할 수 있다. 즉 prop rece
 
 <script src="https://gist.github.com/carlosepp/2e898cc74dcd51f9e4da2602566cf41f.js"></script>
 
-width와 height를 props로 받고 horizontal prop도 받아서 스크롤바를 하단에 출력하는 <ScrollView /> 컴포넌트를 볼 수 있다.
+width와 height를 props로 받고 horizontal prop도 받아서 스크롤바를 하단에 출력하는 `<ScrollView />` 컴포넌트를 볼 수 있다.
 
 ## Helper components
 
@@ -172,7 +172,7 @@ width와 height를 props로 받고 horizontal prop도 받아서 스크롤바를 
 
 ## Theme
 
-테마를 지원하는 것은 애플리케이션 전체에 걸친 1개의 source of truth of values를 가지게 할 것이다. 이는 컬러 팔렛트나 일반적인 룩앤필과 같은 애플리케이션에서 공통적으로 재사용되는 값들을 저장하는데 유용함이 증명되었다.
+테마를 지원하는 것은 애플리케이션 전체에 걸친 1개의 source of truth of values를 가지게 할 것이다. 이는 컬러 팔렛트나 공통 룩앤필과 같은 애플리케이션에서 전체적으로 재사용되는 값들을 저장하는데 유용함이 증명되었다.
 
 <script src="https://gist.github.com/carlosepp/891d2f20f65f16bfb7c17a0e0afd4e16.js"></script>
 
