@@ -90,105 +90,108 @@ That’s the simple principle behind Local CSS Modules. If you can see, local mo
 
 ## Styled Components to blend css in JS (fully)
 
-Styled-components are pure visual primitives that act as a wrapping component; they can be mapped to actual html tags and what they do is wrap the children components with the styled-component.
+Styled-components는 순수한 시각적 primitives다; 실제 html 태그에 매핑될 수 있으며 자식 컴포넌트들을 styled-component로 감싸는 일을 한다.
 
-This following code will explain it better:
+다음 코드로 더 설명하는 것이 나을 것이다:
 
 <script src="https://gist.github.com/carlosepp/f3b342565e1a41cf4488a626e696e26e.js"></script>
 
-If you see the styled component is very simple to understand, it uses the template literal notation to define css properties, it seems that the core styled-components team nailed it this time as it blends the full power of ES6 and CSS.
+보기만해도 styled component는 굉장히 이해하기 쉬울 것이다. 템플릿 리터럴 표기법을 사용하여 css 프로퍼티를 정의하고 있다는 것은 core styled-compoents 팀이 es6와 css의 모든 파워를 혼합한 것 처럼 보인다.
 
-Styled-components provides a very simple pattern to reuse and fully separate UI from Functional and Stateful components. Creating an api that has access to native tags either in the browser as HTML or Natively using React Native.
+Styled-components는 기능적, 상태적인 컴포넌트에서 UI를 완전히 분리하고 재사용할 수 있는 매우 단순한 패턴을 제공한다. React Native 혹은 브라우저의 HTML 양쪽 태그 모두를 억세스하는 api를 만드는 것이다.
 
-This is how you pass custom props (or modifiers) to a Styled Component:
+이것이 Styled Component에 props(혹은 modifiers)를 전달하는 방법이다:
 
 <script src="https://gist.github.com/carlosepp/b1bbf0b9ab60807c9e8f74902a55a97e.js"></script>
 
-You can see that the props suddenly become the modifiers that each of the components receive and they can be processed to output different lines of css, neat right?
+props가 갑자기 각 컴포넌트가 받는 modifier가 되고, css 몇 라인의 출력으로 처리될 수 있음을 알 수 있다. 산뜻하지 않은가?
 
-This allows us to move faster and use the full power of JS to process our styles while making sure they remain consistent and reusable.
+따라서 스타일을 처리하는데 JS의 모든 기능을 사용하면서 일관성있고 재사용 가능한 상태를 유지한 채로 빠르게 움직일 수 있게 한다.
 
-Core UI for everyone to reuse
+## 모든 사람이 재사용하는 Core UI
 
+CSS 모듈이나 Styled Components나 그 자체로는 완벽한 솔루션이 아니라는 것은 꽤 빠르게 명백해졌고, 작동과 확장을 목적으로 하는 몇 가지 패턴이 필요하다. 패턴은 컴포넌트가 무엇인지 정의하는 것과, 로직으로부터 완전히 분리하는 것, 스타일을 지정하는 것 뿐이다.
 It quickly became apparent that CSS Modules nor Styled Components by themselves was not the perfect solution, it needed some kind of pattern in order for it to work and scale. The pattern emerged by defining what a component is and separating it fully from logic, creating core components which sole purpose is to style and nothing more.
 
-An example implementation of such component using CSS Modules:
+CSS 모듈을 사용한 컴포넌트의 구현 예제다:
 
 <script src="https://gist.github.com/carlosepp/b8342e24955c1ceb5be36cd3c72ac135.js"></script>
 
-If you see, there’s nothing fancy in here, just a component that receives props and those are mapped to the children component. In other words: the wrapping component transfers all the props to the children.
+보다시피 팬시한 뭔가가 있지는 않고, 그저 props를 받아서 하위 컴포넌트에 매핑하는 컴포넌트일 뿐이다. 다시 말하자면, props를 children에 전달하는 포장용 컴포넌트일 뿐이다.
 
-Then your component can be consumed in the following way
+다음과 같은 방법으로 컴포넌트를 사용할 수 있다.
 
 <script src="https://gist.github.com/carlosepp/e35be27d5e00d7de939bc4774b260c90.js"></script>
 
-Let me show you a similar example of a full implementation of a button using styled-components:
+styled-components를 사용하여 구현한 비슷한 예제를 살펴보자:
 
 <script src="https://gist.github.com/carlosepp/d6c7cebd374b88609c140bfdfe270498.js"></script>
 
-What’s interesting about this pattern is that the component is dumb and only serves as a wrapper of css definitions mapped to the parent component. There is one advantage of doing this:
+이 패턴이 흥미로운 점은 컴포넌트가 dumb이고 상위 컴포넌트에 매핑된 css 정의의 wrapper일 뿐이라는 것이다. 이 일을 하는 것에는 한 가지 이점이 있다:
 
-It lets us define a base UI api which you can swap at will and make sure that all UI remains consistent throughout the application.
+기본 UI api를 정의하게 해주므로 이를 스왑함으로 모든 UI가 애플리케이션 전체에 걸쳐 일관성있게 유지되도록 해준다.
 
-This way we can fully isolate the design process from the implementation process, making it possible to trigger them in parallel if wanted; you can have 1 developer focusing on the implementation of the feature and another polishing the UI achieving full separation of concerns.
+이 방법은 디자인 처리와 구현 처리를 완전히 분리시켜서 원한다면 각 처리를 병렬적으로 시작할 수 있다. 피쳐 구현에 포커싱한 개발자와 UI를 갈고닦는 개발자에 대해서 서로 완전히 관심사를 분리할 수 있게 한다.
 
-Sounds like a great solution so far, internally we had discussions around it and thought it was a good idea to follow this pattern. Together with this pattern we started identifying other useful patterns as well:
-Prop receivers
+지금까지는 아주 훌륭한 해결책인것 같다. 내부적으로 우리는 이 문제를 두고 토론을 시작했으며 좋은 아이디어라고 생각했다. 그리고 이 패턴과 함께 또다른 유용한 패턴을 식별하기 시작했다:
 
-These do the function of listening to props passed to any component, thus making it easy to use these functions in any component you want, making it the holy grail for reusability and extending the capabilities of any given component, you can think of it as a way of inheriting modifiers, an example of what I mean by this:
+## Prop receivers
+
+이 패턴은 어떤 컴포넌트로 전달된 props를 리스닝하는 기능을 하므로, 어떤 컴포넌트에든 이 기능을 사용하기 쉽고, 어떤 주어진 컴포넌트라도 재사용성과 가용성을 확장할 수 있는 성배로 만들어준다. modifier를 상속하는 방법으로 생각할수도 있다. 다음 예제가 바로 내가 말하는 바다:
 
 <script src="https://gist.github.com/carlosepp/bcb7d275546ab344805a032e9d659bbc.js"></script>
 
-This way you are sure that you won’t need to hardcode all the borders again for each specific component 🏆, saving you tons of time.
-Placeholder / Mixin like functionality
+이 방법을 통해 특정 컴포넌트를 위한 각 border를 하드코드할 필요가 없음을 확신할 수 있다. 엄청나게 시간을 절약할 수 있다.
 
-In styled components you can use the full power of JS to be able to create functions not just as prop receivers but also as a way of sharing code between different components, here is an example:
+## Placeholder / Mixin like functionality
+
+styled component에서는 JS의 풀파워를 사용할 수 있다. 즉 prop receivers 뿐만 아니라 서로 다른 컴포넌트 간의 코드 공유같은 방법으로. 여기 예제가 있다:
 
 <script src="https://gist.github.com/carlosepp/7704cce24edba0520eb6b36d894f04ae.js"></script>
 
-Layout Components
+## Layout Components
 
-We’ve detected that one of the first things we need to do when working in an application is layout our UI elements, for this purpose, we’ve identified some components that aid us in the process.
+우리는 애플리케이션 작업을 할때 처음으로 필요한 것이 UI elements를 레이아웃 하는 것임을 알아냈다. 이를 처리하는 과정에서 레이아웃 목적으로 사용하는 몇몇 컴포넌트를 식별해냈다.
 
-These components have proven to be very useful as often some developers (not familiar enough with css positioning techniques) have a hard time setting the structure, here is an example of such components:
+이 컴포넌트들은 종종 구조를 세팅하는 힘든 시간을 보내는 몇몇 개발자들에게 매우 유용함이 증명되었다(css 포지셔닝 테크닉보다 충분히 익숙하지는 않다). 여기 그런 컴포넌트들의 예제가 있다:
 
 <script src="https://gist.github.com/carlosepp/2e898cc74dcd51f9e4da2602566cf41f.js"></script>
 
-If you can see we have the <ScrollView /> component which takes a width and a height as props and also receives the horizontal prop so the scrollbar appears below.
+width와 height를 props로 받고 horizontal prop도 받아서 스크롤바를 하단에 출력하는 <ScrollView /> 컴포넌트를 볼 수 있다.
 
 ## Helper components
 
-Helper components make our life easier and allow us to reuse heavily. This is the place where we store all our common patterns.
+헬퍼 컴포넌트는 엄청난 재사용을 허용하여 우리의 삶을 간단하게 만든다. 우리의 모든 공통 패턴을 저장한 장소다.
 
-These are some of the helpers I’ve found quite useful so far:
+지금까지 꽤 유용했던 헬퍼 몇몇은 다음과 같다:
 
 <script src="https://gist.github.com/carlosepp/112987c144fd6e301ca35940a675ae2e.js"></script>
 
 ## Theme
 
-Having a theme lets you have 1 source of truth of values that can be reused throughout the application, it’s been proven useful for storing values that are commonly reused in the application like color palette and general look and feel.
+테마를 지원하는 것은 애플리케이션 전체에 걸친 1개의 source of truth of values를 가지게 할 것이다. 이는 컬러 팔렛트나 일반적인 룩앤필과 같은 애플리케이션에서 공통적으로 재사용되는 값들을 저장하는데 유용함이 증명되었다.
 
 <script src="https://gist.github.com/carlosepp/891d2f20f65f16bfb7c17a0e0afd4e16.js"></script>
 
-Pros
+장점
 
-- The full power of JS at our hands, meaning full communication with the component’s UI.
-- Eliminates the need of mapping components and styles through the use of a className (this is done under the hood)
-- Great development experience so far, it reduces the amount of time spent thinking about classNames and mapping them to the component.
+- 풀파워의 JS가 우리 손에 들어왔다. 이는 컴포넌트 UI와 풀 커뮤니케이션을 의미한다.
+- className을 통한 컴포넌트와 스타일의 매핑을 제거한다.(매핑은 속에서 완료된다)
+- 지금까지 중 최고의 개발 경험을 제공한다. 클래스네임과 컴포넌트를 매핑을 생각하는데 들이는 엄청난 양의 시간을 줄인다.
 
-Cons
+단점
 
-- Yet to be tested in the wild
-- Built for React
-- Super young
-- Testing needs to be done via aria-labels or using classNames
+- 야생에서 테스트된 적이 없다.
+- React를 위해 개발되었다.
+- 아직은 정말 미성숙하다.
+- classNames를 사용하거나 arai-labels를 위한 테스팅이 필요하다.
 
-##Conclusion
+## 결론
 
-Whatever technology you use whether it is SASS, BEM, CSS Modules or Styled Components there is no substitute for a well defined styling architecture that makes it intuitive for other developers to contribute to your code base without thinking too much, breaking or introducing new moving parts to the system.
+SASS, BEM, CSS 모듈, Styled Components 어떤 기술을 사용하더라도 다른 개발자들이 시스템의 새로운 파트를 가져오는 것이나 시스템을 깨뜨리는 것에 대해 너무 많이 생각하지 않아도 당신의 코드 베이스에 기여할 수 있도록 잘 정의된 스타일링 아키텍쳐를 대체할 수는 없다.
 
-This approach is crucial to scale properly and can be achieved even if using plain CSS and BEM, the main difference is the amount of work and LOC needed for each implementation, overall styled-components feels like a great suit for pretty much all React projects, yet to test it in the wild but quite promising indeed.
+이 접근 방법은 애플리케이션을 적절하게 확장시키는데 주요하다. plain CSS 혹은 BEM을 사용하더라도 중요한 차이점은 각 구현에 필요한 작업량과 LOC다. 전반적으로 보면 styled-components는 거의 모든 React 프로젝트에 잘 맞고, 아직 야생에서 태스트되지는 않았지만 충분히 유망한 스타일링 방법이다.
 
-If you have any feedback thoughts, opinions, advices or anything please comment below, or feel free to reach me via twitter @perezpriego7
+의견이나 의견, 조언 등이 있으시면 아래에 의견을 남기고 트위터 @perezpriego7을 통해 연락 바란다.
 
-Here at AlphaSights we are hiring, If you are interested in working in awesome projects using React, Ember, Rails, Elixir, GraphQL. Check our available positions at: https://engineering.alphasights.com/#positions
+Refact, Ember, Rails, Elixir, GraphQL을 사용하여 멋진 프로젝트에서 작업하고 싶다면 AlphaSights에서 채용 중이다. 채용 직군을 확인하려면 https://engineering.alphasights.com/#positions 를 방문하라.
