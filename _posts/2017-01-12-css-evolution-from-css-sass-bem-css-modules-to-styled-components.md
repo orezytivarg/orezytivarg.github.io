@@ -19,7 +19,8 @@ CSS가 강력해졌고 진화해졌다는 뉴스는 없지만, CSS를 어떻게�
 
 90년대에 우리는 "멋진" 인터페이스를 만드는데 중점을 뒀다. 와우 팩터는 가장 중요한 것이었고, inline style이 그당시에 쓰였던 것이다. 그리고, 우리는 그저 다르게 보이게 하는 것이라면 다른 것은 신경쓰지 않았고, 결국 웹페이지는 몇몇 gifs와 marquees, 끔찍한(당시에는 인상적인) 엘레멘트를 이용해서 방문객의 주의를 끌기를 기대하는 귀여운 장난감처럼 보였었다.
 
-![](https://twitter.com/ivantodorov/status/324420248201736195)
+<blockquote class="twitter-tweet" data-lang="ko"><p lang="en" dir="ltr">Microsoft&#39;s fist website, back in 1994. :) Looking pretty cool <a href="https://twitter.com/hashtag/microsoft?src=hash">#microsoft</a> <a href="http://t.co/7wy1HQUObB">pic.twitter.com/7wy1HQUObB</a></p>&mdash; Ivan Todorov (@ivantodorov) <a href="https://twitter.com/ivantodorov/status/324420248201736195">2013년 4월 17일</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 그 후에 동적 사이트를 만들기 시작했을 때 각 개발자들이 css를 다루는 자신만의 방법을 가지는 일관성 없는 상태로 남겨졌다. 우리 중 몇몇은 새 코드를 도입할때 비주얼 리그레션을 일으키는 특수함과 사투를 펼쳤다. 우리는 !important에 의존해서 UI를 정확히 특정한 방식으로 보이게 하려고 했으나, 곧 깨달았다:
 
