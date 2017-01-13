@@ -9,84 +9,88 @@ category: CSS
 
 # CSS의 진화: CSS, SASS, BEM, CSS Modules로부터 Styled Components로
 
-Since the beginnings of the Internet we’ve always had the need to style our websites, CSS has been around forever and has evolved at its own pace over the years, this article will take you through it.
+초기 인터넷 시절부터 우리는 항상 웹사이트를 스타일링할 필요가 있었다. CSS는 영원히 계속되었고 지난 몇 년간 독자적인 페이스로 발전해왔다. 이 기사를 통해 여러분과 그 지난 몇 년 간을 짚어본다.
 
-To begin with we need to be on the same page of what CSS is, I think we can all agree that css is used for describing the presentation of a document written in a markup language.
+CSS는 무엇과 함께 있어야할 필요가 있는지 먼저 생각해보자. 당신들 모두 CSS를 마크업 언어로 작성된 문서의 표현을 기술하는데 사용되야 한다는 데에 동의할 것이다.
 
-It’s no news that CSS has evolved along the way and has become more powerful nowadays, but it’s widely known that additional tooling needs to be used in order to make css somehow work for teams.
+CSS가 강력해졌고 진화해졌다는 뉴스는 없지만, CSS를 어떻게든 활용할 수 있도록 추가적인 도구들이 있다는 것은 널리 알려져 있다.
 
-## CSS in the wild-west
+## 미개척 서부의 CSS
 
-In the 90’s we use to focus on creating “fancy” interfaces, the wow factor was the most important thing, inline styles were the thing back then, we just didn’t care if things looked different, in the end Webpages were like cute toys we could threw some gifs, marquees and other horrible (at the time impressive) elements over and expect to catch your visitors’ attention.
+90년대에 우리는 "멋진" 인터페이스를 만드는데 중점을 뒀다. 와우 팩터는 가장 중요한 것이었고, inline style이 그당시에 쓰였던 것이다. 그리고, 우리는 그저 다르게 보이게 하는 것이라면 다른 것은 신경쓰지 않았고, 결국 웹페이지는 몇몇 gifs와 marquees, 끔찍한(당시에는 인상적인) 엘레멘트를 이용해서 방문객의 주의를 끌기를 기대하는 귀여운 장난감처럼 보였었다.
 
 https://twitter.com/ivantodorov/status/324420248201736195
 
-After that, we started creating dynamic sites, but css remained a consistent mess, every developer had his/her way of doing css. Some of us struggled with specificity, causing visual regressions when introducing new code, we relied on using !important to set in stone our strong will to make a UI element look in a certain way. But we soon realized that:
+그 후에 동적 사이트를 만들기 시작했을 때 각 개발자들이 css를 다루는 자신만의 방법을 가지는 일관성 없는 상태로 남겨졌다. 우리 중 몇몇은 새 코드를 도입할때 비주얼 리그레션을 일으키는 특수함과 사투를 펼쳤다. 우리는 !important에 의존해서 UI를 정확히 특정한 방식으로 보이게 하려고 했으나, 곧 깨달았다:
 
 ![](https://cdn-images-1.medium.com/max/800/1*vePubKIIK_96qGEgKo5G4Q.jpeg)
 
-All those practices became more evident and bigger problems as soon as projects grew in size, complexity, and team members. So not having a consistent pattern to do styling became one of the biggest blockers for experienced and inexperienced developers who struggled to find a right way to do things in CSS. In the end there was no right or wrong thing to do, we just cared to make the thing look ok.
+프로젝트의 규모, 복잡성 및 팀 구성원이 증가함에 따라 이러한 모든 관행들이 더욱 분명하고 큰 문제가 되었다. 따라서 스타일을 유지하는 데 있어서 개발자의 경험이 많고 적음을 가리지않고를 떠나 모두가 일관된 패턴을 갖추지 못한 CSS를 다루는 올바른 방법을 찾기위해 사투를 펼쳤다. 그러나 결국, 올바른지 아닌지는 상관하지 않고, 그저 제대로 보이기만 하면 되는데 신경을 쓰게 되었다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*3IDlXD210gSmF5jYko1RtQ.gif)
 
-## SASS to the rescue
+## SASS 구조대
 
-SASS transformed CSS into a decent programming language in the form of a preprocessing engine that implemented nesting, variables, mixins, extends and logic into stylesheets, so you could better organize your css files and have at least some ways of deconstructing your css chunks in smaller files, which was a great thing back then.
+SASS는 중첩, 변수, 믹스, 확장 및 로직을 스타일시트에 구현한 전처리 엔진 형태로 CSS를 적절한 프로그래밍 언어로 변형하여 CSS 파일을 보다 잘 구성하고 CSS 덩어리를 더 작은 파일로 분류할 수 있었다. 그 당시에는 아주 훌륭해 보였다.
 
-It essentially takes scss code, preprocesses it and outputs the compiled versions of the file in a global css bundle. Great right? but not so much I’d say, After a while it became apparent that unless there were strategies and best practices in place, SASS only caused more troubles than it alleviated.
+본질적으로 그것은 SCSS 코드를 가지고 전처리하고 컴파일된 버전을 CSS 묶음으로 출력하는 것이다. 훌륭하지 않은가? 그러나 별로 말할 것도 없이, 시간이 흐르자 적절한 전략과 모범사례가 없다면 SASS는 더 많은 문제를 일으킨다는 것이 분명해졌다.
 
-Suddenly we became unaware of what the preprocessor was doing under the hood and relied on lazily nesting to conquer the specificity battle but causing compiled stylesheets to go nuts in sizes.
+갑자기 우리는 이 전처리기가 후드 아래서 무엇을 하고 있는지 신경쓰지 못했고, lazily nesting에 의존하여 특수성과의 싸움을 정복했으나 컴파일된 스타일시트의 크기는 엄청나졌다.
 
-Until BEM came along….
+BEM이 나타나기 전까지는….
 
-## BEM and component based thinking
+## BEM과 컴포넌트 기반의 생각
 
-When BEM came along it was a breath of fresh air that made us think more about reusability and components. It basically brought semanticity to a new level, it let us make sure that className is unique thus reducing the risk of specificity clash by using a simple Block Element Modifier convention. Look at the following example:
+BEM이 나왔을 때는 공기 중에 재사용성과 컴포넌트에 대해 더 생각하게 만드는 신선한 공기가 맴돌았다. 그것은 의미론을 새로운 수준으로 끌어올렸고, 단순한 Block Element Modifier 컨벤션을 통해 className을 고유하게 만들었다. 다음 예제를 보자:
 
 <script src="https://gist.github.com/carlosepp/01ebb1e7fb6cc7aacf96896de718cf4d.js"></script>
 
-If you analyze a bit the markup you can see immediately the Block Element Modifier convention in play here.
+마크업을 약간 분석하면 즉시 Block Element Modifier가 여기서 놀고 있음을 알아차릴 수 있다.
 
-You can see that we have two very explicit blocks in the code: .scenery and .sky, each one of them have their own blocks. Sky is the only one that has modifiers as it could be foggy, daytime or dusk, those are different characteristics that could be applied to the same element.
+.scenery와 .sky라는 블록을 가지고 있음을 확연히 알 수 있다. 각 블록들은 또 자체적인 블록을 가지고 있다. Sky는 foggy, daytime, dusk처럼 같은 엘레멘트에 적용될 수 있는 다른 특성들을 가진 유일한 엘레멘트다.
 
-Let’s take a look at the companion css with some pseudo code that will let us analyze it better:
+더 나은 분석을 할 수 있도록 pseudo 코드를 사용한 CSS를 살펴보자:
 
 <script src="https://gist.github.com/carlosepp/090f44bce2a1344a6eeaece7762c10a2.js"></script>
 
-If you want to have an in-depth understanding of how BEM works, I recommend you take a look at this article , written by my colleague and friend Andrei Popa.
+BEM이 어떻게 동작하는지 깊이 알고 싶다면, 내 동료이자 친구인 Andrei Popa가 작성한 이 [기사](https://m.alphasights.com/bem-i-finally-understand-b0c74815d5b0#.9vdcmiugz)를 추천한다.
 
-BEM is good in the sense that you made sure that components were unique #reusabilityFtw. With this kind of thinking some apparent patterns became more evident as we started migrating our old stylesheets into this new convention.
+BEM은 컴포넌트가 고유한 #reusabilityFtw임을 보장한다는 의미에서 유용하다. 이런 종류의 생각은 패턴으로 나타났고 예전 스타일 시트를 이 새로운 컨벤션으로 이전하기 시작하면서 더 명백해졌다.
 
-But, another set of problems came along:
+그러나, 또 다른 문제들이 발생했다:
 
-- Classname selection became a tedious task
-- Markup became bloated with all those long class names
-- You needed to explicitly extend every ui component whenever you wanted to reuse
-- Markup became unnecessarily semantic
+- 클레스 이름 선택이 끔찍한 일이 되었다.
+- 마크업이 길다란 클래스 이름으로 비대해졌다.
+- 재사용할 때마다 모든 ui 컴포넌트를 명시적으로 확장해야만 했다.
+- 마크업이 불필요하게 의미론적이 되었다.
 
-CSS Modules and local scope
+## CSS 모듈과 로컬 스코프
 
-Some of the problems that neither SASS or BEM fixed was that in the language logic there is no concept of true encapsulation, thus relying on the developer to choose unique class names. A process that felt could be solved by tools rather by conventions.
+SASS나 BEM이 수정하지 않은 문제 중 일부는 언어 논리에 진정한 캡슐화 개념이 없으므로 개발자가 선택한 고유 클래스 이름에 의존해야 한다는 것이였다. 컨벤션보다는 도구로 처리할 수 있을 것 같았다.
 
-And this is exactly what CSS modules did, it relied on creating a dynamic class names for each locally defined style, making sure no visual regressions are caused by injecting new css properties, all styles were properly encapsulated.
+이것이 바로 정확히 CSS 모듈이 한 일이다. 로컬 정의된 각 스타일에 의존해 동적으로 클래스 이름을 만들었다. 모든 스타일을 적절하게 캡슐화해서 새로운 CSS 속성을 주입함에 따라 생기는 시각적 퇴행현상을 없애버린 것이다.
 
-CSS-Modules quickly gained popularity in the React ecosystem and now it’s common to see many react projects using it, it has it’s pros and cons but over all it proves to be a good paradigm to use.
+React 생태계에서 CSS-모듈은 빠르게 인기를 얻었으며, 이제 기본적으로 많은 React 프로젝트들이 이것을 일반적으로 사용하고 있다. 장점과 단점이 있지만 사용하기 좋은 패러다임이 입증된 것이다.
 
-But… CSS Modules by itself doesn’t solve the core problems of CSS, it only shows you a way of localizing style definitions: a clever way of automating BEM so you don’t need to think about chosing a class name ever again (or at least think about it less).
+그러나… CSS 모듈 자체 만으로는 CSS의 핵심 문제를 해결하지는 못한다. 단지 스타일 정의를 지역화하는 방법만을 보여주었을 뿐이다: 한번 선택했던 클래스이름을 다시 선택하지 않는 자동화된 BEM이 있어서 당신이 클래스 네임을 고민할 필요가 없는 것이다(적어도 더 조금만 고민하면 되는)
 
-But it does not alleviate the need for a good and predictable style architecture that is easy to extend reuse and control with the least amount of effort.
+그러나 이것이 최소한의 노력만으로 예측 가능하고 확장 재사용이 가능한 아키텍쳐에 대한 필요성을 줄이지는 못한다.
 
-This is how local css looks like:
+이것이 로컬 CSS의 모양이다:
 
 <script src="https://gist.github.com/carlosepp/89edc1dd4bc87f129cf62233672e1536.js"></script>
 
-You can see that it’s just css, the main difference is that all classNames prepended with :local will generate a unique class name that looks something like this:
+단지 그것이 CSS라는 것을 알 수 있다. 가장 큰 차이는 모든 클래스네임 앞에 유니크한 클래스 이름을 생성하도록하는 :local이 붙는 것이다. 그 유니크한 클래스 이름은 다음과 같다:
 
 `.app-components-button-__root — 3vvFf {}`
 
-You can configure the generated ident with the localIdentName query parameter. Example: `css-loader?localIdentName=[path][name]---[local]---[hash:base64:5]` for easier debugging.
+localIdentName 쿼리 파라미터를 통해서 생성되는 글자를 설정할 수 있다. 디버깅이 쉽도록 하는 예를 들면:
 
-That’s the simple principle behind Local CSS Modules. If you can see, local modules became a way to automate the BEM notation by generating a unique className that was sure it wouldn’t clash with other’s even if they used the same name. Quite convenient.
+`css-loader?localIdentName=[path][name]---[local]---[hash:base64:5]`
+
+처럼 할수 있다.
+
+이것이 Local CSS Modules의 기본 원리다. 로컬 모듈이 동일한 이름을 사용하더라도 다른 모듈과 동일하지 않을 것이라는 것을 보장하는 자동화된 BEM 표기방법을 제공하는 방법이다. 매우 편리하다.
 
 ## Styled Components to blend css in JS (fully)
 
@@ -111,7 +115,6 @@ props가 갑자기 각 컴포넌트가 받는 modifier가 되고, css 몇 라인
 ## 모든 사람이 재사용하는 Core UI
 
 CSS 모듈이나 Styled Components나 그 자체로는 완벽한 솔루션이 아니라는 것은 꽤 빠르게 명백해졌고, 작동과 확장을 목적으로 하는 몇 가지 패턴이 필요하다. 패턴은 컴포넌트가 무엇인지 정의하는 것과, 로직으로부터 완전히 분리하는 것, 스타일을 지정하는 것 뿐이다.
-It quickly became apparent that CSS Modules nor Styled Components by themselves was not the perfect solution, it needed some kind of pattern in order for it to work and scale. The pattern emerged by defining what a component is and separating it fully from logic, creating core components which sole purpose is to style and nothing more.
 
 CSS 모듈을 사용한 컴포넌트의 구현 예제다:
 
