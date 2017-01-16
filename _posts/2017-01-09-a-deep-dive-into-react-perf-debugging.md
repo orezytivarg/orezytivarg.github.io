@@ -1,6 +1,6 @@
 ---
 id: a-deep-dive-into-react-perf-debugging
-title: React 퍼포먼스 디버깅 심층 연구
+title: React 성능 디버깅 심층 연구
 category: React
 ---
 

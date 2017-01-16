@@ -1,6 +1,6 @@
 ---
 id: optimizing-performance
-title: 퍼포먼스 최적화하기
+title: React 성능 최적화하기
 category: React
 ---
 

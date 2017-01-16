@@ -1,6 +1,6 @@
 ---
 id: performance-engineering-with-react
-title: React 퍼포먼스 엔지니어링
+title: React 성능 엔지니어링
 category: React
 ---
 
