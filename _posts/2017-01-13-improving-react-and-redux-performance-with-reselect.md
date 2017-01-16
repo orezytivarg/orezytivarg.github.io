@@ -1,66 +1,67 @@
 ---
-id: css-evolution-from-css-sass-bem-css-modules-to-styled-components
-title: CSS의 진화 - CSS, SASS, BEM, CSS Modules로부터 Styled Components로
+id: improving-react-and-redux-performance-with-reselect
+title: Reselect로 React와 Redux 퍼포먼스 향상시키기
 category: Redux
 ---
 [원문보기](http://blog.rangle.io/react-and-redux-performance-with-reselect/)
 
-# Improving React and Redux performance with Reselect
+# Reselect로 React와 Redux 퍼포먼스 향상시키기
 
 ![](http://blog.rangle.io/content/images/2016/06/neil-fenton-memoization-1.gif)
 
-When used together, React and Redux are an awesome combination of technologies that help us structure applications with a true separation of concerns. Even with React being extremely performant out of the box, there comes a time when even higher performance is required.
+React와 Redux를 함께 사용하면 애플리케이션을 관심사가 분리되도로 구조화하는 최고의 기술 조합이 된다. 그러나 React가 아무리 기존에 비해 엄청난 성능을 보여주더라도 시간이 지나면 더욱 높은 성능이 요구되기 마련이다.
 
-One of the more expensive operations that React can perform is the rendering cycle. When a component detects a change in input, the render cycle is triggered.
+React가 실행하는 가장 값비싼 오퍼레이션 중 하나는 바로 렌더링 싸이클이다. 컴포넌트가 인풋 컨트롤의 변경을 탐지했을때, 렌더 사이클은 시작된다.
 
-When we first get started with React, we typically don’t worry about how costly these render cycles are. But as our UIs grow in complexity, we need to start concerning ourselves with them. React offers us some tools to hijack the render cycle and prevent re-rendering if we deem it isn't necessary. To do this, we can tap into the componentShouldUpdate lifecycle event, and return a boolean that says whether or not the component should update. This is the basis of the PureRenderMixin, which compares the incoming props and state with the previous props and state, and returns false if equality passes.
+React를 처음 접했을때, 우리는 렌더 사이클에 대해서 아무런 걱정도 하지 않았다. 그러나 UI가 커지고 복잡해짐면서 그에대한 걱정을 시작할 필요가 있었다. React는 불필요한 렌더링을 예방할 수 있도록 렌더 싸이클을 중간에 가로챌 수 있는 툴을 제안한다. shouldComponentUpdate 라이프사이클 이벤트를 이용하여 true false를 반환하면 된다. 이것은 이전 props와 새 props의 동등성을 비교하여 동등할때 false를 리턴하는 PureRenderMixin의 기반이 된다.
 
-This, coupled with Immutable datasets, provides us with a substantial performance improvement because we can easily determine if a component should re-render or not. Unfortunately, this only goes so far.
+이것은 Immutable 데이터셋과 결합하여 상당한 성능 향상을 제공한다. 유감스럽게도 지금은 여기까지다.
 
-Consider the following problem: We are building a shopping cart, with 3 types of input:
+다음 문제를 고려해보자: 3가지 타입의 입력을 받는 쇼핑 카트를 만들고 있다.
 
-- Items in the cart
-- Quantity of those items
-- Applicable tax (based on state or province)
+- 카트 안의 아이템들
+- 각 아이템들의 양
+- 적용된 세금(시/도를 기준으로 함)
 
-The problem is that whenever the state of any of the inputs is modified (a new item is added, a quantity is changed, or the selected state is changed), everything will need to be recalculated and rerendered. You can see how this would be problematic if we had hundreds of items in our cart. Changing the tax percentage would trigger a recalculation of the items in the cart, but shouldn’t. The tax percentage is simply a change in the derived data. Only the total, and tax total, should change and trigger subsequent updates. Let’s look at how we can fix these problems.
+문제는 어떤 입력이 수정되더라도(새 아이템 추가, 수량 변경 혹은 현재 선택된 아이템), 모든 것이 재계산되고 재 렌더링 되야 할 필요가 있다. 아마 당신들도 카트에 수백개의 아이템이 있을 경우에 이것이 문제가 될 수 있다는 것을 알 것이다. 세금의 비율을 변경하는 것도 역시 재계산을 시작하게 한다. 하지만 정상적이라면 그렇지 않아야 한다. 물건값 합계와 세금 합계는 서로 독립적으로 업데이트되야 한다. 이 문제를 어떻게 해결할 수 있는지 알아보자.
 
-## Reselect to the rescue
+## Reselect 구조대
 
-Reselect is a library for building memoized selectors. We define selectors as the functions that retrieve snippets of the Redux state for our React components. Using memoization, we can prevent unnecessary rerenders and recalculations of derived data which in turn will speed up our application.
+Reselect는 memoized selector를 만들기 위한 라이브러리다. 셀렉터란 Redux state를 잘라내어 React 컴포넌트에게 전달하는 기능을 하는 함수다. 메모이제이션을 사용하면, 파생 데이터 때문에 발생하는 불필요한 재렌더링과 재계산을 예방할 수 있어 애플리케이션의 속도를 올려준다.
 
-Consider the following example:
+다음 예제를 살펴보자:
 
 ![](http://blog.rangle.io/content/images/2016/06/image00-1.png)
 
-If we had several hundred, or thousands of items, rerendering all the items in our cart would be costly even if only the tax-percentage changes. What if we implemented a search? Should we have to recalculate the items and their taxes over and over every time the user searched their cart? We can prevent these costly operations by moving them to use memoized selectors. With memoized selectors, if the state tree is large, we don’t have to worry about expensive calculations being performed every time the state changes. We can also add additional flexibility to our frontend by breaking these out into individual components.
+만약 수백 수천개의 아이템이 있을 경우, 세율 변경만으로도 카트안의 모든 아이템을 재렌더링할 것이다. 검색을 구현한다면? 사용자가 카트를 검색할 때마다 세금을 계속 재계산해야만 할까? 이런 비용소모적인 오퍼레이션은 메모이즈드 셀렉터를 이용함으로써 방지할 수 있다. 메모이즈드 셀렉터를 쓰면, 상태 트리가 큰 경우에도 스테이트가 변경될 때마다 값비싼 계산을 해야한다는 걱정을 할 필요가 없게된다. 또한 개별 컴포넌트로 쪼갤 수 있는 유연함도 얻게된다.
 
-Let’s look at a simple selector using Reselect:
+Reselect를 사용한 간단한 셀렉터를 보자:
 
 ![](http://blog.rangle.io/content/images/2016/06/image03-1.png)
 
-In the above example, we’ve broken our cart item retrieval function into two functions. The first function (Line 3) will simply get all the items in the cart and the second function represents a memoized selector. Reselect exposes the createSelector API which allows us to build a memoized selector. What this means is that getItemsWithTotals will be calculated the first time the function runs. If the same function is called again, but the input (the result of getItems) has not changed, the function will simply return a cached calculation of the items and their totals. If the items are modified (e.g. an item is added, a quantity is changed, anything that manipulates the result of getItems), then the function will be executed again.
+위의 예제에서, 카트 아이템을 획득하는 함수를 2개로 쪼갰다. 첫 번째 함수(3번째 줄)는 카트의 모든 아이템을 얻어오고, 두 번째 함수는 메모이즈드 셀렉터를 나타낸다. Reselect는 메모이즈드 셀렉터를 만들어주는 createSelector API를 노출하고 있다. 이것이 의미하는 바는 getItemsWithTotals가 처음 실행될 때는 계산된다는 것이다. 만약 다시 한번 같은 함수가 불렸는데 입력(getItems의 결과)이 변경되지 않았다면, items와 합계에 대해 캐시된 계산 결과를 리턴할 것이다. 만약 아이템이 수정되었다면( 아이템이 추가되거나, 수량이 변경되거나, getItems의 결과에 영향을 주는 어떤 일이든), 함수는 다시 실행될 것이다.
 
-This is a powerful concept as it allows us to completely optimize which components should be rerendered, and when their derived state should be recalculated. This means we no longer have to worry about getItems – and subsequently the total cost of each item being calculated – when operations that don’t impact their state are performed.
+이것은 재렌더링되야만 하는, 상태에 의해 재계산되야만 하는 컴포넌트에 대해 완전한 최적화를 허용하는 강력한 개념이다. getItems에 대해 더 이상 고민하지 않아도 된다는 뜻이다 - 그리고 getItems 때문에 각 아이템을 다시 계산하는 전체 비용도 - 상태를 실제로 변경하지 않는 작업이 수행될 때에는.
 
-We can continue this trend by creating selectors for all of our derived data. This includes the subtotal calculation, the total tax calculation, and the final total:
+모든 파생 데이터에 대해서 이러한 셀렉터를 생성해도 된다. 파생 데이터에는 소계, 세금 합계, 최종 합계 등이 포함된다.
 
 ![](http://blog.rangle.io/content/images/2016/06/image01-1.png)
 
-## Making use of a selector
+## 셀렉터 사용하기
 
-With our selectors in place, let’s now look at how we can take advantage of the getItemsWithTotals selector in one of our components:
+컴포넌트 중 하나에서 셀렉터를 적절히 사용하여 어떻게 getItemsWithTotals 셀렉터의 이점을 취할 수 있는지 알아보자:
 
 ![](http://blog.rangle.io/content/images/2016/06/image02-1.png)
 
-We now have a component that only understands the items in the cart. This is a nice approach because it does not have to concern itself with totals, subtotals, etc. While it is not the most useful component for reuse, it is a very performant component. Changes that it does not concern itself with (e.g. changes to the tax calculation), will not cause additional rerenders.
+오직 카트안의 아이템만 이해하는 어떠한 컴포넌트가 있다. 이것은 합계나 소계 등을 구분할 필요가 없기 때문에 괜찮은 접근 방법이다. 재사용에 가장 유용한 컴포넌트는 아니지만 매우 성능 좋은 컴포넌트다. 자체적으로 관련이 없는 변경사항(예. 세금 계산법 변경)으로 인한 추가적인 재렌더링이 일어나지 않는다.
 
-Applying this approach to the rest of the shopping cart means we will have a component that is responsible for displaying the subtotal, total, and tax calculation.
+이 방법을 카트의 나머지 부분에 적용하면 소계, 합계 및 세금 계산에 대대 각각 책임을 갖는 컴포넌트를 만들게 된다.
 
-Making these optimizations early in your application means less work in the future when you need to correct performance problems. I recommend moving to using reselect as soon as possible. One of the major benefits of moving our selectors out of our components means that we can easily test these derived data calculations just as we would any other JavaScript function. We simply mock our Redux state and then check for the expected output based on the state provided.
+어플리케이션 초기에 이런 최적화를 수행하면 성능 문제를 해결해야할만한 작업이 줄어들게 된다. 가능한 빨리 reselect를 사용하는 것을 추천한다. 셀렉터를 컴포넌트 밖으로 옮기는 주요 이점 중 하나는 다른 자바스크립트 합수들 처럼 파생된 데이터를 계산하는 함수를 쉽게 테스트할 수 있다는 것을 의미한다. Redux의 상태를 모킹한 다음 제공된 상태를 기반으로 하는 기대값을 확인하면 된다.
 
-For a further demonstration of these concepts, refer to the demo here: https://github.com/neilff/react-redux-performance
+이 개념을 더 많이 구현한 데모는 다음을 참고하라:
+ https://github.com/neilff/react-redux-performance
 
 # React & Redux Resources
 
-For more on React, from our team to yours, you can check out these informative videos and webinars. Better yet, we encourage you to inquire about custom training to ramp up your knowledge of the fundamentals and best practices with custom course material designed and delivered to address your immediate needs. We also have more on redux [here](http://rangle.io/resources/tags/redux/). 
+React에 대한 더 자세한 내용은 비디오나 webinar를 이용하라. 모범 사례에 대한 맞춤 교육을 문의하면 좋을 것이다. 우리 사이트에도 [redux](http://rangle.io/resources/tags/redux/)에 대해서 더 설명하고 있다.
