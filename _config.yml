@@ -7,16 +7,16 @@
 
 # Site Settings
 locale                   : "ko"
-title                    : "오역 블로그"
+title                    : "불펌 오역 블로그"
 title_separator          : "-"
-name                     : "Orez"
-description              : "오역 투성이 번역 블로그"
+name                     : "Orezy Tivarg"
+description              : "불펌 오역 블로그"
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # breadcrumbs            : false # true, false (default)
-words_per_minute         : 200
+words_per_minute         : 400
 comments:
   provider               : # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman", "custom"
   disqus:
