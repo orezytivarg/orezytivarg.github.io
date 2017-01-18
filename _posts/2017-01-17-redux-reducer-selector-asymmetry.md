@@ -7,13 +7,13 @@ category: Redux
 
 # Redux 리듀서와 셀렉터간의 비대칭성
 
-In my previous post, I talked about using actions, reducers, and selectors to encapsulate the Redux state tree. In that post, I showed an approach that works great for a single top-level reducer, but doesn’t address how to handle decomposed reducers. Let’s talk about that.
+이전 포스트에서 Redux 상태 트리를 캡슐화하는 액션과 리듀서와 셀렉터의 사용에 대해서 이야기 했다. 그 포스트에서는 하나의 탑레벨 리듀서에 대해서 잘 동작한다는 것을 보였으나, 분해된 리듀서를 어떻게 다루어야 하는지에 대해서는 보여주지 못했다. 이제 그에 대해서 이야기하자.
 
-## What’s the Problem?
+## 무엇이 문제인가?
 
-There are a number of ways to break up the Redux reducer into smaller pieces. Mark Erikson is working on a pull request for the Redux documentation that does a great job of explaining the options.
+리듀서를 작은 조각으로 나누는 몇 가지 방법들이 있다. Mark Erikson은 Redux 문서의 pull request에서 이 선택사항에 대해서 잘 설명했다.
 
-The most common approach is to use Redux’ combineReducers function to split the state into separate, decoupled “slices”, each of which is handled by a sub-reducer. For example:
+가장 일반적인 접근방법은 Redux의 combineReducers 함수를 이용하여 state를 분리 독립적인 "슬라이스"로 나누는 것이다. 각 슬라이스는 서브-리듀서에 의해 처리된다. 예를 들면:
 
 combineReducers
 
@@ -29,57 +29,54 @@ export default combineReducers({
 })
 ```
 
-In this example, we’re building up our single top-level reducer by combining other reducers that each handle their own section of the state tree. Each of calendarReducer, todosReducer, and usersReducer are reducers in their own right.
+이 예제에서는 상태트리 안의 각각의 섹션을 처리하는 리듀서들로 조합된 싱글 탑레벨 리듀서를 만들었다. calendarReducer, todosReducer, usersReducer는 그들만의 권리를 갖고 있다.
 
-For each section of the state tree, we’ll also want to have some selectors so that we keep the shape of the state tree hidden from the rest of our application. How do we do that?
+우리는 상태 트리의 각 섹션들이 애플리케이션의 나머지 부분으로부터 그 모양을 숨긴 채로 유지하기를 원한다. 어떻게 그렇게 할 수 있을까?
 
-The FAQ in the Redux documentation says:
+Redux 문서의 FAQ는 이렇게 말하고 있다:
 
-> It’s generally suggested that selectors are defined alongside reducers and exported, and then reused elsewhere (such as in mapStateToProps functions, in async action creators, or sagas) to colocate all the code that knows about the actual shape of the state tree in the reducer files.
+> 일반적으로 리듀서와 셀렉터를 함께 정의하고 익스포트하기를 제안한다. 리듀서 파일 안애 상태 트리의 실제 모양에 대해서 알아야 하는 코드를 모두 함께 두어서 이를 다른 곳(mapStateToProps 함수들, 비동기 액션 생성자, sagas)에서 재사용하도록 하는 것이다.
 
-If the selectors are defined alongside the reducers, and the reducers operate on a subset of the state tree, what should the selectors do?
+셀렉터와 리듀서를 함께 두고 정의한다면 리듀서가 상태 트리의 서브셋에서 동작하는 경우 셀렉터는 뭘 해야 할까?
 
-## What Are Our Options?
+## 어떤 선택지가 있는가?
 
-We really only have two options for our selectors:
+실제로 단 2개의 셀렉터를 위한 선택지가 있다:
 
-1. We should make them parallel the reducers. They should operate on the same restricted subset of the state tree that the reducers do.
+1. 리듀서와 평행적으로 셀렉터를 만들어야 한다. 리듀서들과 마찬가지로 제한적인 서브셋에 대해 동작해야만 한다.
 
-2. We should make them “global”. That is, selectors should always expect to be given the root of the entire state tree.
+2. "글로벌" 셀렉터를 만들어야 한다. 즉, 셀렉터는 전체 상태 트리의 루트를 가지고 동작하기를 기대하는 셀렉터를 말한다.
 
-## Which Option Is Best?
+## 어떤 선택지가 가장 좋은가?
 
-Let’s look at where we use selectors. We identified several places last time:
+셀렉터를 사용하는 곳을 살펴보자. 지난번에 몇몇 장소를 식별했었다:
 
-- In the mapStateToProps functions of our container components.
+- 컨테이너 컴포넌트의 mapStateToProps 함수들
+- 썽크 액션 생성자들
+- 리듀서 테스트들
 
-- In thunk action creators.
+추가적으로 셀렉터를 사용할 수 있는 다른 곳들을 생각해봤다:
 
-- In our reducer tests.
+- 리듀서 자체. 가끔 리듀서는 상태 (서브)트리의 또다른 부분을 참조할 필요가 있다. 비록 리듀서가 이미 상태 트리의 모양에 결합되어 있다고는 하지만, 이미 정의된 셀렉터를 이용하는 것이 종종 편리할 때가 있다.
 
-I thought of another place where we might use selectors since writing the previous post:
+셀렉터의 이러한 용도를 살펴본 결과, 글로벌 상태 트리 혹은 로컬의 제한된 상태 트리를 사용하는 것 중 어떤 것이 좋을까?
 
-- In our reducers themselves. Sometimes, a reducer will need to look at data in another part of the state (sub-)tree in order to do its job. Even though reducers are already coupled to the shape of the tree, it’s often convenient to use an already-defined selector for this.
+mapStateToProps는 항상 글로벌 상태 트리를 호출한다. 썽크 액션 생성자의 getState 함수는 글로벌 상태트리를 리턴하는 것 같다. 그러나 리듀서와 리듀서 테스트는 로컬 상태 트리와 함께 작동한다.
 
-For each of these uses of selectors, which ones need to work with the global state tree, and which ones prefer to work with the local, restricted state tree?
+50대 50이다. 별로 도움이 되지는 않는다.
 
-mapStateToProps is always called with the global state tree. The getState function that is passed to thunk action creators similarly returns the global state tree. However, our reducers and reducer tests work with the local state tree.
+## 둘 다 할 수는 없나?
 
-That’s a 50-50 split, so that doesn’t help us much.
+글로벌 상태와 로컬 상태 양 쪽 모두에 대해 작동하는 셀렉터를 가질 수 있는 방법이 있을까?
+몇 가지 방법이 있다.
 
-## Can’t We Do Both?
+### 하이브리드
 
-Is there a way we can have selectors that work with both local and global state?
+우선 "하이브리드"라고 부르는 접근 방법이다.
 
-There are a couple of ways to do this.
+이 접근법에서는 모든 셀렉터는 로컬 섹션과 함께 동작하도록 정의한다.
 
-### Hybrid
-
-The first is something I’ll call a “hybrid” approach.
-
-In this approach, we define all of our selectors to work on their local section of the state tree.
-
-At the parent level (i.e., alongside the main reducer), we define a selector to get us to that local state tree. When we need to call a selector with global state, we first apply the top-level selector and then the localized selector. That ends up looking like this:
+상위레벨(즉, 메인 리듀서)에서의 셀렉터는 로컬 상태 트리를 갖고 온다. 글로벌 상태가 필요한 셀렉터를 호출하는 경우에는 먼저 탑레벨 셀렉터를 적용하고난 다음 로컬 셀렉터를 적용한다. 결곡 다음과 같이 보일 것이다:
 
 Hybrid selectors
 
@@ -101,15 +98,15 @@ const mapStateToProps = state => ({
 })
 ```
 
-This works, but it’s kind of tedious to have to constantly repeat this code everywhere. Can we do better?
+동작은 하겠지만, 끔찍하게 많은 반복적인 코드가 모든 곳에 위치하게 된다. 더 잘 할 수 있지 않을까?
 
-## Delegation
+## 위임
 
-In Dan Abramov’s video, [Redux: Colocating Selectors with Reducers](https://egghead.io/lessons/javascript-redux-colocating-selectors-with-reducers), he uses a delegation approach instead.
+Dan Abramov의 비디오, [Redux: Colocating Selectors with Reducers](https://egghead.io/lessons/javascript-redux-colocating-selectors-with-reducers)에서는 위임하는 방법을 사용한다.
 
-This approach is similar to the hybrid approach, but moves the composition of the local selector and the state slice selector into the appReducer file.
+이 접근법은 하이브리드 방법과 비슷하지만 로컬 셀렉터와 상태를 쪼개는 셀렉터를 조합하여 appReducer 파일에 둔다.
 
-As above, todosReducer.js exports an allTodos selector that works on the local (todos-only) state. Then, in the main reducer file, we’d have something like this:
+위와 같이 todosReducer.js는 로컬(todos-only) 상태에 대해서 동작하는 allTodos 셀렉터를 익스포트한다. 그 다음 메인 리듀서 파일에서 다음과 같이 한다:
 
 Making a Global Selector
 
@@ -119,34 +116,34 @@ import * as fromTodos from './todosReducer'
 export const allTodos = state => fromTodos.allTodos(state.todos)
 ```
 
-We’re defining a global-state version of allTodos that extracts the todos sub-section of the state tree and then calls the local-state version of allTodos with it.
+todos 서브 섹션의 상태 트리를 추출한 다음 로컬-상태버전의 allTodos를 호출하는 글로벌-상태 버전의 allTodos를 정의한다.
 
-In the reducer and reducer specs, we’d import the local version of allTodos from todosReducer. But in containers and action creators, we’d import global version of allTodos from the main reducer file instead.
+리듀서와 리듀서 스펙에서는 todosReducer가 익스포트한 로컬 버전의 allTodos를 임포트한다. 컨테이너와 액션 생성자에서는 메인 리듀서가 익스포트하는 글로벌 버전의 allTodos를 임포트한다.
 
-So, at the cost of an extra function definition, we have two versions of the same selector. The first version operates on local state, and the second is defined in terms of the first, but operates on global state.
+추가 함수를 정의하는 비용으로, 셀렉터의 두 가지 버전을 갖게된다. 로컬 상태와 동작하는 첫 번째, 그리고 첫 번째 버전을 이용하여 글로벌 상태와 동작하도록 만든 두 번째 버전이다.
 
-The advantage to this approach is that all of the knowledge of the state shape is encapsulated in the appropriate place.
+이 접근 방식의 장범은 상태 트리의 모양에 대한 모든 지식이 적절한 위치에 캡슐화되어 있다는 것이다.
 
-The local-state version of the selector knows about its part of the state tree, and is coupled to it appropriately. But it doesn’t know or care where in the global state tree it lives.
+로컬 버전의 셀렉터는 상태 트리의 일부분을 알고 있고 적절히 결합된다. 그러나 글로벌 트리에 대해서는 모른다.
 
-The global-state version of the selector knows about where the appropriate local state lives. But it doesn’t know or care what the structure of that section of the state tree looks like. It delegates that responsibility to the local-state selector.
+글로벌 버전의 셀렉터는 지역 상태가 어디에 있는지 알고 있다. 그러나 해당 섹션의 구조나 모양에 대해서는 알지 못한다. 그에 대해서는 로컬 버전의 셀렉터에게 위임한다.
 
-This encapsulation is there for both the hybrid and delegation approaches. The advantage of the delegation approach is that we don’t have to keep repeating the local selectors and the state slice selectors. In fact, the client code doesn’t even need to know that the composition is happening at all.
+이 캡슐화는 하이브리드 및 위임 접근법 모두에 존재한다. 위임 접근의 장점은 로컬 셀렉터와 상태 자르기용 셀렉터를 반복하지 않아도 된다는 것이다. 사실, 클라이언트 코드는 이러한 구성이 일어난다는 사실조차 알 필요가 없다.
 
-## Problem Solved, Right?
+## 문재 해결. 맞지?
 
-I think the delegation approach is a good solution to the problem. Yes, it costs writing an extra version of each selector, but the encapsulation and flexibility is worth it to me.
+나는 위임 접근법이 좋은 해결책이라고 생각한다. 각 셀렉터의 추가 버전을 작성하는 비용이 들지만 캡슐화와 유연성은 가치가 있다.
 
-If we decompose our state tree into many nested levels, then this gets more tedious, because each level of reducer has to redefine all of the selectors below it. At some point, this might become unmanageable.
+상태 트리를 여러번 중첩된 레벨로 분리하면, 그 아래의 모든 셀렉터를 재정의해야하므로 끔찍한 작업이 된다. 어느 시점에서 이건 관리할 수 없게 된다.
 
-In addition, the Redux FAQ talks about a few different ways to structure projects:
+추가적으로, Redux FAQ에서는 프로젝트 구조화에 대한 다른 방법들을 이야기하고 있다:
 
-> - Rails-style: separate folders for “actions”, “constants”, “reducers”, “containers”, and “components”
-> - Domain-style: separate folders per feature or domain, possibly with sub-folders per file type
-> - "Ducks”: similar to domain style, but explicitly tying together actions and reducers, often by defining them in the same file
+> - Rails-style: "actions", "constants", "reducers", "containers", "components"로 분리된 폴더를 두는 스타일
+> - Domain-style: 피처나 도메인 별로 폴더를 두고 파일 타입에 따라 서브 폴더를 두는 스타일
+> - Ducks: 도메인 스타일과 비슷하지만, 액션과 리듀서를 같은 파일에 명시적으로 함께 두는 스타일
 
-If we structure our application using a Rails-style approach, then yes, I think the problem is solved. Dan Abramov’s delegation approach is a good one, for all of the reasons I mentioned above. Even if we choose to put our selectors in separate files from our reducers, we can use this technique.
+Rails 스타일의 접근법을 사용하면 문제가 해결된다고 생각한다. Dan Abramov의 위임 접근법은 위에서 언급했듯이 좋은 방법이다.셀렉터를 리듀서 파일과 별개로 두는 방법을 선택하더라도 이 테크닉을 사용할 수 있다.
 
-But if we want to use a Domain-style or Ducks approach, this technique runs into issues with circular dependencies.
+그러나 Domain이나 Ducks 접근법을 사용하기를 원한다면 이 테크닉은 순환 의존이라는 이슈를 발생시킨다.
 
-I’ll spend more time on this structure in my next post.
+다음 포스트에서 이 구조화에 대해서 더 많은 시간을 써 볼 것이다.
