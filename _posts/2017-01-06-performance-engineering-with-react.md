@@ -6,9 +6,9 @@ category: React
 
 [원문보기](http://benchling.engineering/performance-engineering-with-react/)
 
-이 포스트는 React 퍼포먼스 엔지니어링 시리즈의 첫 번째 파트다. Part 2 - [A Deep Dive into React Perf Debugging](http://benchling.engineering/deep-dive-react-perf-debugging/) 도 올라왔다!
+이 포스트는 React 성능 엔지니어링 시리즈의 첫 번째 파트다. Part 2 - [A Deep Dive into React Perf Debugging](http://benchling.engineering/deep-dive-react-perf-debugging/) 도 올라왔다!
 
-이 포스트는 복잡한 React 애플리케이션을 작성한 사람들을 위한 것이다. 만약 단순한 것을 작성 중이라면 퍼포먼스에 포커싱하는 일은 별로 필요하지 않을 것이다. 섣부른 최적화는 금물! 만드는 것이 먼저다!
+이 포스트는 복잡한 React 애플리케이션을 작성한 사람들을 위한 것이다. 만약 단순한 것을 작성 중이라면 성능에 포커싱하는 일은 별로 필요하지 않을 것이다. 섣부른 최적화는 금물! 만드는 것이 먼저다!
 
 하지만, DNA 디자인 도구나, 젤 형태 이미지 분석 소프트웨어, rich-text 에디터, full-feature 스프레드시트 등을 개발 중이라면 아마도 성능 병목 현상과 마주칠 것이고, 이를 해결해야만 한다. 우리는 Benchling에서 이 성능 병목 현상을 마주쳤고, 우리가 배운 것들 중 일부를 공유하려고 이 포스트를 작성했다. 그래서 Benchling 사람들과 인터넷 상의 사람들을 대상으로 작성했다.(그리고 맞다! 우리는 이런 종류의 문제를 좋아하는 사람을 고용 중이다!)
 
@@ -27,18 +27,18 @@ React를 사용하면 별다른 작업 없이도 즉시 성능향상을 이뤄�
 다음과 같이 하는 대신에,
 
 ```js
-someNode.style.left = parseInt(someNode.style.left) + 10 + "px";  
+someNode.style.left = parseInt(someNode.style.left) + 10 + "px";
 ```
 
 선언적으로 "<SomeComponent style={{ left: this.state.left }}/>"과 같이 DOM 상태를 읽지 않고도 컴포넌트가 움직이도록 간단하게 업데이트할 수 있다.
 
 ```js
-this.setState({left: this.state.left + 10}).  
+this.setState({left: this.state.left + 10}).
 ```
 
 더 명확히 하자면, 이런 최적화는 React 없이도 가능하다 - 여기서 말하고자 하는 바는 바로 React가 이런 문제를 미리 해결하는 경향이 있다는 것이다.
 
-단순한 애플리케이션에서는 이 퍼포먼스 최적화가 React를 사용하는 것만으로 충분하다 - 나는 그것이 선언적 프레임워크가 실현될 수 있는 최소한의 작업이라고 생각한다. 그러나 보다 복잡한 뷰들을 개발하고, 관리하고, virtual DOM을 비교하는 것은 비용이 많이 드는 작업이 될 수 있다. 다행히도, React는 성능 문제가 존재하는 곳을 감지하고 이를 방지하기 위한 수단을 몇 가지 툴을 통해 제공한다.
+단순한 애플리케이션에서는 이 성능 최적화가 React를 사용하는 것만으로 충분하다 - 나는 그것이 선언적 프레임워크가 실현될 수 있는 최소한의 작업이라고 생각한다. 그러나 보다 복잡한 뷰들을 개발하고, 관리하고, virtual DOM을 비교하는 것은 비용이 많이 드는 작업이 될 수 있다. 다행히도, React는 성능 문제가 존재하는 곳을 감지하고 이를 방지하기 위한 수단을 몇 가지 툴을 통해 제공한다.
 
 ## 디버깅으로 인한 성능 이슈(Performance issues caused by debugging)
 
@@ -66,7 +66,7 @@ this.setState({left: this.state.left + 10}).
 
 Perf를 사용하려면 콘솔에서 Perf.start()를 호출하면 된다. 그리고 나서 기록하고 싶은 행동을 하고, 다시 Perf.stop()을 선언하면 된다. 그리고 나서 다음 메서드들 중 하나를 호출해서 측정값을 출력해서 확인하면 된다.
 
-퍼포먼스 디버깅 모드에서 나는, 간단하게 start/stop 레코딩 버튼을 만들어서 퍼포먼스를 측정한다. (코드는 정말 간단하다 - 컴포넌트를 화면 한 쪽에 놓고 React.addons.Perf를 호출하도록 한다.) React DevTools 처럼 [Chrome Extension](https://github.com/facebook/react-devtools/issues/71)으로 사용할 수도 있다. Jeff가 start/stop에 단축키를 바인드하는 환상적인 팁을 알려줬다.
+성능 디버깅 모드에서 나는, 간단하게 start/stop 레코딩 버튼을 만들어서 성능을 측정한다. (코드는 정말 간단하다 - 컴포넌트를 화면 한 쪽에 놓고 React.addons.Perf를 호출하도록 한다.) React DevTools 처럼 [Chrome Extension](https://github.com/facebook/react-devtools/issues/71)으로 사용할 수도 있다. Jeff가 start/stop에 단축키를 바인드하는 환상적인 팁을 알려줬다.
 
 ### Perf.printWasted()
 
@@ -93,7 +93,7 @@ React는 값비싼 DOM 연산을 피하기 위해서 virtual DOM 표현을 유�
 이렇게 함으로써 컴포넌트는 [PureRenderMixin](https://facebook.github.io/react/docs/pure-render-mixin.html)을 사용할 수 있다. [소스를 보면](https://github.com/facebook/react/blob/master/src/addons/ReactComponentWithPureRenderMixin.js) mixin은 바로 shallowCompare를 호출한다.(만약 ES6 클래스를 사용하는 경우에는 [shallowCompare](https://facebook.github.io/react/docs/shallow-compare.html)를 직접 사용하는 것도 좋다.)
 
 ```js
-var ReactComponentWithPureRenderMixin = {  
+var ReactComponentWithPureRenderMixin = {
   shouldComponentUpdate: function(nextProps, nextState) {
     return shallowCompare(this, nextProps, nextState);
   },

@@ -27,7 +27,7 @@ React는 그냥 두어도 적당히 빨라보인다. 그러나, 애플리케이�
 
 ### 개발용 빌드 vs 제품용 빌드(Development vs. Production Builds)
 
-만약 React 애플리케이션의 퍼포먼스를 본다거나 혹은 벤치마킹 중이라면 제품용 빌드[minified production build](https://facebook.github.io/react/downloads.html)를 사용하여 테스트 중인지 확인해야 한다.
+만약 React 애플리케이션의 성능을 본다거나 혹은 벤치마킹 중이라면 제품용 빌드[minified production build](https://facebook.github.io/react/downloads.html)를 사용하여 테스트 중인지 확인해야 한다.
 개발용 빌드를 사용하고 있다면 개발에 도움이 되는 추가적인 경고들을 포함하고 있기 때문에 성능 저하의 원인이 되기 때문이다.
 
 하지만, 이 페이지에서 소개하고 있는 perf 도구는 개발용 빌드에서만 동작합니다.  따라서 프로파일러는 앱 중에서 _상대적으로_ 문제가 되는 부분만을 표시한다.

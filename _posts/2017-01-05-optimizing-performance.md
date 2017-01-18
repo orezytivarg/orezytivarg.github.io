@@ -6,11 +6,11 @@ category: React
 
 [원문보기](https://facebook.github.io/react/docs/optimizing-performance.html)
 
-내부적으로 React는 몇 가지 테크닉을 통해 UI를 업데이트할 때 필요한 DOM 조작을 최소화한다. 다른 많은 애플리케이션에 대해서 React를 사용하게되면 별다른 퍼포먼스 최적화 작업이 없이도 빠르게 반응하는 유저 인터페이스를 제공할 수 있을 것이다. 그래도 React 애플리케이션의 속도를 빠르게 하는 몇 가지 방법이 역시 존재한다.
+내부적으로 React는 몇 가지 테크닉을 통해 UI를 업데이트할 때 필요한 DOM 조작을 최소화한다. 다른 많은 애플리케이션에 대해서 React를 사용하게되면 별다른 성능 최적화 작업이 없이도 빠르게 반응하는 유저 인터페이스를 제공할 수 있을 것이다. 그래도 React 애플리케이션의 속도를 빠르게 하는 몇 가지 방법이 역시 존재한다.
 
 ## Production Build 사용하기
 
-만약 벤치마킹한 React 애플리케이션에서 퍼포먼스 문제를 경험했다면, 프로덕션 빌드를 이용해서 테스트했는지 확인해보자:
+만약 벤치마킹한 React 애플리케이션에서 성능 문제를 경험했다면, 프로덕션 빌드를 이용해서 테스트했는지 확인해보자:
 
 * Create React App를 이용할 때에는, `npm run build` 명령어를 실행하고 다음 지시사항을 따를 필요가 있다.
 * single-file 빌드 시에는, 제품 레벨에서 사용가능한 `.min.js` 버전을 제공한다.
@@ -208,7 +208,7 @@ function updateColorMap(colormap) {
 
 * *Immutable*: 일단 한번 생성되면, 컬렉션은 변경될 수 없다.
 * *Persistent*: set과 같은 컬렉션은 이전 컬렉션으로부터 새로운 컬렉션이 생성될 수 있다. 원본 컬렉션은 새로운 컬렉션이 생성된 이후에도 아직 유효하다.
-* *Structural Sharing*: 오리지널 컬렉션으로부터 생성된 새로운 컬렉션은 가능한한 오리지널 컬랙션과 같은 구조를 갖게 되며 퍼포먼스 향상을 위해 카피를 줄인다.
+* *Structural Sharing*: 오리지널 컬렉션으로부터 생성된 새로운 컬렉션은 가능한한 오리지널 컬랙션과 같은 구조를 갖게 되며 성능 향상을 위해 카피를 줄인다.
 
 불변성은 값 변화에 대한 추적비용을 감소시킨다. 값 변화는 항상 새로운 오브젝트를 리턴하기 때문에 오브젝트의 레퍼런스가 변경되었는지만 확인하면 된다. 예를 들면 다음과 같은 보통 자바스크립트 코드에서는:
 
@@ -233,4 +233,4 @@ x === y; // false
 불변 데이터를 지원할 수 있도록 도와주는 두 개의 다른 라이브러리들이 있다.
  [seamless-immutable](https://github.com/rtfeldman/seamless-immutable) 와 [immutability-helper](https://github.com/kolodny/immutability-helper).
 
-불변 데이터 구조는 `shouldComponentUpdate`에 필요한 object 변경에 대한 추적을 쉽게 해준다. 아마도 훌륭한 퍼포먼스 부스터로 쓰일 수 있을 것이다.
+불변 데이터 구조는 `shouldComponentUpdate`에 필요한 object 변경에 대한 추적을 쉽게 해준다. 아마도 훌륭한 성능 부스터로 쓰일 수 있을 것이다.

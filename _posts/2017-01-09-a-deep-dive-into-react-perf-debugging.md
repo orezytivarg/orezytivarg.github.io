@@ -120,7 +120,7 @@ When we run the profiler again, we see that it only takes about 35ms (4x faster 
 
 컴포넌트를 쪼개서 여러개로 나누는 것은 합리적인 다음 단계라고 볼 수 있다(유효한 첫 번째 단계이다). Todos 컴포넌트가 2개로 나눠질만한 서브컴포넌트로 이루어져 있음을 알 수 있다. AddTaskForm 컴포넌트는 input과 버튼을 포함하고, TodoItems 컴포넌트는 항목들에 대한 목록을 포함한다.
 
-각각의 리팩토링은 지속적인 퍼포먼스 향상을 기대할 수 있다:
+각각의 리팩토링은 지속적인 성능 향상을 기대할 수 있다:
 
 * 만약 PureRenderMixin을 이용해서 TodoItems를 생성한다면 각 아이템들에 대해 다시 랜더링을 하는 O(n) 작업을 피할 수 있다. prevProps.items === this.props.items와 같은 작업을 하기 때문이다.
 * 만약 AddTaskForm 컴포넌트를 생성하고 입력된 text에 대한 상태를 유지하자. 텍스트가 변경되어도 Todos 컴포넌트는 다시 랜더링되지 않는다.(O(n) 렌더링 작업을 피할 수 있다)

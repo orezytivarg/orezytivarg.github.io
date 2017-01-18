@@ -1,11 +1,11 @@
 ---
 id: improving-react-and-redux-performance-with-reselect
-title: Reselect로 React와 Redux 퍼포먼스 향상시키기
+title: Reselect로 React와 Redux 성능 향상시키기
 category: Redux
 ---
 [원문보기](http://blog.rangle.io/react-and-redux-performance-with-reselect/)
 
-# Reselect로 React와 Redux 퍼포먼스 향상시키기
+# Reselect로 React와 Redux 성능 향상시키기
 
 ![](http://blog.rangle.io/content/images/2016/06/neil-fenton-memoization-1.gif)
 
