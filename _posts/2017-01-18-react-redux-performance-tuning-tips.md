@@ -258,7 +258,7 @@ React Perf addon을 설치한다.
 3.  Perf.stop()를 호출한다
 4.  이제 액션이 기록되었고 3가지 유용한 함수를 호출할 수 있다:
     printInclusive() — 각 컴포넌트가 얼마나 많은 시간을 소모했는지 출력한다
-    printExclusive() — 각 컴포넌트가 렌더링에 얼마나 많은 시간을 소모했는지 출력한다(componentsWillMount, componentDidMount, props processing… 등은 포함하지 않음).
+    printExclusive() — 각 컴포넌트가 렌더링에 얼마나 많은 시간을 소모했는지 출력한다 (componentsWillMount, componentDidMount, props processing… 등은 포함하지 않음)
     printWasted() — 실제로 변경되지 않은 컴포넌트를 렌더링하는 데 낭비된 시간을 출력한다(렌더링이 가상 DOM 계층에서만 수행되고 브라우저 DOM에서는 변경이 발생하지 않은 시간). 이 함수는 위에서 기술한 안티패턴의 인스턴스와 pure 컴포넌트여야만 하는 컴포넌트를 보여줄 것이다.
     printOperations() — 실제 브라우저의 DOM 조작을 출력할 것이다, 브라우저가 너무 많은 시간을 렌더링에 사용한 경우에 편리하다.
 

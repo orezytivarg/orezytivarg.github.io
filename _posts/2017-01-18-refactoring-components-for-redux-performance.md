@@ -26,7 +26,7 @@ API에서 큰 성능 향상을 거두는 동안 브라우저의 프레임 그래
 
 shouldComponentUpdate 개선에도 여전히 전체 UI가 갑갑했다. 사용자의 액션에 대한 응답은 지연되었고, 로딩 인디케이터는 한참 후에 나타났고, 목록 자동완성은 엄청 시간이 걸렸고, 아주 작은 사용자 상호작용조차 느리고 무거왔다. 요점은 React 렌더링 성능이 아니었다.
 
-병목현상을 확인하기 위해 [React Performance Tools](https://facebook.github.io/react/docs/perf.html) 및 [React Rend Visualizer](https://github.com/redsunsoft/react-render-visualizer)라는 두 가지 도구를 사용했다. 실험은 여러가지 다른 액션들을 수행한 뒤에 주요 컴포넌트에 대해 렌더 횟수 및 인스턴스 수에 대한 테이블을 만드는 것이었다.
+병목현상을 확인하기 위해 [React Performance Tools](https://facebook.github.io/react/docs/perf.html) 및 [React Render Visualizer](https://github.com/redsunsoft/react-render-visualizer)라는 두 가지 도구를 사용했다. 실험은 여러가지 다른 액션들을 수행한 뒤에 주요 컴포넌트에 대해 렌더 횟수 및 인스턴스 수에 대한 테이블을 만드는 것이었다.
 
 아래는 우리가 만든 테이블 중 하나다. 빈번하게 사용되는 두 가지 액션을 분석했다. 앞서 말한 우리의 메인 테이블 컴포넌트에 대해 얼마나 많은 렌더가 트리거되는지 살펴보았다.
 
