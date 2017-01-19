@@ -5,7 +5,7 @@ category: Redux
 ---
 [원문보기](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367#.4ucx5na41)
 
-#어쩌면 당신에게 Redux가 필요하지 않을 수도 있다
+# 어쩌면 당신에게 Redux가 필요하지 않을 수도 있다
 
 사람들은 종종 필요하기도 전에 Redux를 선택한다. "Redux가 없어도 앱을 확장할 수 있을까?". 나중에 개발자들은 Redux를 간접적으로 힐난한다. "이 간단한 기능을 동작시키는 일에 파일을 3개나 손대야하지?". 정말 왜 그럴까!
 
