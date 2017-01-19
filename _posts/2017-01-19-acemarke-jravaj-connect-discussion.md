@@ -7,7 +7,7 @@ category: Redux
 
 **May 12, 2016**
 
-[8:23 PM] **jrajav**:: 헤이, <Provider> 컴포넌트가 실제로 어떤 기능인지 궁금해. 완벽히 이해하려는 건 아니고 - 왜 `store.subscribe( () => render( <App state={store.getState()} />, document.getElementById('root') ) )`처럼 그냥 전달하지 않지?
+[8:23 PM] **jrajav**:: 헤이, `<Provider>` 컴포넌트가 실제로 어떤 기능인지 궁금해. 완벽히 이해하려는 건 아니고 - 왜 `store.subscribe( () => render( <App state={store.getState()} />, document.getElementById('root') ) )`처럼 그냥 전달하지 않지?
 
 [8:24 PM] **jrajav**:: dispatch 함수도 전달하고
 
@@ -20,10 +20,10 @@ category: Redux
 
 [9:59 PM] **acemarke**: 이걸 봐바 http://redux.js.org/docs/FAQ.html#store-setup-multiple-stores
 
-[10:00 PM] **acemarke**: 또한 네가 작성한 스니펫은 App 컴포넌트가 모든 필요한 상태를 아래로 전달하는 것 처럼 보여  
+[10:00 PM] **acemarke**: 또한 네가 작성한 스니펫은 App 컴포넌트가 모든 필요한 상태를 아래로 전달하는 것 처럼 보여
 [10:00 PM] **acemarke**: 만약 상태가 하나의 탑레벨 컴포넌트에 둘 수 있을 정도로 작으면 아마도 Redux가 필요할 것 같지도 않네 - 그냥 React의 컴포넌트 상태를 사용해
 
-[10:01 PM] **acemarke**: 하지만, React Redux에서는 <Provider> 안쪽의 어떤 컴포넌트라도 필요한 state의 조각을 구독할 수 있어. 하위 컴포넌트들이 필요한 데이터를 알고있는 탑레벨 컴포넌트가 없더라도 말이지
+[10:01 PM] **acemarke**: 하지만, React Redux에서는 `<Provider>` 안쪽의 어떤 컴포넌트라도 필요한 state의 조각을 구독할 수 있어. 하위 컴포넌트들이 필요한 데이터를 알고있는 탑레벨 컴포넌트가 없더라도 말이지
 
 [10:25 PM] **jrajav**:: 맞아 `@acemarke`, 근데 한편으론 어떤 컴포넌트 트리에서 어떤 데이터를 필요로하는지 알 수 없잖아. 깊이 중첩된 컴포넌트에서 마술처럼 상태조각을 가져가버리는 건 덜 기능적이고 덜 관리가능해 보여
 
@@ -39,7 +39,7 @@ category: Redux
 
 [11:58 PM] **acemarke**: 탑 레벨의 프레젠테이셔널 컴포넌트를 가지고 있고, LeftSidebar와 RightMainPanel이라는 두개의 프레젠테이셔널 컴포넌트를 렌더링한다고 하자
 
-[11:58 PM] **Francois Ward**: I think he means that looking at your folder structure, without grepping, stuff can come from anywhere.
+[11:58 PM] **Francois Ward**: 내 생각엔 그가 말하는건 폴더 구조를 봤을 때, grep하지도 않고 아무데서나 물건들이 나타나는걸 말하는 것 같아
 
 [11:58 PM] **acemarke**: LeftSidebar에서는 connected 컴포넌트인 UsersList를 렌더링한다고 하자
 
@@ -47,7 +47,7 @@ category: Redux
 
 [11:58 PM] **acemarke**: 아마도 이름이나 몇몇 세부사항을 표시하겠지
 
-[11:58 PM] **Francois Ward**: which is a pretty common criticism of that model. Cyclejs/Elm do it very much the "everything starts from the top and gets wired down". Its a compromise of pragmatism vs ease of following/purity/testability.(edited)
+[11:58 PM] **Francois Ward**: 그 모델의 꽤 일반적인 비판이지. Cyclejs/Elm에서는 "모든 것은 맨 위쪽에서부터 아래쪽으로 이어져서 내려온다" 라고 하지. 그건 실용주의 vs 쉽게따라가기/순수성/테스트성의 타협이야.
 
 [11:59 PM] **acemarke**: 그러고나서, 만약 UserListItem을 선택하기 위해 클릭하면, RightMainPanel에 UserDetails 컴포넌트가 보여지길 바랄거야
 
@@ -77,7 +77,7 @@ category: Redux
 
 [12:20 AM] **jrajav**:: connect() 자체의 "마술" 부분이지, 임의의 장소에서 상태를 가져와서 노출시키는 것 말야
 
-[12:21 AM] **jrajav**:: 그리고 @acemarke 설명해줘서 고마워 - 재 렌더링이 뜻하는 바를 정확히 물어봐도 될까?
+[12:21 AM] **jrajav**:: 그리고 `@acemarke` 설명해줘서 고마워 - 재 렌더링이 뜻하는 바를 정확히 물어봐도 될까?
 
 [12:22 AM] **jrajav**:: 네가 말하는 바가 React가 실제로 light DOM에 모든 싱글 컴포넌트를 재 렌더링한다는거야?
 
@@ -85,17 +85,17 @@ category: Redux
 [12:22 AM] **acemarke**: ...반대로?
 
 [12:23 AM] **acemarke**: 만약 네가 mapStateToProps 함수가 state.some.very.nested.field를 파야한다고 걱정되면 "selector"를 이용해서 상태 트리의 특정 필요 부분을 가져오는 식으로 캡슐화하면 돼
-[12:24 AM] **jrajav**:: 아냐, 나는 React + redux + immutable.js가 더 걱정돼 그리고 상태 오브젝트 전체를 <App /> 컴포넌트에 전달하는 패턴이 하나의 상태 필드만 고쳤을 때도 전체 <App />을 DOM에 재 렌더링하는 결과를 내는 것이 더 걱정돼
+[12:24 AM] **jrajav**:: 아냐, 나는 React + redux + immutable.js가 더 걱정돼 그리고 상태 오브젝트 전체를 `<App /> `컴포넌트에 전달하는 패턴이 하나의 상태 필드만 고쳤을 때도 전체 `<App />`을 DOM에 재 렌더링하는 결과를 내는 것이 더 걱정돼
 
 [12:24 AM] **jrajav**:: 혹은 React의 virtual DOM diff를 대부분의 파트에서 실행한다거나 하는 것 말야
 
 [12:25 AM] **jrajav**:: diffing이 어떤식으로 일어나는지는 정확히는 모르지만 말야
 
-[12:27 AM] **jrajav**:: 예를들어 <Page1 />과 <Page2 />가 있다고 하고 전체 상태 오브젝트의 서브 프로퍼티인 pageOne을 1로 pageTwo를 2로 전달하려고 해. pageTwo의 중첩된 몇몇 서브 프로퍼티가 변경되서 <Page2 />가 바뀌고, 재 렌더링된다고 하자. pageOne의 어떤 것도 바뀌지 않았기 때문에 <Page1 />은 같은 파라미터와 함께 호출되서 같은 virtual DOM 트리로 결과가 나타나지
+[12:27 AM] **jrajav**:: 예를들어 `<Page1 />`과 `<Page2 />`가 있다고 하고 전체 상태 오브젝트의 서브 프로퍼티인 pageOne을 1로 pageTwo를 2로 전달하려고 해. pageTwo의 중첩된 몇몇 서브 프로퍼티가 변경되서` <Page2 />`가 바뀌고, 재 렌더링된다고 하자. pageOne의 어떤 것도 바뀌지 않았기 때문에 `<Page1 />`은 같은 파라미터와 함께 호출되서 같은 virtual DOM 트리로 결과가 나타나지
 
 [12:28 AM] **jrajav**:: 나는 모든 React가 최적화되지 않았기 때문에 피할수 있는 모든 render()가 호출된다고는 생각하지 않아 (맞지?) stateless functional 컴포넌트들 말야
 
-[12:28 AM] **jrajav**:: 하지만 최소한, virtual DOM diffing의 결과에 따라 <Page1 />의 light DOM은 아무것도 갱신되지 않겠지.. 맞지?
+[12:28 AM] **jrajav**:: 하지만 최소한, virtual DOM diffing의 결과에 따라 `<Page1 />`의 light DOM은 아무것도 갱신되지 않겠지.. 맞지?
 
 [12:29 AM] **acemarke**: render 함수는 재실행되고 그에 맞는 virtual DOM도 re-diffed 될거야
 
@@ -194,7 +194,7 @@ shouldComponentUpdate(nextProps) {
 
 [12:50 AM] **jrajav**:: virtual DOM diffing은 실제 DOM을 업데이트하는 것을 대부분 막아주지 맞지?
 
-[12:51 AM] **jrajav**:: 그래서 <Page1 />의 어떤 실제 DOM 부분도 절대 변하지 않는다는 거지? 최적화되지 않은 stateless 컴포넌트라도 예를 들자면말야
+[12:51 AM] **jrajav**:: 그래서 `<Page1 />`의 어떤 실제 DOM 부분도 절대 변하지 않는다는 거지? 최적화되지 않은 stateless 컴포넌트라도 예를 들자면말야
 
 [1:00 AM] **acemarke**: 기본적으로, 맞아
 
@@ -226,11 +226,11 @@ shouldComponentUpdate(nextProps) {
 
 [9:31 AM] **jrajav**:: 다른 성능 최적화를 제공한다거나 하나?
 
-9:49 AM] **acemarke**: 맞아, 조금 더 해. 네가 말하는 접근법을 감안하면 아마도 recompose를 사용할 것 같군. 더 명확한 의도로
+9:49 AM] **acemarke**: 맞아, 조금 더 해. 네가 말하는 접근법을 감안하면 아마도 recompose도 사용할 것 같군. 더 명확한 의도로
 
-[9:52 AM] **acemarke**: (분명히, 난 아직 네가 connect를 여러 군대 사용하는데 사용하는 이유를 반대하는 것 같아)
+[9:52 AM] **acemarke**: (분명히, 난 아직 네가 connect를 여러 곳에서 사용하는 걸 반대하는 것 같아)
 
-[10:06 AM] **jrajav**:: 난 그냥 더 functional한 방법을 선호할 뿌닝야. 데이터 의존성이 명확니까, 합성이나 테스팅도 엄청 쉽지.
+[10:06 AM] **jrajav**:: 난 그냥 더 functional한 방법을 선호할 뿐이야. 데이터 의존성이 명확니까, 합성이나 테스팅도 엄청 쉽지.
 
 [10:07 AM] **jrajav**:: 내가 더 봐야할게 뭐지? 네가 말한 방식이 recompose가 제공하는 것들에도 있나?
 
@@ -264,87 +264,86 @@ Dan은 connect()의 소스코드 대부분을 휼륭한 비디오 코스를 통�
 
 [1:28 AM] **jrajav**:: 그리고 react/redux에서는 함수형 패러다임을 사용하는 것처럼 보이는데도 그런 컨테이너/ 컴포넌트를 사용하는 방법이 "모범 사례"라는 것이 나에게 매우 혼란스러워.
 
-11:37 AM] **acemarke**: @jrajav : 내가 봤을때는, "container" 패턴이 몇 가지 장점을 갖고 있어. 우선, 개념적 유형에 따른 분리를 허용하지. 그런 방식으로 바라본다면 말야 - 컴포넌트가 레이아웃과 조직화에 중점을 두는 것들과 컴포넌트가 데이터를 가져오는 데 책임을 갖는 것들 (Redux store루부터든지 서버로부터든지 등등).
+11:37 AM] **acemarke**: `@jrajav` : 내가 봤을때는, "container" 패턴이 몇 가지 장점을 갖고 있어. 우선, 개념적 유형에 따른 분리를 허용하지. 그런 방식으로 바라본다면 말야 - 컴포넌트가 레이아웃과 조직화에 중점을 두는 것들과 컴포넌트가 데이터를 가져오는 데 책임을 갖는 것들 (Redux store루부터든지 서버로부터든지 등등).
 
-[11:41 AM] **acemarke**: Second, you get performance improvements, because a lot fewer components are forced to re-render compared to a totally top-down approach.  Most of your more layout-focused presentational components probably wouldn't be re-rendering at all, and the use of connect() on a component effectively starts a new update tree-ish thing, especially if that connected component isn't being directly passed any props by its parent.  So, if the store updates, and the update didn't change any values that component cared about in mapStateToProps, that component will skip re-rendering, and so will its entire subtree.  Easy win.
+[11:41 AM] **acemarke**: 둘째, 성능 향상을 얻을 수 있어. 전체를 탑-다운 하는 방법에선 몇몇 컴포넌트는 항상 강제로 재렌더링될 수밖에 없어. 대부분의 layout 중점의 presentional 컴포넌트는 아마도 전혀 재 렌더링되지 않겠지, 그리고 connect()를 사용하는 것은 효율적으로 트리 형태의 새로운 업데이트를 시작할 수 있을 거야. 특히 컨테이너 컴포넌트가 부모로부터 직접 전달받는 props가 없다면 말이야. 그래, 스토어가 업데이트되면 업데이트는 mapStateToProps가 신경쓰는 어떤 값 이외의 변경에 대해서는 변경되지 않을거야 그럼 컴포넌트는 재 랜더링을 건너뛰게 되고 그 하위 서브트리도 마찬가지지. 간단히 승리한 거야.
 
-[11:43 AM] **acemarke**: Third, I would argue that having a connected component pull in the data it needs, right there, makes it a lot easier to trace the actual data flow, as there's fewer layers to go through.  If I want to know why I'm getting something wrong in my UserListItem, I'd rather just look at its parent UserList rather than have to trace through TopLevelComponent > MainLayout > LeftSidebar > UserList > UserListITem
+[11:43 AM] **acemarke**: 셋째, connected 컴포넌트는 필요한 데이터를 바로 그곳에서 가져오기 때문에 실제 데이터의 흐름을 보다 쉽게 추적할 수 있게 해. 더 적은 수의 레이어가 필요하기 때문이야. 내 UserListItem에 뭔가 문제가 생겼음을 알았을 때 TopLevelComponent > MainLayout > LeftSidebar > UserList > UserListItem을 통과해가면서 추적하는 것 보다 그냥 상위의 UserList를 보면 되기를 바라지
 
-[11:44 AM] **acemarke**: Fourth, the connected component itself becomes a lot more reusable within the context of the application - if I decided I want to move it from the LeftSidebar to the BottomPanel, I can just do so, without having to change the flow of props coming down from the top component
+[11:44 AM] **acemarke**: 넷째, connected 컴포넌트는 애플리케이션의 컨텍스트 내에서 더 많은 재사용성을 갖지 - LeftSidebar를 BottomPanel로 옮기기로 결정했다면 그냥 props가 최상위 컴포넌트에서 내려오는 흐름을 신경쓰지 않고도 그냥 옮기면 되는거야
 
-[11:46 AM] **acemarke**: Fifth, the advice for testing connected components is to export the connected version as the default export, but export the "plain" component as a named export, and only really test the unconnected version.  What you care about is how that component responds to its props and lifecycle.  How it gets those props shouldn't matter.  So, you feed it some props in your test code and verify its behavior there, and maybe test your mapStateToProps function as well if you want, but you can safely assume that connect() will correctly call mapStateToProps when needed, and pass those props to your component when something changes.
+[11:46 AM] **acemarke**: 다섯째, connected 컴포넌트를 테스팅하는 것에 대한 충고는 connected 버전의 컴포넌트를 default로 export하고 "plain" 컴포넌트를 named export한 다음 unconnected 버전의 테스트를 테스트하는 거야. 네가 신경써야 할 것은 props와 lifecycle에 어떻게 반응하는지 뿐이지. 어떻게 props를 얻는지는 문제가 되지 않아. 따라서, 넌 그저 몇몇 props를 테스트 코드에 넣고 거기서 행동을 검증하면 되고, 아마도 mapStateToProps 함수도 원한다면 테스트할 수 있지만, connect()가 올바르게 mapStateToProps를 호출하기만을 가정하면 되는거야. 필요할 때는 뭔가 바뀌었을 때 그 props를 컴포넌트에 전달하면 돼.
 
-[11:50 AM] **acemarke**: Sixth: yes, in a sense Redux is a "global variable", but on the flip side, idiomatic Redux code never actually references it directly.  Everything gets dependency injected.  connect() gives you props from the store and a reference to dispatch(), middleware get dispatch() and getState() injected, and since thunks and such are actually middleware, your action creators can get those injected as well.  No direct references to the store anywhere in your actual app code other than the two lines where you create your store, and pass it to <Provider>.  That also makes using something like redux-mock-store feasible for testing.
+[11:50 AM] **acemarke**: 여섯째: 맞아, Redux가 "전역 변수" 라는 측면이 있지만, 반대로, 관용적인 Redux 코드는 절대로 실제 직접 레퍼런스하지 않아. 모든 것은 의존성 주입으로 얻어내지. connect()는 스토어로부터 props를 전달하고 dispatch()에 대한 참조를 제공하고 미들웨어는 dispatch() 및 getState()를 주입하고, 썽크와 같은 실제 미들웨어들은 액션 생성자에도 이것들을 주입하지. 실제 앱 코드의 어디에서도 직접 스토어를 레퍼런스하지 않아. 스토어를 생성하는 두 줄을 제외하고는. 그리고 바로 `<Provider>`에 전달하지. 그게 redux-mock-store가 테스팅을 실제로 가능하게 하는 방법이야
 
-[11:50 AM] **acemarke**: Finally, I'm kinda confused: what are your concerns with "containers" vs "functional"?
+[11:50 AM] **acemarke**: 마지막으로, 조금 헷갈리네: "containers" vs "functional"에 대한 네 걱정은 뭐지?
 
-[11:52 AM] **acemarke**: Ultimately, sounds like we have some differing philosophies on what constitutes good architecture, which is okay.  I'm just trying to understand what all the differences in point of view are.
+[11:52 AM] **acemarke**: 궁극적으로 보면 좋은 아키텍쳐의 구성하는 것이 무엇인지에 대한 조금 다른 철학을 가지고 있는 것처럼 들리네. 난 그저 각자의 관점에서 다른 점이 무엇인지 이해하려고 시도하고 있어.
 
-[2:03 PM] **Francois Ward**: "Fifth, the advice for testing connected components is to export the connected version as the default export, but export the "plain" component as a named export, and only really test the unconnected version. "
+[2:03 PM] **Francois Ward**: ""다섯째, connected 컴포넌트를 테스팅하는 것에 대한 충고는 connected 버전의 컴포넌트를 default로 export하고 "plain" 컴포넌트를 named export한 다음 unconnected 버전의 테스트를 테스트하는 거야. 네가 신경써야 할 것은 props와 lifecycle에 어떻게 반응하는지 뿐이지."
 
-[2:04 PM] **Francois Ward**: Careful about that one, its not that simple... if you have a dumb component that contains a connected component, they now MUST provide a store somehow, OR mock the connected component. Not a problem with Jest, or when you can shallow render.
+[2:04 PM] **Francois Ward**: 조심스럽게 저것에 대해 말해보면, 그건 간단하지 않아.. 만약 dumb 컴포넌트가 connected 컴포넌트를 가지고 있다면 어떻게든 반드시 스토어를 제공해야해. 아니면 connected 컴포넌트를 목킹하든지. Jest의 문제가 아니고, shallow render를 쓸때도 그래.
 
-[2:04 PM] **Francois Ward**: but it's not always an option.
+[2:04 PM] **Francois Ward**: 하지만 항상 옵션인 것은 아니지.
 
-[2:04 PM] **acemarke**: yeah, that caveat probably oughta get added to the docs at some point
+[2:04 PM] **acemarke**: 맞아 아마도 문서에 경고해야할 몇가지 점이 있지
 
-[2:04 PM] **Francois Ward**: connected components as children are a pain in the rear. Its a compromise, but its not simply "connect everywhere, its free!"
+[2:04 PM] **Francois Ward**: connected 컴포넌트를 children으로 가지는 것은 뒤쪽에 고통스러움이 있지. 그건 타협이야. 하지만 "어디서든 연결하세요, 무료입니다!"라고 할 건 아니지
 
-[2:05 PM] **Francois Ward**: there's a strong benefit, AND a high cost to it.
-
-
+[2:05 PM] **Francois Ward**: 강력한 이점이지만. 또한 높은 비용을 수반하지.
 
 **May 15, 2016**
 
-[11:39 AM] **jrajav**:: @acemarke Thanks for the very detailed response! And yes, as you mentioned I think a lot of what this comes down to is a difference of opinion on best practices. You think it's easier to reason about and reuse a component that knows how to pull its own properties out of the global state (or a close parent of it does, at least), and I would actually concede that at the component-level but I'd also say that dealing with global state at arbitrary points makes the composition of multiple components and the app itself more difficult to reason about, more difficult to compose (like putting together a puzzle), and more error-prone. The extra work involved in explicitly declaring the data dependencies (in this case, by manually passing parameters down) is good work that avoids all that and makes your application simpler and more maintainable. That's the way that I see it, at least.
+[11:39 AM] **jrajav**:: `@acemarke` 매우 자세한 답변 고마워! 그리고 맞아. 네가 언급했듯이 모범 사례에 대한 의견차이일 뿐이라고 생각해. 너는 컴포넌트가 어떻게 자신의 프로퍼티를 글로벌 상태(혹은 그것에 가까운 부모)에서 가져오는지 아는 것이 컴포넌트를 재사용하기 쉬게 해주는 이유라고 하고, 나는 컴포넌트 레벨에서는 그것을 인정해. 하지만 임의의 지점에서 글로벌 상태를 다루는 것은 여러 컴포넌트의 조합을 만들고 앱 자체에 대해 추론하기 어렵게 만들고 더 조합하기 어렵게 만들어서(함께 퍼즐을 맞추는 것처럼) 더 에러를 유발한다고 봐. 데이터 의존성에 대해 명시적으로 선언하는 추가 작업(이 경우에는 파라미터를 수동으로 아래로 전달하는 작업)은 그런 것들을 피할 수 있는 좋은 작업이야. 애플리케이션을 더 단순하고 관리가능하게 만들어 주는 거지. 적어도 그게 내가 보는 방법이야.
 
-[11:41 AM] **jrajav**:: @acemarke Also, enforcing that React is always just the presentation layer, and has no knowledge of the store at all, and that all components are "dumb", pure, and have no real lifecycle to speak of - they are just functions of their input - that makes them much easier to develop, test, and reuse
+[11:41 AM] **jrajav**:: `@acemarke` 또한, React가 항상 presentaion 계층으로, 스토어에 대해서는 전혀 아는 바 없고, 모든 컴포넌트를 "dumb", pure하고 실제 라이프사이클을 갖지않게 강제하지. - 라이프사이클은 그저 그들의 input 중에 함수일 뿐이야 - 그게 개발, 테스트, 재사용을 훨씬 쉽게 만들지
 
-[11:42 AM] **jrajav**:: And can I ask what you meant by this?(edited)
+[11:42 AM] **jrajav**:: 그리고 이게 무슨 뜻인지 물어봐도 될까? (edited)
 
-[11:42 AM] **jrajav**:: > Second, you get performance improvements, because a lot fewer components are forced to re-render compared to a totally top-down approach.  Most of your more layout-focused presentational components probably wouldn't be re-rendering at all, and the use of connect() on a component effectively starts a new update tree-ish thing, especially if that connected component isn't being directly passed any props by its parent.  So, if the store updates, and the update didn't change any values that component cared about in mapStateToProps, that component will skip re-rendering, and so will its entire subtree.  Easy win.
+[11:42 AM] **jrajav**:: > 둘째, 성능 향상을 얻을 수 있어. 전체를 탑-다운 하는 방법에선 몇몇 컴포넌트는 항상 강제로 재렌더링될 수밖에 없어. 대부분의 layout 중점의 presentional 컴포넌트는 아마도 전혀 재 렌더링되지 않겠지, 그리고 connect()를 사용하는 것은 효율적으로 트리 형태의 새로운 업데이트를 시작할 수 있을 거야. 특히 컨테이너 컴포넌트가 부모로부터 직접 전달받는 props가 없다면 말이야. 그래, 스토어가 업데이트되면 업데이트는 mapStateToProps가 신경쓰는 어떤 값 이외의 변경에 대해서는 변경되지 않을거야 그럼 컴포넌트는 재 랜더링을 건너뛰게 되고 그 하위 서브트리도 마찬가지지. 간단히 승리한 거야.
 
-[11:44 AM] **jrajav**:: From what I understood, if you have a shouldComponentUpdate over a subtree composed of fully dump props and all of the parameters are equal (probably with the aid of Immutable.js to handle deep objects), then that subtree will not be rendered, so I can't understand how this is different with either methodology
+[11:44 AM] **jrajav**:: 내가 이해한 바로는, 전체 서브트리가 쓰는 props를 조합한 shouldComponentUpdate를 가지고 있으면 모든 파라미터가 동일할 때(아마도 deep 오브젝트를 핸들링하기 위한 Immutable.js같은 것으로), 서브트리가 렌더되지 않을 것이기 때문에 다른 방법론과 어떻게 다른지 이해할 수 없어
 
-[11:48 AM] **jrajav**:: And to directly answer your question, my concern with "containers" vs. "functional" is that, following from my principles, React should just be the presentation layer, just one large function of the state resulting in the corresponding UI - all the way up to the <App /> itself.
+[11:48 AM] **jrajav**:: 그리고 네 질문에 직접 담변하자면, "containers" vs "functional"에 대한 내 걱정은 내 원칙을 따르면 React는 항상 presentation layer여야 해. 하나의 큰 함수지 상태를 적절한 UI로 내놓는 - `<App />` 그 자체를 포함하는 거야
 
-[11:50 AM] **jrajav**:: And thanks for all the counter-opinions, @acemarke! I obviously have my own set of preconceptions already but I'm very new to React and cautious about the nuances I haven't considered. This is very valuable to me.
+[11:50 AM] **jrajav**:: 그리고 모든 반대의견에 감사해! `@acemarke` 난 분명히 선입견을 가지고 있지만 React에 대해선 입문자고 조심스러운 뉘앙스를 가져야한다는 것을 고려하지 못했어. 이것은 내게 매우 가치있어.
 
-[11:52 AM] **acemarke**: @jrajav : sure, good reasonable technical differences of opinion and discussion are usually valuable :)
+[11:52 AM] **acemarke**: @jrajav : 물론, 합리적이고 기술적인 의견과 토론은 항상 가치있지 :)
 
-[11:53 AM] **acemarke**: so let's see.  Per your comments:
+[11:53 AM] **acemarke**: 어디보자. 네 코멘트를 하나하나 보면:
 
-[11:54 AM] **acemarke**: in my case, my opinions are generally influenced by the numerous discussions I've read, as well as the particular needs of my own app
+[11:54 AM] **acemarke**: 내 경우에는 일반적으로 내가 읽었던 수많은 토론과 내 앱이 필요로하는 특별한 니즈에 영향을 받았어
 
-[11:55 AM] **acemarke**: for example, Dan Abramov's advice at the very beginning of Redux was indeed to only connect your top component, or maybe top couple
+[11:55 AM] **acemarke**: 예를 들어 Redux 초창기에 Dan Abramov의 충고 같은거지 connected 탑 컴포넌트, 혹은 아마도 최상위 몇몇 컴포넌트의 connected에 대한 것
 
-[11:57 AM] **acemarke**: but that advice has distinctly changed as time has gone on, and now the suggested usage is to connect deeper wherever it makes sense.  In fact, in his recent optimization pass for the MobX vs Redux benchmark, he found that the "list with 10K items" scenario works best if the parent list gets the IDs of all 10K items, passes the ID to each rendered child item, and the ListItems themselves are also connected and responsible for updating themselves.  That way, an update to one list item doesn't modify the set of IDs, therefore the parent list doesn't have to re-render, etc.
+[11:57 AM] **acemarke**: 하지만 시간이 지나서 그 조언은 확실히 바뀌었어, 이제는 이치에 맞으면 깊은 곳 어디든지 연결하라는 것이지. 사실, 그의 MobX와 Redux 벤치마트를 위한 최근의 최적화 과정에서 그는 "10K 항목이 있는 List" 시나리오에서는 부모 리스트가 10K 아이템에 대한 ID를 가져오고, ID를 자식에게 전달하고, ListItems 자체도 항상 연결하여 자신들의 업데이트에 대해 책임을 지게 하는 것이였어. 그렇게 하면 하나의 목록 항목을 업데이트해도 ID 셋트가 수정되지 않으므로 상위 목록을 다시 렌더링할 필요가 없게되는 것 등이지.
 
-[12:00 PM] **acemarke**: another thought is that while "React is just the view layer" is true, the issue here is that we're trying to figure out how to hook up the data layer and the view layer.  A typical connected component will define its mapStateToProps and the plain component in the same file right next to each other, then export default connect(mapStateToProps)(MyComponent).  So, it's pretty easy to see what the data needs are for a given connected component.
+[12:00 PM] **acemarke**: 또다른 생각은 "React는 그저 view 계층일 뿐이다" 라는 것은 사실이지만, 여기서 문제는 우리가 data 계층과 view 계층을 연결하는 방법을 알아내려 한다는 것이야. 일반적인 connected 컴포넌트는
+각자가 mapStateToProps를 정의하고 있고 plain 컴포넌트는 같은 파일의 바로 옆에 위치하지, 그리고 디폴트로connect(mapStateToProps)(MyComponent)를 익스포트하지. 그래서 connected 컴포넌트에 필요한 데이터가 무엇인지 쉽게 파악할 수 있게 되는 거야
 
-[12:01 PM] **acemarke**: I would also argue that even with multiple connected components, the overall UI is still a "function of the state"
+[12:01 PM] **acemarke**: 또한 여러개의 connected 컴포넌트가 있는 경우에도 전체 UI는 여전히 "상태에 대한 함수"라고 생각해
 
-[12:01 PM] **acemarke**: let's see.  the performance tree thing...
+[12:01 PM] **acemarke**: 어디보자. 트리 성능...
 
-[12:01 PM] **jrajav**:: In this case "re-render" just meaning that the list element still needs to iterate over every list item just to find out most of them pass the SCU, right?
+[12:01 PM] **jrajav**:: 이 경우의 "재 렌더링"은 리스트 요소가 모든 리스트아이템에 대해 반복할 필요가 있다는 것을 의미한다. SCU에 그 대부분을 전달하여 알아내려고, 맞지?
 
-[12:02 PM] **acemarke**: yeah
+[12:02 PM] **acemarke**: 맞아
 
-[12:02 PM] **acemarke**: parent renders -> children check SCU -> children may or may not re-render
+[12:02 PM] **acemarke**: 부모 렌더 -> 자식들의 SCU 확인 -> 자식들은 재 렌더되거나 안되거나한다
 
-[12:02 PM] **acemarke**: but the point is that SCU still gets called even if the props are literally identical
+[12:02 PM] **acemarke**: 하지만 요점은 SCU가 문자 그대로 동일하더라도 불린다는 거다.
 
-[12:03 PM] **jrajav**:: Right
+[12:03 PM] **jrajav**:: 맞아
 
-[12:03 PM] **jrajav**:: But if the SCU is just an Immutable.js equality check, that boils down to a single === op per call right?
+[12:03 PM] **jrajav**:: 하지만 SCU가 그저 Immutable.js의 동등성 체크라면, 그저 single === 체크일 뿐이지 않나?
 
-[12:03 PM] **jrajav**:: Factor in the function calls and yes it's not exactly nothing but not very expensive either
+[12:03 PM] **jrajav**:: 함수의 호출 요소가 있지만 그건 그리 비싸지는 않다.
 
-[12:03 PM] **acemarke**: one per field in props, anyway
+[12:03 PM] **acemarke**: 어쨌든 props의 필드당 한 번이다.
 
-[12:04 PM] **jrajav**:: Right
+[12:04 PM] **jrajav**:: 맞아
 
-[12:04 PM] **jrajav**:: But yes, I can see how this lets you skip over subtrees for rendering
+[12:04 PM] **jrajav**:: 하지만 알겠어 렌더링 할 때 서브트리를 건너뛸 수 있는지 말야
 
 [12:05 PM] **acemarke**: lemme see if I can clarify my point on the subtrees bit you were asking about
 
