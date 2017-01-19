@@ -13,23 +13,24 @@ category: Redux
 
 Redux는 절충안을 제안하고 있다. 당신에게 다음과 같이 요구하는 것이다:
 
-- 애플리케이션 상태를 플레인 오브젝트와 배열로써 기술하라
-- 시스템의 변경 사항을 플레인 오브젝트로써 기술하라
-- 변경사항을 처리하는 로직은 순수(pure)함수로 기술하라
+ - 애플리케이션 상태를 플레인 오브젝트와 배열로써 기술하라
+ - 시스템의 변경 사항을 플레인 오브젝트로써 기술하라
+ - 변경사항을 처리하는 로직은 순수(pure)함수로 기술하라
 
 React를 쓰든지 안쓰든지 간에 이러한 제한점이 Redux 애플리케이션을 만드는데 요구된다. 사실 이들은 꽤 강력한 제약이고, 앱의 어떤 부분에 적용하더라도 주의 깊게 생각해야만 한다.
 
 이렇게 하는데 어떤 좋은 이유라도 있는가?
 
 이러한 제한이 다음과 같이 앱을 만드는 것을 도와주기 때문에 매력적이다:
-- [상태를 로컬 스토리지에 저장하고, 다음에 시작할때 그것을 가지고 시작한다](https://egghead.io/lessons/javascript-redux-persisting-the-state-to-the-local-storage?course=building-react-applications-with-idiomatic-redux)
-- [서버로부터 미리 채워진 상태를 가지고 클라이언트의 HTML에 얹어서 보내고 그것을 가지고 시작한다](http://redux.js.org/docs/recipes/ServerRendering.html)
-- [사용자 액션을 직렬화하고 상태에 대한 스냅샷과 함께 첨부하여 자동 버그 보고서를 보내면 제품 개발자가 오류를 재현할 수 있게 한다](https://github.com/dtschust/redux-bug-reporter)
-- [네트워크를 통해 액션 객체를 전달하여 코드 작성 방법을 크게 변경하지 않고도 협업 환경을 구축할 수 있다](https://github.com/philholden/redux-swarmlog)
-- [코드를 크게 변경하지 않고도 undo 히스토리를 관리하거나, 낙관적인 변경을 구현할 수 있다](http://redux.js.org/docs/recipes/ImplementingUndoHistory.html)
-- [개발 중에 코드 변경 없이도 상태 히스토리간 여행을 할 수도 있고, 액션 히스토리를 통해 현재 상태를 다시 평가해볼 수 있게 한다](https://github.com/gaearon/redux-devtools)
-- [제품 개발자가 앱 전용 커스텀 툴을 만들 수 있도록 검사 및 제어 기능을 완벽히 제공한다](https://github.com/romseguy/redux-devtools-chart-monitor)
-- [대부분의 비즈니스 로직을 재사용하면서 다른 UI로 대체할 수 있게 한다](https://youtu.be/gvVpSezT5_M?t=11m51s)
+
+ - [상태를 로컬 스토리지에 저장하고, 다음에 시작할때 그것을 가지고 시작한다](https://egghead.io/lessons/javascript-redux-persisting-the-state-to-the-local-storage?course=building-react-applications-with-idiomatic-redux)
+ - [서버로부터 미리 채워진 상태를 가지고 클라이언트의 HTML에 얹어서 보내고 그것을 가지고 시작한다](http://redux.js.org/docs/recipes/ServerRendering.html)
+ - [사용자 액션을 직렬화하고 상태에 대한 스냅샷과 함께 첨부하여 자동 버그 보고서를 보내면 제품 개발자가 오류를 재현할 수 있게 한다](https://github.com/dtschust/redux-bug-reporter)
+ - [네트워크를 통해 액션 객체를 전달하여 코드 작성 방법을 크게 변경하지 않고도 협업 환경을 구축할 수 있다](https://github.com/philholden/redux-swarmlog)
+ - [코드를 크게 변경하지 않고도 undo 히스토리를 관리하거나, 낙관적인 변경을 구현할 수 있다](http://redux.js.org/docs/recipes/ImplementingUndoHistory.html)
+ - [개발 중에 코드 변경 없이도 상태 히스토리간 여행을 할 수도 있고, 액션 히스토리를 통해 현재 상태를 다시 평가해볼 수 있게 한다](https://github.com/gaearon/redux-devtools)
+ - [제품 개발자가 앱 전용 커스텀 툴을 만들 수 있도록 검사 및 제어 기능을 완벽히 제공한다](https://github.com/romseguy/redux-devtools-chart-monitor)
+ - [대부분의 비즈니스 로직을 재사용하면서 다른 UI로 대체할 수 있게 한다](https://youtu.be/gvVpSezT5_M?t=11m51s)
 
 만약 당신이 [확장 가능한 터미널]()이나 자바스크립트 디버거 혹은 어떤 종류의 웹앱에서 작업하는 경우라면, 적어도  이 아이디어들을 고려해보거나 실제로 시도해보는 것은 가치가 있을 것이다(별로 새로운 것은 아니다).
 
