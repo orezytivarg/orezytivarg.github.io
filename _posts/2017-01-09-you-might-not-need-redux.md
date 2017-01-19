@@ -32,7 +32,7 @@ React를 쓰든지 안쓰든지 간에 이러한 제한점이 Redux 애플리케
  - [제품 개발자가 앱 전용 커스텀 툴을 만들 수 있도록 검사 및 제어 기능을 완벽히 제공한다](https://github.com/romseguy/redux-devtools-chart-monitor)
  - [대부분의 비즈니스 로직을 재사용하면서 다른 UI로 대체할 수 있게 한다](https://youtu.be/gvVpSezT5_M?t=11m51s)
 
-만약 당신이 [확장 가능한 터미널]()이나 자바스크립트 디버거 혹은 어떤 종류의 웹앱에서 작업하는 경우라면, 적어도  이 아이디어들을 고려해보거나 실제로 시도해보는 것은 가치가 있을 것이다(별로 새로운 것은 아니다).
+만약 당신이 [확장 가능한 터미널](https://hyperterm.org/)이나 [자바스크립트 디버거](https://hacks.mozilla.org/2016/09/introducing-debugger-html/) 혹은 [어떤 종류의 웹앱들](https://twitter.com/necolas/status/727538799966715904)에서 작업하는 경우라면, 적어도  이 아이디어들을 고려해보거나 실제로 시도해보는 것은 가치가 있을 것이다(별로 [새로운 것](https://github.com/omcljs/om)은 [아니다](https://github.com/evancz/elm-architecture-tutorial)).
 
 그러나 React를 배우는 중이라면, Redux를 첫 선택으로 만들지 말아달라.
 
