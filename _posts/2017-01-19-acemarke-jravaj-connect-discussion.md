@@ -345,120 +345,119 @@ Dan은 connect()의 소스코드 대부분을 휼륭한 비디오 코스를 통�
 
 [12:04 PM] **jrajav**:: 하지만 알겠어 렌더링 할 때 서브트리를 건너뛸 수 있는지 말야
 
-[12:05 PM] **acemarke**: lemme see if I can clarify my point on the subtrees bit you were asking about
+[12:05 PM] **acemarke**: 네가 물어본 서브트리에 대한 내 관점을 정확히 하려는데 뭘 좀 알려줘
 
-[12:06 PM] **acemarke**: so as I understand it, in the "one top level component to rule them all" scenario, you're basically doing const mapStateToProps = (state) => state;
+[12:06 PM] **acemarke**: 내가 이해하기로는 "하나의 탑레벨 컴포넌트가 모두를 지배한다" 시나리오에서, 기본적으로 `const mapStateToProps = (state) => state;`를 하기만 하면 되는데
 
-[12:06 PM] **jrajav**:: I'm not entirely sure what you mean by that
+[12:06 PM] **jrajav**:: 네가 말하려는 걸 전부 확신할 수 없어
 
-[12:06 PM] **jrajav**:: It's more like there is no mapStatetoProp anywhere
+[12:06 PM] **jrajav**:: 조금 더 말하자면 mapStatetoProps가 아무데도 없는거야
 
-[12:06 PM] **acemarke**: well, SOMEONE has to use it to grab something from the store...
+[12:06 PM] **acemarke**: 음, 스토어에서 뭔가를 가져가서 사용하는 누군가 말이지...
 
-[12:07 PM] **acemarke**: or the moral equivalent thereof
+[12:07 PM] **acemarke**: 혹은 동등한 뭔가...
 
-[12:07 PM] **jrajav**:: <App dispatch={store.dispatch} state={store.getState()} />(edited)
+[12:07 PM] **jrajav**:: `<App dispatch={store.dispatch} state={store.getState()} />`(edited)
 
-[12:07 PM] **acemarke**: yeah, that's just connect() without actually calling connect
+[12:07 PM] **acemarke**: 맞아 그게 실제 connect() 호출없이 connect() 하는 방법이지
 
-[12:08 PM] **acemarke**: I assume you're doing, roughly:
+[12:08 PM] **acemarke**: 대충 네가 하려는걸 추측할수 있어:
 
-[12:08 PM] **jrajav**:: The difference being that it's only at this one root element that we ever access the state
+[12:08 PM] **jrajav**:: 차이점은 이 하나의 루트 엘레멘트만 상태에 접근할 수 있다는 거야
 
-[12:08 PM] **acemarke**: so the same as doing connect(state => state)(App)
+[12:08 PM] **acemarke**: 그래 connect(state => state)(App) 이랑 같은거지
 
-[12:09 PM] **jrajav**:: Well sure, but when it's that simple either way it seems preferable to do it the more obvious, explicit way
+[12:09 PM] **jrajav**:: 물론, 하지만 어느쪽이든 간단하다면 명백하고 명시적인 방법이 더 바람직하지
 
-[12:09 PM] **jrajav**:: Otherwise you're using an abstracted function just to do state={store.getState()} once in the whole app
+[12:09 PM] **jrajav**:: 한편으로 넌 state={store.getState()}를 한번만 수행하는 데다가 추상화 함수를 사용하는거야
 
-[12:09 PM] **acemarke**: yeah.  anyway, point is, top level component gets the whole state every time, either way
+[12:09 PM] **acemarke**: 맞아. 아무튼, 요점은, 탑레벨 컴포넌트가 항상 모든 상태를 가져오는 거야
 
-[12:09 PM] **jrajav**:: Correct
+[12:09 PM] **jrajav**:: 정확해
 
-[12:09 PM] **acemarke**: so.  Let's go with my favorite hypothetical app structure
+[12:09 PM] **acemarke**: 좋아. 내가 좋아하는 어떤 가설적인 앱 구조를 한번 보자
 
 [12:10 PM] **jrajav**:: Todo? ??
 
-[12:10 PM] **acemarke**: some kind of LeftSidebar and RightMainPanel(edited)
+[12:10 PM] **acemarke**: LeftSidebar랑 RightMainPanel같은 거(edited)
 
-[12:10 PM] **jrajav**:: Aww
+[12:10 PM] **jrajav**:: 오
 
-[12:10 PM] **acemarke**: NO.  NO MORE TODOS.
+[12:10 PM] **acemarke**: 아니. TODO는 더이상은 네이버....
 
-[12:11 PM] **acemarke**: and we'll say that the left sidebar shows.... a CurrentUserInfo component, plus a ListOfThings component
+[12:11 PM] **acemarke**: 그리고 왼쪽 사이드바가 CurrentUserInfo 컴포넌트랑, ListOfThings 컴포넌트를 보여준다고 하자
 
-[12:11 PM] **acemarke**: when you select a ThingListItem in the list, the MainPanel shows a details form for that Thing
+[12:11 PM] **acemarke**: 네가 목록에서 ThingListItem을 선택하면, MainPanel은 그 Thing의 세부정보를 보여줄거야
 
-[12:11 PM] **acemarke**: which you can edit
+[12:11 PM] **acemarke**: 네가 수정할 수 있도록
 
-[12:12 PM] **acemarke**: so our state would look like, say: { currentUser: {}, things : { byId : {}, order : [] }, thingBeingEdited : {} }
+[12:12 PM] **acemarke**: 우리 상태는 이렇게 보이겠지 : { currentUser: {}, things : { byId : {}, order : [] }, thingBeingEdited : {} }
 
-[12:13 PM] **acemarke**: cool so far?
+[12:13 PM] **acemarke**: 지금까진 괜찮지?
 
-[12:13 PM] **jrajav**:: Yep, I'm following you
+[12:13 PM] **jrajav**:: 그래 난 잘 따라가고 있어
 
-[12:14 PM] **acemarke**: oh, we might also want to have a currentSelectedThingId field in there
+[12:14 PM] **acemarke**: 오 아마도 currentSelectedThingId 필드가 있을 수 있지
 
-[12:14 PM] **acemarke**: maybe.
+[12:14 PM] **acemarke**: 아마도
 
-[12:14 PM] **acemarke**: gimme a sec to think through how the sequence for this would work
+[12:14 PM] **acemarke**: 어떤 순서로 동작하는지 조금만 더 생각해볼게
 
-[12:14 PM] **jrajav**:: No prob
+[12:14 PM] **jrajav**:: 문제없어
 
-[12:15 PM] **acemarke**: so to start, we'll say the user's already logged in, and we've fetched our data, so both currentUser and things are filled up appropriately
+[12:15 PM] **acemarke**: 사용자는 이미 로그인했다고 하자, 그리고 데이터도 가져왔고, currentUser와 things는 적절히히 채워져있어.
 
-[12:16 PM] **acemarke**: so our ThingList is displaying all its ThingListItems
+[12:16 PM] **acemarke**: 그래서 ThingList는 ThingListItems를 모두 표시하지
 
-[12:17 PM] **acemarke**: so I click on ThingListItem #1 to select it, and we dispatch {type : SELECT_THING, payload : {id : 1} }
+[12:17 PM] **acemarke**: 그래서 `ThingListItem #1`을 선택하여 클릭하고, {type : SELECT_THING, payload : {id : 1} }를 dispatch 하는거야
 
-[12:17 PM] **acemarke**: reducer copies the values from things.byId[1] over to thingBeingEdited
+[12:17 PM] **acemarke**: 리듀서는 thing.byId[1]의 값을 thingBeingEdited에 복사하고
 
-[12:18 PM] **acemarke**: and we want to pass all that down to our form over in the RightMainPanel
+[12:18 PM] **acemarke**: 그리고 RightMainPanel에 있는 폼들에게 이 값을 전달하길 원하지
 
-[12:19 PM] **acemarke**: so, TopLevelComponent renders `<RightMainPanel thingBeingEdited={state.thingBeingEdited} />`, which renders `<ThingEditForm thingBeingEdited={this.props.thingBeingEdited} />`
+[12:19 PM] **acemarke**: 그래서, TopLevelComponent는 `<RightMainPanel thingBeingEdited={state.thingBeingEdited} />`를 렌더링하고, 그건 다시 `<ThingEditForm thingBeingEdited={this.props.thingBeingEdited} />`를 렌더링하지
 
-[12:19 PM] **acemarke**: which renders a bunch of inputs
+[12:19 PM] **acemarke**: ThingEditForm은 input 여러 개를 렌더하고
 
-[12:20 PM] **acemarke**: and I'm assuming we're going with controlled inputs here
+[12:20 PM] **acemarke**: controlled input이라고 가정할게
 
-[12:20 PM] **jrajav**:: Controlled inputs meaning that their values are reflected in the state?
+[12:20 PM] **jrajav**:: Controlled input이 그들의 값을 상태에 반영하는 걸 의미하는거야?
 
-[12:20 PM] **acemarke**: other way around technically - their values come from the state
+[12:20 PM] **acemarke**: 기술적으로 다른 방법이야 - 그들의 값이 상태에서 나오는 거야
 
-[12:21 PM] **acemarke**: "uncontrolled" inputs means you let the user manipulate them at will, the value is stored by the browser itself per normal, and at some point in time (like form submit) you ask the actual input element itself for its value
+[12:21 PM] **acemarke**: "uncontrolled" input은 사용자가 조작하게 두는거야, 값은 브라우저 자체에 의해서 정상적으로 저장되며, 특정 시점(양식 제출 같은)에 실제 input 엘레멘트에 값을 요청하는거지
 
-[12:22 PM] **acemarke**: "controlled" inputs means you always specify a "value" prop for every input, forcing it to use that value
+[12:22 PM] **acemarke**: "controlled" input은 항상 모든 입력에 대해 "value" prop을 지정하는 거야. 항상 그 값을 사용하도록 강제하지
 
-[12:22 PM] **acemarke**: which means you must also specify an onChange handler, look at the new proposed value in the event, put that in state somewhere, and re-render with the newly accepted modified value
+[12:22 PM] **acemarke**: 즉 onChange 핸들러를 지정하고, 이벤트에서 새 값을 보고, 어딘가에 상태를 넣고, 새로 승인된 값으로 다시 렌더링해야해
 
-[12:24 PM] **acemarke**: so.  now I put my cursor in the "Thing Name" input field, which currently has a value of "Thing #1", and start typing
+[12:24 PM] **acemarke**: 그래. 이제 `"Thing #1"`의 값을 내 커서가 있는 "Thing Name"에 넣어야 하지. 그리고 타이핑을 시작해
 
-[12:24 PM] **acemarke**: and I just try to add "asdf" to the end of "Thing #1"
+[12:24 PM] **acemarke**: "asdf"를 `"Thing #1"`의 끝에다 추가했어
 
-[12:25 PM] **acemarke**: each keystroke will trigger the onChange handler I've attached to the input
+[12:25 PM] **acemarke**: 각 키 입력은 onChange 핸들러를 트리거하지
 
-[12:25 PM] **acemarke**: and we'll assume for purposes of the scenario that I'm storing all this still in Redux state, not component state
+[12:25 PM] **acemarke**: 시나리오 목적상 이건 컴포넌트 상태가 아니라 Redux state에 저장하고 있다고 가정하자
 
-[12:26 PM] **acemarke**: so the onChange handler dispatches {type : EDIT_THING_FIELD, payload : {name : "Thing #1a"} } for the first keystroke
+[12:26 PM] **acemarke**: 그래서 onChange 핸들러는 첫 타이핑에 {type : EDIT_THING_FIELD, payload : {name : "Thing #1a"} } 를 dispatch 하겠지
 
-[12:27 PM] **acemarke**: the thingBeingEdited reducer will update the thingBeingEdited.name field with the new value
+[12:27 PM] **acemarke**: thingBeingEdited 리듀서는 thingBeingEdited.name 필드를 새 값으로 업데이트 할테고
 
-[12:27 PM] **acemarke**: so thingBeingEdited.name, thingBeingEdited, and state are all new references
+[12:27 PM] **acemarke**: 그래서 thingBeingEdited.name, thingBeingEdited, 그리고 state까지 모두 새로운 레퍼런스지
 
-[12:27 PM] **acemarke**: scenario still clear so far?
+[12:27 PM] **acemarke**: 지금까지 시나리오는 명확하지?
 
-[12:28 PM] **acemarke**: (again, making this all up off the top of my head, so hopefully not screwing things up :)  )
+[12:28 PM] **acemarke**: (다시, 내 머리 꼭대기에서 이걸 만들면서, 망치지 않기를 바라고 있어 :))
 
-[12:28 PM] **jrajav**:: Yes, clear so far
+[12:28 PM] **jrajav**:: 맞아 지금까진 명확해
 
-[12:28 PM] **jrajav**:: And I'm starting to see where you're heading, too ??
+[12:28 PM] **jrajav**:: 그리고 네가 뭘 하려는건지 보기 시작했어 ??
 
-[12:28 PM] **acemarke**: so.  TopLevelComponent gets the new state reference
+[12:28 PM] **acemarke**: 그래서. TopLevelComponent는 새 state 레퍼런스를 갖게되지.
 
-[12:28 PM] **acemarke**: and will re-render:
+[12:28 PM] **acemarke**: 재 렌더링을 할거야:
 
 [12:30 PM] **acemarke**:
-
 
 ```js
 render() {
@@ -472,161 +471,148 @@ render() {
 }
 ```
 
+[12:30 PM] **acemarke**: RightMainPanel, ThingEditForm, 그리고 "name" 인풋이 명백히 재 렌더링 되지
 
-[12:30 PM] **acemarke**: RightMainPanel, ThingEditForm, and the "name" input obviously re-render
+[12:31 PM] **acemarke**: LeftSidebar도 재 렌더링을 시도하겠지
 
-[12:31 PM] **acemarke**: the LeftSidebar will attempt to re-render
+[12:31 PM] **acemarke**: 이 시점에서 SCU가 나머지 컴포넌트에 얼마나 구현됬나하는 질문이 있지
 
-[12:31 PM] **acemarke**: so at this point, the question is just how many SCU implementations you've slapped on the rest of your components
+[12:32 PM] **acemarke**: 이론상, LeftSidebar는 순수한 presentational 컴포넌트야
 
-[12:32 PM] **acemarke**: in theory, LeftSidebar is a purely presentational component
+[12:32 PM] **acemarke**: CurrentUserDetails와 ThingList만을 신경쓰는거지
 
-[12:32 PM] **acemarke**: all it really cares about is rendering CurrentUserDetails and ThingList
-
-[12:32 PM] **jrajav**:: Aren't they both purely presentational if we're using controlled inputs?
+[12:32 PM] **jrajav**:: controlled input을 사용하면 양쪽다 순수 presentational 아니야?
 
 [12:32 PM] **acemarke**: ?
 
-[12:33 PM] **jrajav**:: RightMainPanel as well I mean
+[12:33 PM] **jrajav**:: RightMainPanel도 말이야
 
-[12:34 PM] **acemarke**: yeah, sure.  the semi-point of the scenario, I guess, is that the state change really only "affects" one small input, buried deep down inside RightMainPanel
+[12:34 PM] **acemarke**: 응 맞아. 시나리오에서 또하나의 버금가는 요점은, 내 생각엔, 상태 변화가 실제로 하나의 작은 input에만 "영향"을 주는 거지, RightMainPanel의 깊은 곳에 묻혀있는 인풋말야
 
-[12:34 PM] **acemarke**: but, because we're doing things purely top-down, every keystroke is going to try to re-render LeftSidebar
+[12:34 PM] **acemarke**: 하지만, 순수하게 탑-다운으로만 이 키입력을 처리하기 때문에 LeftSidebar도 재 렌더링을 시도할 거라는 거지
 
-[12:34 PM] **jrajav**:: Right
+[12:34 PM] **jrajav**:: 맞아
 
-[12:34 PM] **acemarke**: now, maybe we did hook up an SCU implementation for LeftSidebar
+[12:34 PM] **acemarke**: 이제, LeftSidebar의 SCU 구현을 했다고 하자
 
-[12:35 PM] **acemarke**: but that's still work that doesn't have to be done
+[12:35 PM] **acemarke**: 아직 작업은 끝나지 않았지
 
-[12:35 PM] **jrajav**:: Well
+[12:35 PM] **jrajav**:: 음
 
-[12:35 PM] **jrajav**:: If everything really is a pure dumb component
+[12:35 PM] **jrajav**:: 만약 모든 것이 실제로 pure dumb 컴포넌트라면
 
-[12:35 PM] **jrajav**:: And we use Immutable.js for the full state tree
+[12:35 PM] **jrajav**:: 그리고 우리가 Immutable.js를 모든 상태 트리에서 사용하고 있다면
 
-[12:35 PM] **jrajav**:: Then wrap every dumb component in a recompose pure()
+[12:35 PM] **jrajav**:: 그리고 모든 dumb 컴포넌트를 recompose의 pure()로 감쌌다면
 
-[12:35 PM] **jrajav**:: It's pretty much all done for us, isn't it?
+[12:35 PM] **jrajav**:: 아마도 꽤 잘 동작하겠지, 그렇지?
 
-[12:35 PM] **jrajav**:: Without writing any extra code (except the pure() call), LeftMainSidebar would SCU correctly and not re-render
+[12:35 PM] **jrajav**:: 어떤 추가 코드를 작성하지 않아도(pure() 호출을 제외하고), LeftMainSidebar는 SCU가 잘 동작할테고 재 렌더링되지 않을거야t re-render
 
-[12:36 PM] **acemarke**: if you really do do that for every component, mostly, yeah
+[12:36 PM] **acemarke**: 모든 컴포넌트에 대해 그렇게 했다면, 대부분, 그렇지
 
-[12:36 PM] **acemarke**: so let's invert the scenario a bit
+[12:36 PM] **acemarke**: 자 시나리오를 조금 뒤집어보자
 
-[12:36 PM] **acemarke**: let's say that TopLevelComponent, LeftSidebar, and RightMainPanel are 100% presentational components, no connections at all
+[12:36 PM] **acemarke**: TopLevelComponent, LeftSidebar, RightMainPanel이 100% presentational 컴포넌트고 연결되지 않았다면
 
-[12:36 PM] **acemarke**: CurrentUserDetails, ThingsList, and ThingEditForm are all connected
+[12:36 PM] **acemarke**: CurrentUserDetails, ThingsList, ThingEditForm는 연결되었고 말이야
 
-[12:37 PM] **acemarke**: and each one has a simple mapStateToProps that is just grabbing their appropriate top-level chunk of state
+[12:37 PM] **acemarke**: 각각은 간단한 mapStateToProps를 갖고 있겠지 탑레벨의 상태에서 적절한 부분을 가져오기 위해 말이야
 
-[12:37 PM] **acemarke**: once again, I place my cursor in the "Name" field after "Thing #1" and type "a"
+[12:37 PM] **acemarke**: 다시 한번, Name 필드에 `"Thing #1"`에 커서를 두고 "a"를 타이핑해보자
 
-[12:38 PM] **acemarke**: edit action dispatches, thingBeingEdited.name is updated, store notifies subscribers
+[12:38 PM] **acemarke**: edit 액션이 디스패치되고 thingBeingEdited.name이 업데이트되고, store가 구독자들에게 알리겠지
 
-[12:38 PM] **acemarke**: CurrentUserDetails will re-run mapStateToProps and return {currentUser : state.currentUser}
+[12:38 PM] **acemarke**: CurrentUserDetails의 mapStateToProps가 재실행되서 {currentUser : state.currentUser}를 리턴할거야
 
-[12:39 PM] **acemarke**: connect() will shallow-compare that return value vs the last return value, see things haven't changed, and skip re-rendering
+[12:39 PM] **acemarke**: connect()가 shallow-compare하겠지 이전 리턴값과 이번 리턴값을, 그리고 변하지 않았으니 재 렌더링을 건너뛸거야
 
-[12:39 PM] **acemarke**: ditto for ThingsList
+[12:39 PM] **acemarke**: ThingsList도 마찬가지고
 
-[12:39 PM] **acemarke**: ThingEditForm will see that thingBeingEdited has changed and re-render
+[12:39 PM] **acemarke**: ThingEditForm은 thingBeingEdited가 변경된걸 알았으니 재 렌더링 할거고
 
-[12:39 PM] **acemarke**: but TopLevelComponent, LeftSidebar, and RightMainPanel never even had to do anything
+[12:39 PM] **acemarke**: 하지만 TopLevelComponent, LeftSidebar, RightMainPanel은 결코 아무 일도 하지 않을거야
 
-[12:40 PM] **acemarke**: they do not know, and they do not care, that anything happened with the state at all
+[12:40 PM] **acemarke**: 알지도 못하고 신경도 안쓰니까, 상태의 나머지 부분에 대해서는 전혀.
 
-[12:40 PM] **jrajav**:: I'm definitely seeing the point here, but - are we not just trading one linear set of compare operations for another?
+[12:40 PM] **jrajav**:: 여기서 요점이 명확히 드러났네, 하지만 - 하나의 선형적인 비교 연산을 또다른 것과 트레이드하고 있는거 아닌가?
 
-[12:40 PM] **jrajav**:: I do see the argument that the connect()'ed set may be smaller
+[12:40 PM] **jrajav**:: 나는 connect()'ed 집합이 더 작아질 수 있다고 주장하는 걸 알았어
 
-[12:41 PM] **jrajav**:: But if the state tree is organized sensibly w.r.t. the UI they may not be that dissimilar
+[12:41 PM] **jrajav**:: 하지만 상태 트리가 잘 조직되어 있더라도, UI는 비슷하지 않을 수도 있어
 
-[12:41 PM] **acemarke**: yeah, I'm not saying that the overall intent and behavior are drastically different
+[12:41 PM] **acemarke**: 맞아, 전채 의도와 행동은 크게 다르지 않을 수 있지
 
-[12:42 PM] **jrajav**:: In this case specifically they're almost identical - we seem to be running three comparison funcs outside of the "real" re-render (the form) in either case
+[12:42 PM] **jrajav**:: 이 경우에는 거의 동일하지만 - 양쪽 다 "실제" 재 렌더링에 대한 3번의 비교를 수행하는 함수가 있는 것 처럼 보이네
 
-[12:42 PM] **acemarke**: but depending on how nested your UI is, and how much data you've got, you could certainly be cutting out a number of intermediate layers
+[12:42 PM] **acemarke**: 하지만 UI의 중첩 방식에 따라, 얼마나 데이터를 가졌냐에 따라, 중간 계층의 숫자를 확실히 줄일 수 있어
 
-[12:43 PM] **jrajav**:: But you're trading those intermediate layers for however many container components you have
+[12:43 PM] **jrajav**:: 하지만 중간 계층의 숫자를 많은 컨테이너 컴포넌트로 절충하고 있잖아
 
-[12:43 PM] **acemarke**: it also is, as you said, a question of whether or not you want to explicitly tag all your more layout-y components with SCU
+[12:43 PM] **acemarke**: 네가 말했듯이, SCU로 모든 레이아웃스러운 컴포넌트를 명시적으로 태그할지 여부에 대한 질문이야
 
-[12:43 PM] **acemarke**: and deal with the props management
+[12:43 PM] **acemarke**: props 관리에 대한 거래지
 
-[12:45 PM] **acemarke**: for me personally, I would rather do a lot less typing, get the same or better performance, and have less data flow to track
+[12:45 PM] **acemarke**: 개인적으로는, 타이핑 수를 줄이고 성능을 동일하게 유지하며 추적할 데이터 흐름이 적어지지
 
+12:45 PM] **jrajav**:: 하지만 그건 명시적이지 않잖아 우리가 recompose의 pure()에 의존한다면 말이야
 
+[12:46 PM] **jrajav**:: 그걸 기억해야 할 필요가 있어...
 
-12:45 PM] **jrajav**:: But it's not explicit if we rely on recompose's pure() implementing it for us
+[12:47 PM] **acemarke**: 맞아 그게 내가 의미한 바야. 실제로 각 컴포넌트 정의에 포함시켜야 해
 
-[12:46 PM] **jrajav**:: You do have to remember to do that though...
+[12:47 PM] **jrajav**:: 맞아
 
-[12:47 PM] **acemarke**: yeah, that's what I meant.  just having to actually include it in each component definition
+[12:48 PM] **acemarke**: 자 이제 내 생각에 영향을 미치는 내 앱에 대한 일반적인 설명이야
 
-[12:47 PM] **jrajav**:: Right
+[12:48 PM] **acemarke**: 몇 년 전에 GWT로 작성한 앱을 재작성한 거지
 
-[12:48 PM] **acemarke**: so lemme just give a general description of my own app, which is obviously an influence on my thinking
+[12:50 PM] **acemarke**: 기본적으로 3D 지구를 사용한 지도 플래닝 툴이야, 사용자를 지구와 상호작용할 수 있게 하지. 왼쪽 창에는 프로젝트의 모든 항목이 있는 몇몇 버튼과 트리뷰가 있고, 아래쪽 창에는 트리의 각기 다른 데이터 유형에 대한 속성을 보여주는 탭이 있어. 데이터 항목들은 트리에 보이고, 폼을 통해 보여지고 수정될 수 있지, 그리고 이는 지구에 표시돼
 
-[12:48 PM] **acemarke**: rewriting the client for an app I built a few years back in GWT
+[12:50 PM] **acemarke**: 시각적으로는 구글 어스 데스크탑의 레이아웃이랑 비슷해: http://elmcip.net/sites/default/files/platform_images/launch_google_earth.jpg
 
-[12:50 PM] **acemarke**: basically a map planning tool that uses a 3D globe, lets the user interact with the globe.  left pane has some control buttons and a treeview with all items in the project.  bottom pane has tabs to show attribute forms for each different data type in the tree.  data items are shown in the tree, can be viewed and edited in the forms, and are displayed on the globe.
+12:50 PM] **acemarke**: 지구를 놓고, 폼들과 탭드 섹션을 오른쪽 창 세 번째의 아래쪽 두는거지
 
-[12:50 PM] **acemarke**: visually, the app has a marked resemblance to Google Earth Desktop's layout: http://elmcip.net/sites/default/files/platform_images/launch_google_earth.jpg
+[12:52 PM] **acemarke**: 나의 이 특정 앱에서는 꽤 무거운 중첩 구조를 갖고 있으면서도, 폼에 항목을 표시/편집 하고, 지구본을 렌더링하고, 그 선택이나 편집에 대한 모든 정보를 업데이트 해야해
 
-12:50 PM] **acemarke**: bump up the globe and put a tabbed section with forms inside in the bottom third of the right pane
+[12:52 PM] **acemarke**: 내 최상위 몇몇 계층은 pure presentational and dumb 컴포넌트야
 
-[12:52 PM] **acemarke**: so for my particular app, I've got some pretty heavy nesting inside that tree, need to show/edit items in the forms, and need to render them on the globe, and update all of the above on selection, editing, etc
+[12:52 PM] **acemarke**: TreeView도 최상위에 있고 마찬가지로 presentational이고 dumb지. 하지만 각 데이터 타입에 따라 "ConnectedFolder" 트리 아이템을 표시해
 
-[12:52 PM] **acemarke**: my top couple layers are very much purely presentational and dumb
+[12:53 PM] **acemarke**: 개별적으로 중첩된 트리 항목들은 "자신을 위한 데이터만 가져와서 자식들에게 ID만 전달한다" 는 패러다임을 따르지
 
-[12:52 PM] **acemarke**: my TreeView is itself also presentational and dumb at the top, but displays a "ConnectedFolder" tree item for each data type
+[12:53 PM] **acemarke**: 그리고 트리의 하위 노드들은 expand된 경우에만 렌더하지
 
-[12:53 PM] **acemarke**: the individual nested tree items then follow that "grab data for self, pass just ID to children" paradigm
+12:54 PM] **acemarke**: 꽤 심각한 중첩 구조지, 하지만 트리를 클릭해서 현재 선택한 항목을 변경한 경우 적절한 속성 폼과, 해당되는 개별 지구본 표시 컴포넌트만 실제로 업데이트돼
 
-[12:53 PM] **acemarke**: and only render their children if expanded
+12:55 PM] **acemarke**: 컴포넌트 인스턴스 별로 메모이즈드 셀렉터를 사용하여 트리 항목에 대한 최적화를 할 필요는 아직 없지만, 성능이 이슈가 된다면 그렇게 해야겠지. 항상 나중에 할 수 있는 어떤 것이 있어
 
-12:54 PM] **acemarke**: so, there's some pretty serious nesting going on, but if I do something like click on a tree item to make it the currently selected thing, only that tree item, the appropriate attributes form, and the corresponding individual globe display component will really update
+[12:56 PM] **acemarke**: 그래 이런 사고 과정과 구조가 내게 영향을 미친 거야
 
-12:55 PM] **acemarke**: I don't have my tree item components optimized to use per-component-instance memoized selectors yet, but so far performance hasn't been an issue.  always something I can throw in later.
+12:58 PM] **acemarke**: 또 MobX와 Redux 벤치마크에서 Dan Abramove의 최근 최적화도 말이지: https://twitter.com/dan_abramov/status/720219615041859584 , https://github.com/mweststrate/redux-todomvc/pulls?q=is%3Apr+is%3Aclosed
 
-[12:56 PM] **acemarke**: so, that sort of structure is obviously an influence on my thought process.
+[12:59 PM] **acemarke**: 마지막으로 다양한 connected() 접근 방법으로 Redux를 최적화하는 훌륭한 프레젠테이션이 있지: http://somebody32.github.io/high-performance-redux/
 
-12:58 PM] **acemarke**: as well as Dan Abramov's recent optimization pass at the MobX vs Redux benchmark: https://twitter.com/dan_abramov/status/720219615041859584 , https://github.com/mweststrate/redux-todomvc/pulls?q=is%3Apr+is%3Aclosed
+[1:00 PM] **acemarke**: 자 이제 다 말했어: 개인적으로는 순수한 탑-다운 방법은 날 짜증나게 해. 하지만, 정신적으로 그게 너에게 더 잘 맞는다면, 그렇게 해
 
-Dan Abramov@dan_abramov
+[1:11 PM] **jrajav**:: 난 이제 상황을 더 잘 이해하고 있는 것처럼 느껴지네. `@acemarke` 다시 한번 자세한 토론에 대해 감사해
 
-Red is unoptimized Redux app. Orange is an optimized one. Green is MobX. Takeaway: in Redux, state shape means a lot https://t.co/qq3NlzbQpv
+[1:12 PM] **acemarke**: 확실히. 텍스트로 벽쌓기는 내 특기지! :)
 
-GitHub
+[1:13 PM] **jrajav**:: 내 생각에 난 아직도 순수한 함수형 스타일로 앱을 작성해보고 싶은 것 같아. 아마도 성능에 대한 우려가 있을 수 있지만 이 애플리케이션은 성능에 그렇게 연관되지는 않아. 하지만 아마도 아주 큰 상태 트리를 갖게되면 트리의 각 레벨에서 하위 속성을 빼낼 수 있도록 효율적으로 조직하는 방법을 알고 싶어. 그리고 실제로 얼만큼 지저분해 질 수 있는지도 말이야
 
-mweststrate/redux-todomvc
+[1:14 PM] **acemarke**: 내가 절대 질문하지 않았다고 추측되네: 네 앱이 어떤 앱이며 어떤 종류의 데이터가 있는지?
 
-redux-todomvc - Redux todoMVC, used to do some benchmarking
+[1:15 PM] **jrajav**:: 상대적으로 간단한 검색-표시 앱이야
 
-[12:59 PM] **acemarke**: and finally, a great presentation on optimizing Redux that demonstrates the various approaches to connect: http://somebody32.github.io/high-performance-redux/
+[1:15 PM] **jrajav**:: 메인 페이지는 고급 기능이 포함된 검색 뷰가 있고, 사이드바에는 필터링, 자동완성, 페이지네이션, 용어 강조 같은 것들이 있지
 
-[1:00 PM] **acemarke**: so.  all that said: I personally would find the pure top-down approach annoying and verbose.  BUT, if it does work better for you mentally, go for it.
+[1:16 PM] **jrajav**:: 검색 결과는 각 항목에 대한 세부 보기로 링크되고, 대부분 수십 개의 정적인 세부 속성들이 여러 탭 및 뷰로 확산되지
 
-[1:11 PM] **jrajav**:: I feel like I understand the situation a lot better now @acemarke, thanks again for the very detailed discussion
+[1:18 PM] **jrajav**:: 따라서 상태 트리는 쿼리를 위한 'search' 객체, 'searchResults' 객체('검색' 아래쪽에 중첩시킬 것을 고려중이야)가 될것이고, 그리고 선택한 아이템에 대한 'details' 객체로 분리될 거야
 
-[1:12 PM] **acemarke**: sure.  Wall O' Texts my specialty! :)
+[1:19 PM] **jrajav**:: 관리 및 성능에 관련한 큰 문제와 맞닥뜨리기에는 앱이 너무 간단하지만 적절한 조직화에 대한 이해와 최소한의 props 전달에 대해 이해하는 것은 충분히 복잡하네
 
-[1:13 PM] **jrajav**:: I think I would still like to try this current application in the purely-functional style, out of curiosity more than anything else. Perhaps there are performance concerns but this application isn't too performance bound. It does, however, have a rather large state tree, so I'm interested to see if that can be effectively organized with subproperty destructuring at each level of the tree, and just how messy it would really get
+[1:22 PM] **acemarke**: 잡았다. ThingEditor 예제와 완전히 다른 건 아니네
 
-[1:14 PM] **acemarke**: I guess I never did ask: what sort of app do you have, and what's the data like?
-
-[1:15 PM] **jrajav**:: A relatively simple search-and-display app
-
-[1:15 PM] **jrajav**:: Main page will be a search view, with advanced features like a facet filtering sidebar, autocomplete, pagination, term highlighting
-
-[1:16 PM] **jrajav**:: Then the search results will link to a large details view for each item, with a few dozen mostly static detail properties, spread into different tabs and views
-
-[1:18 PM] **jrajav**:: So the state tree will mostly be a 'search' object with the query and facets, a 'searchResults' object (which I'm considering nesting in 'search'), then a separate 'details' object with the single selected item once you route to that
-
-[1:19 PM] **jrajav**:: It's probably too simple of an app to really run into big issues with state management or performance, but it is complex enough to get a good sense for the organization and passing down properties at least
-
-[1:22 PM] **acemarke**: gotcha.  so, not entirely dissimilar from my hypothetical ThingEditor example, then :)
-
-[1:22 PM] **acemarke**: and yeah, doesn't sound overly perf-intensive
+[1:22 PM] **acemarke**: 그리고 성능을 강조해야만 하는 것도 아닌 것 처럼 들리고
