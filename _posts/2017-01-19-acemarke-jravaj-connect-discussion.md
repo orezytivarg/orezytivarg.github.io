@@ -85,6 +85,7 @@ category: Redux
 [12:22 AM] **acemarke**: ...반대로?
 
 [12:23 AM] **acemarke**: 만약 네가 mapStateToProps 함수가 state.some.very.nested.field를 파야한다고 걱정되면 "selector"를 이용해서 상태 트리의 특정 필요 부분을 가져오는 식으로 캡슐화하면 돼
+
 [12:24 AM] **jrajav**:: 아냐, 나는 React + redux + immutable.js가 더 걱정돼 그리고 상태 오브젝트 전체를 `<App /> `컴포넌트에 전달하는 패턴이 하나의 상태 필드만 고쳤을 때도 전체 `<App />`을 DOM에 재 렌더링하는 결과를 내는 것이 더 걱정돼
 
 [12:24 AM] **jrajav**:: 혹은 React의 virtual DOM diff를 대부분의 파트에서 실행한다거나 하는 것 말야
@@ -218,7 +219,7 @@ shouldComponentUpdate(nextProps) {
 
 [1:08 AM] **jrajav**:: (그런데 실제 memoizing이 아니라, React-short-circuiting이나 뭔가 있지 않나)
 
-9:30 AM] **jrajav**:: `@acemarke` https://github.com/acdlite/recompose 의 pure() 함수가 react-redux의 connect()같은 일을 한다는것을 알아냈어
+[9:30 AM] **jrajav**:: `@acemarke` https://github.com/acdlite/recompose 의 pure() 함수가 react-redux의 connect()같은 일을 한다는것을 알아냈어
 
 [9:30 AM] **jrajav**:: 그럼 stateless 컴포넌트에 대해서 connect()를 선호하는 이유가 더 있을까?
 
@@ -264,7 +265,7 @@ Dan은 connect()의 소스코드 대부분을 휼륭한 비디오 코스를 통�
 
 [1:28 AM] **jrajav**:: 그리고 react/redux에서는 함수형 패러다임을 사용하는 것처럼 보이는데도 그런 컨테이너/ 컴포넌트를 사용하는 방법이 "모범 사례"라는 것이 나에게 매우 혼란스러워.
 
-11:37 AM] **acemarke**: `@jrajav` : 내가 봤을때는, "container" 패턴이 몇 가지 장점을 갖고 있어. 우선, 개념적 유형에 따른 분리를 허용하지. 그런 방식으로 바라본다면 말야 - 컴포넌트가 레이아웃과 조직화에 중점을 두는 것들과 컴포넌트가 데이터를 가져오는 데 책임을 갖는 것들 (Redux store루부터든지 서버로부터든지 등등).
+[11:37 AM] **acemarke**: `@jrajav` : 내가 봤을때는, "container" 패턴이 몇 가지 장점을 갖고 있어. 우선, 개념적 유형에 따른 분리를 허용하지. 그런 방식으로 바라본다면 말야 - 컴포넌트가 레이아웃과 조직화에 중점을 두는 것들과 컴포넌트가 데이터를 가져오는 데 책임을 갖는 것들 (Redux store루부터든지 서버로부터든지 등등).
 
 [11:41 AM] **acemarke**: 둘째, 성능 향상을 얻을 수 있어. 전체를 탑-다운 하는 방법에선 몇몇 컴포넌트는 항상 강제로 재렌더링될 수밖에 없어. 대부분의 layout 중점의 presentional 컴포넌트는 아마도 전혀 재 렌더링되지 않겠지, 그리고 connect()를 사용하는 것은 효율적으로 트리 형태의 새로운 업데이트를 시작할 수 있을 거야. 특히 컨테이너 컴포넌트가 부모로부터 직접 전달받는 props가 없다면 말이야. 그래, 스토어가 업데이트되면 업데이트는 mapStateToProps가 신경쓰는 어떤 값 이외의 변경에 대해서는 변경되지 않을거야 그럼 컴포넌트는 재 랜더링을 건너뛰게 되고 그 하위 서브트리도 마찬가지지. 간단히 승리한 거야.
 
