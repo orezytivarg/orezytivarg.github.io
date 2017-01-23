@@ -31,41 +31,40 @@ MobX와 같은 객체 지향 솔루션은 보일러플레이트를 줄이지만,
 
 <script src="https://gist.github.com/arackaf/289d7ba664a6e5f54e01ab4d29cb5884.js"></script>
 
-When the subjects come back, they’re flattened into a hash. Then, methods for shaping this hash back into a useful collection are exported, and used as needed by different parts of the application.
+서브젝트가 되돌아왔을 떄, 그들은 해쉬에 평평하게 들어간다. 그러고나서, 이 해쉬를 다시 유용한 콜렉션으로 모양을 바꿔주는 메서드들이 익스포트되고, 애플리케이션 내 다른 부분들에 의해 필요에 따라 사용된다.
 
-For example, the part of the application that lists books, allowing you to search for and select a subject to filter by, or add to a book looks in part like this
+예를 들어 도서 목록을 표시하는 애플리케이션에서 대상을 필터에 의해 검색하고 선택하거나, 도서 목록에 도서를 추가하는 부분은 다음과 같다.
 
 <script src="https://gist.github.com/arackaf/f10cb1e850c241d93428f84d660d4813.js"></script>
 
-That same subjectHash is plucked from a different part of the application state, and then shaped with the exported `stackAndGetTopLevelSubjects` method, the results of which combined with the rest of that reducer’s state.
+동일한 subjectHash가 애플리케이션 상태에서 다른 부분에 의해 추출되고, 그 다음에는 `stackAndGetTopLevelSubjects` 메서드로 모양을 바꾼다. 그리고 그 결과를 리듀서의 나머지 상태 부분과 결합한다.
 
+## 코드 확장하기
 
-## Extending this code
-
-More interestingly, there’s another part of the application dedicated to editing subjects. All hierarchical subjects are listed out, and the user can drag and drop them onto new parents. But, as a subject is hovering over a valid new parent, that parent will show the pending subject in its children, so the user can get a visual sanity check before completing the drop. (styles are a work in progress, as always)
+더 흥미로운 부분은, 서브젝트의 상세 정보를 수정하는 애플리케이션의 또다른 파트다. 서브젝트들이 모두 계층적으로 목록에 표시되고, 사용자는 그들을 새로운 부모에게 드래그앤 드랍한다. 하지만, 서브젝트는 새로운 유효한 부모들에게 호버링 중일 때, 부모는 서브젝트가 하위 자식들로 들어오는 것이 보류 중임을 보여주고, 사용자는 드랍을 완료하기 전에 시각적인 유효성 검사를 볼 수 있게 된다. (스타일링은 언제나처럼 진행 중인 작업이다)
 
 ![](https://cdn-images-1.medium.com/max/800/1*1arwYSRMEDRTPm6K0wbvvQ.png)
 
-The reducer in question accepts actions indicating the drop is pending, and from there it’s fairly simple to tweak the subjects hash to create the new, temporary subject, and have it show up under its pending new parent.
+문제의 리듀서는 드랍이 보류 중임을 나타내는 액션을 받아들이고, 새로운 서브젝트 해쉬를 받아들이기 위해 새로운 임시적인 서브젝트를 새로운 부모 아래쪽에 보여주도록 살짝 조정한다.
 
 <script src="https://gist.github.com/arackaf/606aa0cab08b68d942686cd93b6818d8.js"></script>
 
-Basically the 5 lines under if(currentDropCandidateId){which creates a shallow copy of that same subjects hash, creates and adds a copy of the dragging subject, with the path to make it a child of the drop target, and that’s it.
+기본적으로 5줄 미만의 `if(currentDropCandidateId){`가 서브젝트 해쉬의 shallow copy를 생성하고, 드래깅 중인 서브젝트의 복사본을 드랍 타겟의 자식의 경로를 갖도록 생성하고 추가한다. 그게 전부다.
 
-And if there is no currentDropCandidateId, then the imported subjectsSelectoris called. Yes, this selector does just call the same stackAndGetTopLevelSubjectsinternally, and so I could just call that same method below the if and ditch the else to save 3 lines, but subjectsSelectoris separately memoized, so these calls never cause any re-computation.
+그리고 `currentDropCandidateId`가 없으면 임포트된 `subjectsSelectoris`를 호출한다. 맞다, 이 셀렉터는 그저 stackAndGetTopLevelSubjectsinternally를 호출할 뿐이고, 그래서 같은 메서드를 호출하는 것으로 if 아래에 else 3행을 절약하게 해준다. 하지만 subjectsSelectoris는 개별적으로 메모이즈드되고, 어떤 재계산도 일으키지 않는다.
 
-Along those lines, it is obnoxious that every time there’s a drag, each subject has its children re-computed in stackAndGetTopLevelSubjects, even if they’ve obviously not changed, but this, too, can easily be improved with simple caching and an ES6 Map. It’s doubtful any of these perf optimizations make any difference in real life here; I only do them because I’m irrational and the inefficiencies annoy me, and because it’s good experience working with these tools.
+따라가다보면, 드래그가 있을 때마다 드랍 타겟이 명백히 변경되지 않았더라도 각 서브젝트가 stackAndGetTopLevelSubjects에서 재계산되지만, 이는 ES6 Map과 간단한 캐싱에 의해 아주 쉽게 향상시킬 수 있다. 사실 나는 이런 성능 최적화들이 실제에 어떤 영향을 미칠 수 있을 지는 의심스럽다; 그러나 비합리성과 비효율성이 나를 괴롭히고 있기 떄문에, 그리고 이러한 도구를 가지고 작업하는 것이 좋은 경험이 될 것이기 때문에, 그렇게 한다.
 
-## The benefits of normalization
+## 정규화의 이점
 
-Could this have been done with MobX? Of course. And it wouldn’t really be that hard. Presumably there’d be a main, subjects observable array — from there I figure there’d be a computed that would read both the main subjects array, and the current drop id. If no dropId, the main subjects array would be returned, simply enough. And, if the dropId were set, then the target subject would have to be cloned and replaced, with a copy of the dragged subject added to the target’s children array — all without violating any MobX invariants: observables can never be modified in a computed property definition. And, of course the target subject would have to be found, no matter how deep in the hierarchy it is, so either some sort of search to find it, or a computed lookup map defined off of the main subjects array. It’s doable, but I honestly think the Redux solution would be the more straightforward.
+MobX로도 이렇게 할 수 있었냐고? 물론이다. 그리고 그렇게 어렵지도 않을 것이다. 아마도 주요 서브젝트들이 옵저버블 어레이—주요 서브젝트들과 현재 drop id를 읽는 계산이 거기서 이루어질 것이다. 만약 dropId가 없으면 주요 서브젝트 어레이가 리턴될 것이다. dropId가 있는 경우에는 대상 서브젝트가 복제되고 대체되야 할 것이다. 즉, 드래그된 서브젝트의 복사본이 대상의 하위 자식으로 추가될 것이다—MobX의 invariants를 위반하는 일 없이: observables는 계산된 속성 정의 안에서는 절대 수정될 수 없다. 그리고, 물론 대상 서브젝트는 얼마나 깊은 계층 구조를 가졌냐에 상관없이 발견되야 할 것이다. 그러므로, 그것을 탐색하기위한 종류의 computed lookup map이 주요 서브젝트 어레이에 정의되어야 한다. 아마도 가능하겠지만, Redux의 솔루션이 더 직관적이라고 생각한다.
 
-Or maybe there’s a simpler way I’m not seeing. Even if so, that still demonstrates my point: Redux forces you into a paradigm that’s fundamentally flexible and simple.
+아니면 내가 모르는 더 간단한 방법이 있을 수도 있다. 그렇더라도, 이 데모가 보여주듯이, Redux는 근본적으로 유연하고 단순한 패러다임으로 당신을 강제한다.
 
-## Conclusion
+## 결론
 
-There’s no silver bullet. Both approaches have pros and cons that should be understood. The Redux approach of storing normalized data, shaped as needed offers a unique flexibility, at the cost of lots of boilerplate, plus code that may be unintuitive to the uninitiated.
+은탄환은 없다. 두 접근법 모두 장단점이 있고 그것을 이해해야 한다. Redux의 normalized data를 저장하는 접근법은 고유한 유연성을 제공하지만, 많은 양의 보일러 플레이트가 필요하고, 비경험자에게는 코드가 직관적이지 않다.
 
-If that flexibility is not in high demand for your project, you may very well be better off with MobX. Also, the MobX ability to easily create cascading reactions lends itself well to some use cases, “spreadsheets” being a common example.
+유연성에 대한 수요가 크지 않은 경우에는 MobX를 사용하는 것이 좋다. 계단식 반응을 이끄는 MobX의 능력은, "스프레드시트"와 같은 사례에 일반적으로 적합하다.
 
-I suppose my main motivation for writing this is to try to combat the increasing criticisms I see Redux getting. Yes, it requires more code, but it also offers unique benefits.
+이 글을 쓰는 주된 동기는 Redux에 대한 비판에 대해 싸우려는 것이다. 맞다. 더 많은 코드가 필요하지만, 고유의 이점도 제공한다.
