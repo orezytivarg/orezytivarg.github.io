@@ -36,7 +36,7 @@ React를 쓰든지 안쓰든지 간에 이러한 제한점이 Redux 애플리케
 
 그러나 React를 배우는 중이라면, Redux를 첫 선택으로 만들지 말아달라.
 
-대신 [think in React](https://facebook.github.io/react/docs/thinking-in-react.html)를 배우라. 정말로 Redux가 필요할 때, 혹은 뭔가 새로운 것이 필요할 때만 Redux로 돌아오라. 하지만 고집불통 툴을 사용하는 것처럼 조심해서 접근하라.
+대신 [Thinking in React](https://facebook.github.io/react/docs/thinking-in-react.html)를 배우라. 정말로 Redux가 필요할 때, 혹은 뭔가 새로운 것이 필요할 때만 Redux로 돌아오라. 하지만 고집불통 툴을 사용하는 것처럼 조심해서 접근하라.
 
 만약 "Redux 방식"으로 하는 것에 압박을 느낀다면, 당신이나 당신의 팀 동료들이 이를 심각하게 받아들이는 신호일 수 있다. Redux는 도구 중 하나일 뿐이며, [거친](https://www.youtube.com/watch?v=uvAXVMwHJXU) [실험](https://www.youtube.com/watch?v=xsSnOQynTHs)이다.
 
