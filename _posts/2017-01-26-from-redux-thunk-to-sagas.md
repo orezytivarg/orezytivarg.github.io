@@ -13,10 +13,10 @@ redux에 의해 제공되는 제약에 묶여있지 않다면, 우리는 Promise
 
 redux를 사용하여 서버에 비동기 요청을 수행하기 위한 여러가지 액션들을 정의한다:
 
- 1. MAKE_ASYNC_REQUEST
- 2. MAKE_ASYNC_REQUEST_PROGRESS
- 3. MAKE_ASYNC_REQUEST_SUCCESS
- 4. MAKE_ASYNC_REQUEST_FAILURE
+1. MAKE_ASYNC_REQUEST
+2. MAKE_ASYNC_REQUEST_PROGRESS
+3. MAKE_ASYNC_REQUEST_SUCCESS
+4. MAKE_ASYNC_REQUEST_FAILURE
 
 비동기 작업을 시작해야할 필요가 있을 때, 즉 사용자 액션이나 애플리케이션 시작 시점에서, 첫 번째 액션이 디스패치된다. 두 번째 액션은 선택사항이며, 요청의 진행 상황(로딩 바를 말함)을 나타내기 위해 디스패치된다. 이런 요구사항이 없을 경우, 로딩 인디케이터를 화면에 나타내는 플래그를 애플리케이션 상태에 두는 것이 최고다.
 
@@ -87,12 +87,12 @@ asyncRequestSaga 내에서, 액션으로부터 몇몇 데이터를 받은 다음
 
 이 접근법을 좋아한다면, 아래의 몇몇 라이브러리들을 확인해야만 할 것이다. 경고하건대, 이 목록은 내 자바스크립트 윈도우 쇼퍼로서의 경험에 근거한 것이다.
 
-[tj/co](https://github.com/tj/co)
-[async-csp](https://github.com/dvlsg/async-csp)
+ - [tj/co](https://github.com/tj/co)
+ - [async-csp](https://github.com/dvlsg/async-csp)
 
 만약 다른 언어들에도 관심이 있다면, 다음을 확인해봐도 된다:
 
-[Goroutines](https://gobyexample.com/goroutines)
-[core.async](http://www.core-async.info/tutorial)
+ - [Goroutines](https://gobyexample.com/goroutines)
+ - [core.async](http://www.core-async.info/tutorial)
 
 이것들은 조금 부담 될 수도 있고 큰 영향을 주지 못할 수도 있지만 어쨌든 한번 확인해보라.
