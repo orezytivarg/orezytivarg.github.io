@@ -21,17 +21,21 @@ Styled-Components는 스타일 값으로 함수를 전달할 수 있기 때문�
 
 결과적으로 코드량이 줄어든다. 처음에 CSS를 Styled-Components로 전환했을 때, 아주 드라마틱한 향상을 볼 수 있었다.
 
-![원본 CSS](https://cdn-images-1.medium.com/max/800/1*NCEuP2Xo2j5VwlK8JRYoUQ.png)
+![](https://cdn-images-1.medium.com/max/800/1*NCEuP2Xo2j5VwlK8JRYoUQ.png)
+*원본 CSS*
 
-![Styled-Components로 변환](https://cdn-images-1.medium.com/max/800/1*G2GsxjVgtRnYwK31OGUSQA.png)
+![](https://cdn-images-1.medium.com/max/800/1*G2GsxjVgtRnYwK31OGUSQA.png)
+*Styled-Components로 변환*
 
 ## 명확해진 JSX
 
 당신이 나처럼 JSX를 `<div>`와 `<span>`으로 흐트려뜨리는 사람이라면, 아마도 Styled-Components가 기본적으로 더 의미에 맞는 컴포넌트 계층 구조를 구성하게 한다는 사실을 알 수 있을 것이다.
 
-![클래스 훅을 통해 스타일링한 원본 JSX](https://cdn-images-1.medium.com/max/800/1*Y1FPLYaimV5SACmtWlfylw.png)
+![](https://cdn-images-1.medium.com/max/800/1*Y1FPLYaimV5SACmtWlfylw.png)
+*클래스를 통해 스타일링한 원본 JSX*
 
-![className이 사용되지 않은 Styled-Components로 변환된 JSX! 태그의 의미를 보라](https://cdn-images-1.medium.com/max/800/1*qecnFfwQ3a3PGk85L4_CDA.png)
+![](https://cdn-images-1.medium.com/max/800/1*qecnFfwQ3a3PGk85L4_CDA.png)
+*className이 사용되지 않은 Styled-Components로 변환된 JSX! 태그의 의미를 보라*
 
 난 이미 당신의 JSX가 두 번째 예제처럼 보일 것이라는 것을 확신한다 :P. 그게 아니라면, Styled-Components는 성공으로 가는 기본 통로로 당신을 이끌어 당신에게 큰 도움을 줄 수 있을것이다.
 
@@ -41,7 +45,8 @@ Styled-Components는 스타일 값으로 함수를 전달할 수 있기 때문�
 
 왜냐면 Styled-Components에게 DOM 엘레멘트 뿐만 아니라 컴포넌트도 전달할 수 있기 때문이다.
 
-![Message를 가지고 합성된 두 새로운 컴포넌트, Success와 Danger](https://cdn-images-1.medium.com/max/800/1*qi1X679F99NqLW02he-Xig.png)
+![](https://cdn-images-1.medium.com/max/800/1*qi1X679F99NqLW02he-Xig.png)
+*Message를 가지고 합성된 두 새로운 컴포넌트, Success와 Danger*
 
 ## Prop 필터링
 
@@ -51,9 +56,11 @@ React 15.2.0부터 DOM 엘레멘트가 알지 못하는 prop을 전달하면 경
 
 우리는 앞서 언급한 알지못하는 prop 경고를 피하기 위해 유효한 DOM 속성이 아닌 prop을 필터링하기 시작했다. 흥미롭게도 Styled-Components는 이미 내부적으로 이 작업을 수행하고 있는 잘 관리되는 라이브러리라서 이러한 필터링에 대한 항목을 업데이트할 필요가 없었다.
 
-![`<span>`과 같은 DOM 엘레멘트에 유효한 DOM 속성을 필터링하는 함수를 가지고 있었다](https://cdn-images-1.medium.com/max/800/1*mRMB1rv5yNVL-9TTKiBJWg.png)
+![](https://cdn-images-1.medium.com/max/800/1*mRMB1rv5yNVL-9TTKiBJWg.png)
+*`<span>`과 같은 DOM 엘레멘트에 유효한 DOM 속성을 필터링하는 함수를 가지고 있었다*
 
-![이런 필터링으로부터 자유로워졌다! 심지어 아무런 스타일도 필요하지 않은 경우에도!](https://cdn-images-1.medium.com/max/800/1*RbwbxXorxdm3utC3LRpTxA.png)
+![](https://cdn-images-1.medium.com/max/800/1*RbwbxXorxdm3utC3LRpTxA.png)
+*이런 필터링으로부터 자유로워졌다! 심지어 아무런 스타일도 필요하지 않은 경우에도!*
 
 이들은 우리가 경험한 패턴이나 이점의 일부에 지나지 않는다. 우리가 계속 사용한다면 시간이 갈 수록 더 많은 것들이 나타나리라 확신한다.
 
