@@ -126,10 +126,10 @@ Styled-Components는 매우 어린 프로젝트고, 일부 기능은 아직 완�
 
 만약 내가 호기심을 자극했다면, Styled-Components에 대해 더 알아볼 만한 장소가 몇 군데 있다:
 
-    Max Stoiber는 최근 Styled-Components에 대한 이유를 [Smashing Magazine](https://www.smashingmagazine.com/2017/01/styled-components-enforcing-best-practices-component-based-systems/)에 작성했다.
-    [Styled-Components 저장소](https://github.com/styled-components/styled-components)에서 자체적으로 광범위한 문서를 제공하고 있다.
-    [Jamie Dixon의 글](https://medium.com/@jamiedixon/styled-components-production-patterns-c22e24b1d896#.tfxr5bws2)에서 Styled-Components로 전환하는 것의 이점들에 대해 밝히고 있다
-    실제로 어떻게 이 라이브러리가 구현된건지 알고 싶다면, Max의 [이 글](http://mxstbr.blog/2016/11/styled-components-magic-explained/)을 읽어보라.
+ - Max Stoiber는 최근 Styled-Components에 대한 이유를 [Smashing Magazine](https://www.smashingmagazine.com/2017/01/styled-components-enforcing-best-practices-component-based-systems/)에 작성했다.
+ - [Styled-Components 저장소](https://github.com/styled-components/styled-components)에서 자체적으로 광범위한 문서를 제공하고 있다.
+ - [Jamie Dixon의 글](https://medium.com/@jamiedixon/styled-components-production-patterns-c22e24b1d896#.tfxr5bws2)에서 Styled-Components로 전환하는 것의 이점들에 대해 밝히고 있다
+ - 실제로 어떻게 이 라이브러리가 구현된건지 알고 싶다면, Max의 [이 글](http://mxstbr.blog/2016/11/styled-components-magic-explained/)을 읽어보라.
 
 그리고 더 나아가고 싶다면, Glamor에서 CSS의 새 물결에 대한 다른 이야기들을 확인할 수 있다!
 
