@@ -25,13 +25,13 @@ Styled-Components는 스타일 값으로 함수를 전달할 수 있기 때문�
 
 ![Styled-Components로 변환](https://cdn-images-1.medium.com/max/800/1*G2GsxjVgtRnYwK31OGUSQA.png)
 
-## Clearer JSX
+## 명확해진 JSX
 
 당신이 나처럼 JSX를 `<div>`와 `<span>`으로 흐트려뜨리는 사람이라면, 아마도 Styled-Components가 기본적으로 더 의미에 맞는 컴포넌트 계층 구조를 구성하게 한다는 사실을 알 수 있을 것이다.
 
 ![클래스 훅을 통해 스타일링한 원본 JSX](https://cdn-images-1.medium.com/max/800/1*Y1FPLYaimV5SACmtWlfylw.png)
 
-![className이 사용되지 않은 Styled-Components로 변환된 JSX! 태그의 의미를 보라]
+![className이 사용되지 않은 Styled-Components로 변환된 JSX! 태그의 의미를 보라](https://cdn-images-1.medium.com/max/800/1*qecnFfwQ3a3PGk85L4_CDA.png)
 
 난 이미 당신의 JSX가 두 번째 예제처럼 보일 것이라는 것을 확신한다 :P. 그게 아니라면, Styled-Components는 성공으로 가는 기본 통로로 당신을 이끌어 당신에게 큰 도움을 줄 수 있을것이다.
 
