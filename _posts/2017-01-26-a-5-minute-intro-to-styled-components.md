@@ -1,6 +1,6 @@
 ---
 id: a-5-minute-intro-to-styled-component
-title: Styled Components 5분 소개
+title: Styled-Components 5분 소개
 category: css
 ---
 [원문보기](https://medium.freecodecamp.com/a-5-minute-intro-to-styled-components-41f40eb7cd55#.y3q8dwmf5)
@@ -19,13 +19,13 @@ BEM과 같은 방법론에 맡겨진 조직화 업무는 - 유용하지만 - 완
 ## CSS의 새 물결
 몇년 전부터 자바스크립트 기반의 툴을 사용하려는 새로운 물결이 CSS를 쓰는 방법을 바꿔버리는 식으로 이러한 문제를 발본색원하려고 노력하고 있다.
 
-[Styled Components](https://github.com/styled-components/styled-components)는 이러한 라이브러리 중 하나다. 그리고 혁신과 친숙함의 조합을 무기로 많은 이들의 관심과 주목을 받았다. 만약 React를 사용한다면(만약 아니라면 [내 자바스크립트 스터디 계획](https://medium.freecodecamp.com/a-study-plan-to-cure-javascript-fatigue-8ad3a54f2eb1)과 [React 소개글](https://medium.freecodecamp.com/the-5-things-you-need-to-know-to-understand-react-a1dbd5d114a3)을 확인하라), 이 새로운 CSS의 대체제를 살펴보는 것이 좋을 것이다.
+[Styled-Components](https://github.com/styled-components/styled-components)는 이러한 라이브러리 중 하나다. 그리고 혁신과 친숙함의 조합을 무기로 많은 이들의 관심과 주목을 받았다. 만약 React를 사용한다면(만약 아니라면 [내 자바스크립트 스터디 계획](https://medium.freecodecamp.com/a-study-plan-to-cure-javascript-fatigue-8ad3a54f2eb1)과 [React 소개글](https://medium.freecodecamp.com/the-5-things-you-need-to-know-to-understand-react-a1dbd5d114a3)을 확인하라), 이 새로운 CSS의 대체제를 살펴보는 것이 좋을 것이다.
 
 나는 최근 [개인 사이트를 다시 디자인](http://sachagreif.com/)하기 위해서 이것을 사용해보았고, 그 과정에서 배운 몇 가지를 공유하기를 바랐다.
 
 ## 컴포넌트, 스타일링된
 
-Styled Components에 대해 이해해야만 할 주요 사항은 그 이름을 문자 그대로 대해야 한다는 것이다. 당신은 더이상 HTML 엘레멘트를 스타일링하거나, HTML 엘레멘트나 클래스를 기반으로하는 컴포넌트를 스타일링하지 않는다:
+Styled-Components에 대해 이해해야만 할 주요 사항은 그 이름을 문자 그대로 대해야 한다는 것이다. 당신은 더이상 HTML 엘레멘트를 스타일링하거나, HTML 엘레멘트나 클래스를 기반으로하는 컴포넌트를 스타일링하지 않는다:
 
 ```CSS
 <h1 className="title">Hello World</h1>
@@ -53,9 +53,9 @@ const Title = styled.h1`
 
 다른 말로 하자면, 컴포넌트와 스타일 사이의 중간단계인 CSS 클래스를 제거하는 것이다.
 
-Styled Components의 공동 제작자인 Max Stoiber가 말하기를:
+Styled-Components의 공동 제작자인 Max Stoiber가 말하기를:
 
-"Styled Components의 기본 아이디어는 스타일과 컴포넌트간의 매핑을 제거함으로써 베스트 프랙티스를 강요하는 것이다"
+"Styled-Components의 기본 아이디어는 스타일과 컴포넌트간의 매핑을 제거함으로써 베스트 프랙티스를 강요하는 것이다"
 
 ## 복잡성 제거하기
 
@@ -65,7 +65,7 @@ Styled Components의 공동 제작자인 Max Stoiber가 말하기를:
 
 ## 클래스 대신 props
 
-노-클래스의 철학을 유지하기위해, Styled Components는 컴포넌트의 행동을 커스터마이징할 때 클래스 대신 props를 사용하게 한다. 따라서 다음과 같이 하는 대신에:
+노-클래스의 철학을 유지하기위해, Styled-Components는 컴포넌트의 행동을 커스터마이징할 때 클래스 대신 props를 사용하게 한다. 따라서 다음과 같이 하는 대신에:
 
 ```CSS
 <h1 className="title primary">Hello World</h1> // will be blue
@@ -91,7 +91,7 @@ const Title = styled.h1`
 <Title primary>Hello World</Title> // will be blue
 ```
 
-보다시피 Styled Components를 사용하면 모든 CSS와 HTML을(그와 관련된 바깥쪽의 모든 구현 세부사항) 소유함으로써 당신의 React 컴포넌트를 말끔하게 정리해준다.
+보다시피 Styled-Components를 사용하면 모든 CSS와 HTML을(그와 관련된 바깥쪽의 모든 구현 세부사항) 소유함으로써 당신의 React 컴포넌트를 말끔하게 정리해준다.
 
 즉, Styled-Components의 CSS는 여전히 CSS다. 따라서 다음과 같은 (비록 약간 비관용적이지만) 코드도 완전히 유효하다:
 
