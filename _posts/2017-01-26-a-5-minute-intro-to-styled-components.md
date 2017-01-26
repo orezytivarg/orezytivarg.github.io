@@ -27,7 +27,7 @@ BEM과 같은 방법론에 맡겨진 조직화 업무는 - 유용하지만 - 완
 
 Styled-Components에 대해 이해해야만 할 주요 사항은 그 이름을 문자 그대로 대해야 한다는 것이다. 당신은 더이상 HTML 엘레멘트를 스타일링하거나, HTML 엘레멘트나 클래스를 기반으로하는 컴포넌트를 스타일링하지 않는다:
 
-```CSS
+```
 <h1 className="title">Hello World</h1>
 
 h1.title{
@@ -67,7 +67,7 @@ Styled-Components의 공동 제작자인 Max Stoiber가 말하기를:
 
 노-클래스의 철학을 유지하기위해, Styled-Components는 컴포넌트의 행동을 커스터마이징할 때 클래스 대신 props를 사용하게 한다. 따라서 다음과 같이 하는 대신에:
 
-```CSS
+```
 <h1 className="title primary">Hello World</h1> // will be blue
 
 h1.title{
