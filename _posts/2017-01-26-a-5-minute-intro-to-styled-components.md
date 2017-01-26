@@ -131,6 +131,6 @@ Styled-Components는 매우 어린 프로젝트고, 일부 기능은 아직 완�
  - [Jamie Dixon의 글](https://medium.com/@jamiedixon/styled-components-production-patterns-c22e24b1d896#.tfxr5bws2)에서 Styled-Components로 전환하는 것의 이점들에 대해 밝히고 있다
  - 실제로 어떻게 이 라이브러리가 구현된건지 알고 싶다면, Max의 [이 글](http://mxstbr.blog/2016/11/styled-components-magic-explained/)을 읽어보라.
 
-그리고 더 나아가고 싶다면, Glamor에서 CSS의 새 물결에 대한 다른 이야기들을 확인할 수 있다!
+그리고 더 나아가고 싶다면, [Glamor](https://github.com/threepointone/glamor)라는 또다른 CSS의 새 물결이 있다!
 
 셀프-프로모션 타임: 폼, 데이터 로드, 사용자 계정을 갖춘 풀스택 React & GraphQL 앱을 만드는 가장 쉬운 방법인 Nova를 돕기 위해 오픈 소스 컨트리뷰터를 찾고 있습니다! 우리는 아직 Styled-Components를 사용하고 있지는 않지만 당신이 이를 구현하는 첫 번째 사람이 될 수도 있습니다!
