@@ -1,7 +1,8 @@
 ---
+layout: post
 id: avoiding-accidental-complexity-when-structuring-your-app-state
 title: Redux 앱 상태를 구조화할 때 우발적인 복잡성 피하기
-category: Redux
+tags: [React, Redux]
 ---
 [원문보기](https://hackernoon.com/avoiding-accidental-complexity-when-structuring-your-app-state-6e6d22ad5e2a#.2ujfp0566)
 

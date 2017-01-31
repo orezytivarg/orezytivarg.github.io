@@ -1,7 +1,7 @@
 ---
 id: encapsulating-the-redux-state-tree
 title: Redux 상태 트리 캡슐화하기
-category: Redux
+tags: [React, Redux]
 ---
 [원문보기](http://randycoulman.com/blog/2016/09/13/encapsulating-the-redux-state-tree/)
 

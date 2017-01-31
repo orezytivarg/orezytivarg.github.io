@@ -1,7 +1,8 @@
 ---
+layout: post
 id: styled-components-production-patterns
 title: Styled Components 제품 패턴
-category: CSS
+tags: [CSS, React]
 ---
 [원문보기](https://medium.com/@jamiedixon/styled-components-production-patterns-c22e24b1d896#.972759r99)
 

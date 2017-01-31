@@ -1,7 +1,8 @@
 ---
+layout: post
 id: acemarke-jravaj-connect-discussion
 title: connected 컴포넌트에 대한 토론
-category: Redux
+tags: [React, Redux]
 ---
 [원문보기](https://gist.github.com/markerikson/6056565dd65d1232784bf42b65f8b2ad)
 

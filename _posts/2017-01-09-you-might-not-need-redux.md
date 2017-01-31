@@ -1,7 +1,7 @@
 ---
 id: you-might-not-need-redux
 title: 어쩌면 당신에게 Redux가 필요하지 않을 수도 있다
-category: Redux
+tags: [React, Redux]
 ---
 [원문보기](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367#.4ucx5na41)
 

@@ -1,7 +1,8 @@
 ---
+layout: post
 id: react-redux-performance-tuning-tips
 title: React Redux 성능 튜닝 팁
-category: Redux
+tags: [React, Redux]
 ---
 
 [원문보기](https://medium.com/@arikmaor/react-redux-performance-tuning-tips-cef1a6c50759#.64yt91nsu)

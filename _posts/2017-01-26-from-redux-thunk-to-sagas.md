@@ -1,7 +1,8 @@
 ---
+layout: post
 id: from-redux-thunk-to-sagas
 title: redux-thunk에서 redux-saga로
-category: Redux
+tags: [React, Redux]
 ---
 [원문보기](https://medium.com/@deeepakampolu/from-redux-thunk-to-sagas-2896c0abc676#.ptlov4222)
 

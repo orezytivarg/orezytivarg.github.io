@@ -1,7 +1,8 @@
 ---
+layout: post
 id: a-5-minute-intro-to-styled-component
 title: Styled Components 5분 소개
-category: CSS
+tags: [CSS, React]
 ---
 [원문보기](https://medium.freecodecamp.com/a-5-minute-intro-to-styled-components-41f40eb7cd55#.y3q8dwmf5)
 

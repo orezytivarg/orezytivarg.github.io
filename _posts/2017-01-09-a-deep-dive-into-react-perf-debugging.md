@@ -1,7 +1,8 @@
 ---
+layout: post
 id: a-deep-dive-into-react-perf-debugging
 title: React 성능 디버깅 심층 연구
-category: React
+tags: [React]
 ---
 
 [원문보기](http://benchling.engineering/deep-dive-react-perf-debugging/)

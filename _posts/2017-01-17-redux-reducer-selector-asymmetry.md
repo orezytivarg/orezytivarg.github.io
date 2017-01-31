@@ -1,7 +1,8 @@
 ---
+layout: post
 id: redux-reducer-selector-asymmetry
 title: Redux 리듀서와 셀렉터간의 비대칭성
-category: Redux
+tags: [React, Redux]
 ---
 [원문보기](http://randycoulman.com/blog/2016/09/20/redux-reducer-selector-asymmetry/)
 

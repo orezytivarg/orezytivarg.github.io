@@ -1,7 +1,8 @@
 ---
+layout: post
 id: how-to-scale-react-applications
 title: React 애플리케이션을 확장하는 방법
-category: Redux
+tags: [React, Redux]
 ---
 [원문보기](https://www.smashingmagazine.com/2016/09/how-to-scale-react-applications/)
 

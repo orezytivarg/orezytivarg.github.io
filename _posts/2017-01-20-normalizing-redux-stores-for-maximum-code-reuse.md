@@ -1,7 +1,8 @@
 ---
+layout: post
 id: normalizing-redux-stores-for-maximum-code-reuse
 title: 코드 재사용을 최대화하는 Redux 스토어 정규화
-category: Redux
+tags: [React, Redux]
 ---
 [원문보기](https://medium.com/@adamrackis/normalizing-redux-stores-for-maximum-code-reuse-ae6e3844ae95#.beyrhslyz)
 

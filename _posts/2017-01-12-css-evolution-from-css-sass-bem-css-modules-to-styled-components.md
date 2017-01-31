@@ -1,7 +1,8 @@
 ---
+layout: post
 id: css-evolution-from-css-sass-bem-css-modules-to-styled-components
 title: CSS의 진화 - CSS, SASS, BEM, CSS Modules로부터 Styled Components로
-category: CSS
+tags: [CSS, React]
 ---
 ![](https://cdn-images-1.medium.com/max/1000/1*yBxZo9LNEjRaL7eKUBqRSA.png)
 

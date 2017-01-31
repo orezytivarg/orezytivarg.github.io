@@ -1,7 +1,8 @@
 ---
+layout: post
 id: optimizing-performance
 title: React 성능 최적화하기
-category: React
+tags: [React]
 ---
 
 [원문보기](https://facebook.github.io/react/docs/optimizing-performance.html)

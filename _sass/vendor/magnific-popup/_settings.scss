@@ -19,7 +19,7 @@ $mfp-controls-opacity:                1;                          // Opacity of 
 $mfp-controls-color:                  #fff;                     // Color of controls
 $mfp-controls-border-color:           #fff;                     // Border color of controls
 $mfp-inner-close-icon-color:          #fff;                     // Color of close button when inside
-$mfp-controls-text-color:             #ccc;                       // Color of preloader and "1 of X" indicator
+$mfp-controls-text-color:             #CCC;                       // Color of preloader and "1 of X" indicator
 $mfp-controls-text-color-hover:       #fff;                     // Hover color of preloader and "1 of X" indicator
 $mfp-IE7support:                      true;                       // Very basic IE7 support
 
@@ -38,9 +38,9 @@ $mfp-image-padding-bottom:            40px;                       // Image paddi
 $mfp-include-mobile-layout-for-image: true;                       // Removes paddings from top and bottom
 
 // Image caption options
-$mfp-caption-title-color:             #f3f3f3;                    // Caption title color
-$mfp-caption-subtitle-color:          #bdbdbd;                    // Caption subtitle color
-.mfp-counter { font-family: $serif; }                          // Caption font family
+$mfp-caption-title-color:             #F3F3F3;                    // Caption title color
+$mfp-caption-subtitle-color:          #BDBDBD;                    // Caption subtitle color
+.mfp-counter { font-family: $alt-font; }                          // Caption font family
 
 // A11y
-$mfp-use-visuallyhidden:              false;
+$mfp-use-visuallyhidden:              false; 

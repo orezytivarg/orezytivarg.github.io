@@ -1,7 +1,8 @@
 ---
+layout: post
 id: performance-engineering-with-react
 title: React 성능 엔지니어링
-category: React
+tags: [React]
 ---
 
 [원문보기](http://benchling.engineering/performance-engineering-with-react/)

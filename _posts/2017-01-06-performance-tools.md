@@ -1,7 +1,8 @@
 ---
+layout: post
 id: performance-tools
 title: React 성능 측정 도구들
-category: React
+tags: [React]
 ---
 
 [원문보기](https://facebook.github.io/react/docs/perf.html)

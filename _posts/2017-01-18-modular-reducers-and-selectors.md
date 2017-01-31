@@ -1,7 +1,8 @@
 ---
+layout: post
 id: modular-reducers-and-selectors
 title: 모듈형 리듀서와 셀렉터
-category: Redux
+tags: [React, Redux]
 ---
 [원문보기](http://randycoulman.com/blog/2016/09/27/modular-reducers-and-selectors/)
 

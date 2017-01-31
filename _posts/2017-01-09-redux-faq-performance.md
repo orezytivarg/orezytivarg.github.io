@@ -1,7 +1,8 @@
 ---
+layout: post
 id: redux-faq-performance
 title: Redux FAQ 성능편
-category: Redux
+tags: [React, Redux]
 ---
 
 [원문보기](http://redux.js.org/docs/faq/Performance.html)

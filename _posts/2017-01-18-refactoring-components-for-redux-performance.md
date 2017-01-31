@@ -1,7 +1,8 @@
 ---
+layout: post
 id: refactoring-components-for-redux-performance
 title: Redux 성능 향상을 위한 컴포넌트 리팩토링
-category: Redux
+tags: [React, Redux]
 ---
 
 # Redux 성능 향상을 위한 컴포넌트 리팩토링
