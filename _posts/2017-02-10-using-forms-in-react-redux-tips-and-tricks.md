@@ -1,7 +1,7 @@
 ---
 layout: post
 id: using-forms-in-react-redux-tips-and-tricks
-title: React-Redux에서 forms 사용하기: 팁과 트릭들
+title: React-Redux에서 폼 사용하기 - 팁과 트릭들
 tags: [React, Redux, Redux-Form]
 ---
 [원문보기](https://hackernoon.com/using-forms-in-react-redux-tips-and-tricks-48ad9c7522f6#.rjayg450p)
