@@ -5,8 +5,6 @@ title: 리액트의 도(Tao of React)
 tags: [React]
 ---
 
-## 리액트의 도(Tao of React)
-
 [원문보기](https://alexkondov.com/tao-of-react/)
 
 저는 2016년 부터 리액트를 가지고 작업을 해왔지만 여전히 어플리케이션 구조나 설계에 대한 하나의 모범 사례는 없는 것 같습니다.
