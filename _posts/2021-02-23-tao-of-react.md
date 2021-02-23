@@ -23,7 +23,7 @@ tags: [React]
 
 ## 컴포넌트
 
-### Functional Component를 우선하세요.
+### Functional Component를 우선하기
 
 Functional Component는 더 간단한 문법을 가지고 있습니다. 라이프사이클 메서드, 생성자나 판박이(boilerplate) 코드도 없습니다. 가독성을 잃지 않고도 같은 로직을 더 적은 문자수로 표현할 수 있습니다.
 
